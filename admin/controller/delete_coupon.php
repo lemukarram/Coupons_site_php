@@ -1,0 +1,48 @@
+<?php 
+
+/*--------------------*/
+// Description: Couponza - Coupons & Discounts Php Script
+// Author: Wicombit
+// Author URI: https://www.wicombit.com
+/*--------------------*/
+
+session_start();
+if (isset($_SESSION['user_email'])){
+    
+require '../../config.php';
+require '../functions.php';
+require '../views/header.view.php';
+
+$connect = connect($database);
+if(!$connect){
+	header('Location: ./error.php');
+} 
+
+$id_coupon = cleardata($_GET['id']);
+
+if(!$id_coupon){
+	header('Location: ./home.php');
+}
+
+$check_access = check_access($connect);
+
+if ($check_access['user_role'] == 1 || $check_access['user_role'] == 2){
+
+$id_coupon = cleardata($_GET['id']);
+
+$statement = $connect->prepare("DELETE FROM coupons WHERE coupon_id = :coupon_id");
+$statement->execute(array('coupon_id' => $id_coupon));
+
+header('Location: ' . $_SERVER['HTTP_REFERER']);
+	
+}else{
+	
+	header('Location:'.SITE_URL);
+}
+
+}else{
+	
+	header('Location: ./login.php');		
+}
+
+?>
