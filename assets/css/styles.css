@@ -13,4 +13,29 @@
 @import url('./cookieconsent.min.css');
 @import url('./ionicons.css');
 @import url('./css-stars.css');
+/*some css added by MUK */
+.uk-navbar-nav>li>a {
+    min-height: 44px;
+}
 
+.tas_nav .uk-navbar-nav>li.uk-active>a {
+    color: var(--secondary-color);
+    border-bottom: 4px solid;
+    border-color: var(--primary-color);
+}
+
+.tas_nav .uk-navbar-nav>li>a {
+    color: var(--secondary-color);
+}
+
+.tas_nav .uk-navbar-nav>li>a:hover {
+    color: var(--primary-color);
+}
+
+.uk-form-large:not(textarea):not([multiple]):not([size]){
+    height: 32px !important;
+}
+
+.box-shadow-bottom{
+    box-shadow: rgba(0, 14, 88, 0.1) 0px 4px 10px 0px;
+}

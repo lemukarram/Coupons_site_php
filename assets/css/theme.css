@@ -3634,24 +3634,3 @@ margin-left: auto;
     }
 
 }
-
-
-
-/*some css added by MUK */
-.uk-navbar-nav>li>a {
-    min-height: 44px;
-}
-
-.tas_nav .uk-navbar-nav>li.uk-active>a {
-    color: var(--secondary-color);
-    border-bottom: 4px solid;
-    border-color: var(--primary-color);
-}
-
-.tas_nav .uk-navbar-nav>li>a {
-    color: var(--secondary-color);
-}
-
-.tas_nav .uk-navbar-nav>li>a:hover {
-    color: var(--primary-color);
-}
