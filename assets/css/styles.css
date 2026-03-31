@@ -41,262 +41,199 @@
 }
 
 
+/* ===================================================
+   Voucher-style Exclusive Coupons Grid
+   =================================================== */
 
-/* ============================================================
-   COUPONZA — FATCOUPON-INSPIRED HEADER OVERRIDES
-   Paste this at the bottom of your style.css
-   ============================================================ */
-
-/* ── 1. Remove the old orange top bar (Sign In bar) ── */
-#top-bar,
-.top-bar {
-  background: #ffffff !important;
-  border-bottom: 1px solid #f0f0f0 !important;
-  padding: 0 !important;
+.vch-exclusive-section {
+    padding-top: 10px;
 }
 
-#top-bar a,
-.top-bar a {
-  color: #555555 !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
+.vch-coupon-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 20px;
 }
 
-
-/* ── 2. Main navbar — white background, clean shadow ── */
-#navbar,
-.navbar,
-nav.navbar {
-  background: #ffffff !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07) !important;
-  border-bottom: 1px solid #f0f0f0 !important;
-  padding: 0 24px !important;
-  min-height: 62px !important;
+@media (max-width: 1024px) {
+    .vch-coupon-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
-/* Remove any existing colored backgrounds on the navbar wrapper */
-header,
-#header,
-.site-header {
-  background: #ffffff !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07) !important;
+@media (max-width: 580px) {
+    .vch-coupon-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
-
-/* ── 3. Logo ── */
-.navbar-brand,
-#logo,
-.logo {
-  display: flex !important;
-  align-items: center !important;
-  gap: 10px !important;
-  padding: 10px 0 !important;
+/* --- Outer wrap (card + store link below) --- */
+.vch-coupon-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.navbar-brand img,
-#logo img,
-.logo img {
-  height: 38px !important;
-  width: auto !important;
+/* --- Main Card --- */
+.vch-coupon-card {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 6px;
+    padding: 22px 18px 0 18px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
 }
 
-
-/* ── 4. Search bar — centered, pill shape ── */
-#search-form,
-.search-form,
-.navbar-form,
-form[role="search"] {
-  flex: 1 !important;
-  max-width: 440px !important;
-  margin: 0 28px !important;
+.vch-coupon-card:hover {
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
 }
 
-#search-form .form-control,
-.search-form .form-control,
-.navbar-form .form-control,
-input[type="search"],
-input[name="q"] {
-  background: #f5f5f5 !important;
-  border: 1.5px solid transparent !important;
-  border-radius: 24px !important;
-  padding: 9px 20px 9px 42px !important;
-  font-size: 13px !important;
-  color: #333333 !important;
-  width: 100% !important;
-  box-shadow: none !important;
-  transition: border-color 0.2s, background 0.2s !important;
-  height: auto !important;
+/* --- Exclusive Ribbon (top-right corner) --- */
+.vch-ribbon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 72px;
+    height: 72px;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
 }
 
-#search-form .form-control:focus,
-.search-form .form-control:focus,
-input[type="search"]:focus,
-input[name="q"]:focus {
-  background: #ffffff !important;
-  border-color: rgba(228, 94, 45, 0.35) !important;
-  outline: none !important;
-  box-shadow: 0 0 0 3px rgba(228, 94, 45, 0.08) !important;
+.vch-ribbon span {
+    display: block;
+    background: #cc0000;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    line-height: 1.2;
+    padding: 6px 0;
+    width: 96px;
+    transform: rotate(45deg) translate(14px, -18px);
+    transform-origin: center;
 }
 
-/* Search button */
-#search-form .btn,
-#search-form button[type="submit"],
-.search-form .btn,
-.search-form button[type="submit"] {
-  background: #e45e2d !important;
-  border: none !important;
-  border-radius: 0 24px 24px 0 !important;
-  color: #ffffff !important;
-  padding: 9px 20px !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  transition: background 0.2s !important;
+/* --- Logo area --- */
+.vch-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 64px;
+    margin-bottom: 14px;
+    width: 100%;
 }
 
-#search-form .btn:hover,
-.search-form .btn:hover {
-  background: #c94e22 !important;
+.vch-logo-img {
+    max-height: 54px;
+    max-width: 140px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
-
-/* ── 5. Nav links — right side ── */
-.navbar-nav > li > a,
-.nav > li > a {
-  color: #444444 !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  padding: 8px 14px !important;
-  border-radius: 6px !important;
-  transition: color 0.15s, background 0.15s !important;
-  line-height: 1 !important;
+/* --- Description text --- */
+.vch-description {
+    font-size: 13px;
+    color: #333333;
+    text-align: center;
+    line-height: 1.45;
+    min-height: 46px;
+    margin-bottom: 14px;
+    text-decoration: none;
+    display: block;
+    padding: 0 4px;
 }
 
-.navbar-nav > li > a:hover,
-.nav > li > a:hover {
-  color: #e45e2d !important;
-  background: #fff3ef !important;
+.vch-description:hover {
+    color: #cc0000;
+    text-decoration: none;
 }
 
-.navbar-nav > li.active > a,
-.nav > li.active > a {
-  color: #e45e2d !important;
-  background: #fff3ef !important;
-  font-weight: 600 !important;
+/* --- Dashed divider with scissors --- */
+.vch-divider {
+    position: relative;
+    width: calc(100% + 36px);  /* bleed past card padding */
+    margin-left: -18px;
+    margin-right: -18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    margin-bottom: 0;
 }
 
-
-/* ── 6. Sign In link ── */
-.navbar-nav .signin,
-.navbar-nav li a[href*="signin"],
-a[href*="signin"] {
-  color: #555555 !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  background: none !important;
-  padding: 8px 12px !important;
+.vch-divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    border-top: 2px dashed #e03030;
+    z-index: 0;
 }
 
-/* ── 7. "Sign Up / Join" CTA button — orange pill ── */
-.navbar-nav .btn-signup,
-.navbar-nav li a[href*="signup"],
-.navbar-nav li a[href*="register"],
-a[href*="register"],
-a[href*="signup"] {
-  background: #e45e2d !important;
-  color: #ffffff !important;
-  border-radius: 20px !important;
-  padding: 8px 20px !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  border: none !important;
-  transition: background 0.2s !important;
+.vch-scissors {
+    position: relative;
+    z-index: 1;
+    font-size: 16px;
+    color: #888;
+    background: #fff;
+    padding-left: 4px;
+    line-height: 1;
+    transform: scaleX(-1); /* point scissors left to right */
+    display: inline-block;
 }
 
-a[href*="register"]:hover,
-a[href*="signup"]:hover {
-  background: #c94e22 !important;
-  color: #fff !important;
+/* --- Go to Code link --- */
+.vch-go-code {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+    color: #333;
+    padding: 12px 0;
+    text-decoration: none;
+    letter-spacing: 0.2px;
+    transition: color 0.15s;
 }
 
-
-/* ── 8. Second row — category nav bar ── */
-#category-nav,
-.category-nav,
-.sub-navbar,
-.navbar-second {
-  background: #ffffff !important;
-  border-bottom: 1px solid #efefef !important;
-  box-shadow: none !important;
-  padding: 0 24px !important;
-  min-height: 42px !important;
+.vch-go-code:hover {
+    color: #cc0000;
+    text-decoration: none;
 }
 
-#category-nav a,
-.category-nav a,
-.sub-navbar a,
-.navbar-second a {
-  color: #444444 !important;
-  font-size: 13px !important;
-  padding: 10px 12px !important;
-  display: inline-block !important;
-  border-bottom: 2px solid transparent !important;
-  transition: color 0.15s, border-color 0.15s !important;
-  text-decoration: none !important;
-  white-space: nowrap !important;
+.vch-arrow {
+    font-size: 15px;
+    font-weight: 700;
+    margin-left: 2px;
 }
 
-#category-nav a:hover,
-.category-nav a:hover,
-.sub-navbar a:hover,
-.navbar-second a:hover {
-  color: #e45e2d !important;
-  border-bottom-color: #e45e2d !important;
-  background: none !important;
+/* --- Store link below card --- */
+.vch-store-link {
+    margin-top: 7px;
+    text-align: center;
 }
 
-#category-nav a.active,
-.category-nav a.active {
-  color: #e45e2d !important;
-  font-weight: 600 !important;
-  border-bottom-color: #e45e2d !important;
+.vch-view-all {
+    font-size: 12px;
+    color: #e03030;
+    text-decoration: none;
+    transition: color 0.15s;
 }
 
-
-/* ── 9. Mobile hamburger tweaks ── */
-.navbar-toggle {
-  border-color: #e45e2d !important;
-}
-
-.navbar-toggle .icon-bar {
-  background-color: #e45e2d !important;
-}
-
-.navbar-collapse {
-  border-top: 1px solid #f0f0f0 !important;
-  box-shadow: none !important;
-}
-
-/* ── 10. Responsive — stack on mobile ── */
-@media (max-width: 768px) {
-  #navbar,
-  .navbar,
-  nav.navbar {
-    padding: 0 14px !important;
-  }
-
-  #search-form,
-  .search-form,
-  .navbar-form {
-    margin: 8px 0 !important;
-    max-width: 100% !important;
-  }
-
-  #category-nav,
-  .category-nav,
-  .sub-navbar {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-    white-space: nowrap !important;
-    padding: 0 14px !important;
-  }
+.vch-view-all:hover {
+    color: #a00;
+    text-decoration: underline;
 }
