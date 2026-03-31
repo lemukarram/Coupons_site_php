@@ -61,7 +61,7 @@
 
 <!-- MAIN NAVBAR -->
 
-<div class="uk-section-primary uk-preserve-color">
+<div class=" uk-preserve-color">
 <nav class="uk-container tas_nav uk-navbar-container uk-navbar-transparent uk-visible@m" uk-navbar>
 
     <div class="uk-navbar-center">
