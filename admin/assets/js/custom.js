@@ -523,7 +523,9 @@ $(document).ready(function(){
   $.ajax({  
     url:"../controller/new_navpage.php",  
     method:"POST",  
-    data:$('#insertNavPage').serialize(),  
+    data: new FormData(this),
+    contentType: false,
+    processData: false,
     beforeSend:function(){  
      $('#insert').val(ST_PROCESSING);  
    },  
@@ -549,7 +551,9 @@ $(document).ready(function(){
        $.ajax({  
         url:"../controller/new_navlink.php",  
         method:"POST",  
-        data:$('#insertNavLink').serialize(),  
+        data: new FormData(this),
+        contentType: false,
+        processData: false,
         beforeSend:function(){  
          $('#add').val(ST_PROCESSING);  
        },  

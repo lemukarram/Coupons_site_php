@@ -38,14 +38,32 @@ $menu_id = $_POST["menu_id"];
 $navigation_target = $_POST['navigation_target'];
 $navigation_type = cleardata($_POST['navigation_type']);
 
-	$statment = $connect->prepare("INSERT INTO navigations (navigation_id,navigation_order, navigation_page,navigation_target,navigation_type,navigation_menu) VALUES (null, :navigation_order, :navigation_page, :navigation_target, :navigation_type, :navigation_menu)");
+$navigation_icon = cleardata($_POST['navigation_icon_class']);
+
+if(isset($_FILES['navigation_icon_image']) && $_FILES['navigation_icon_image']['error'] == 0) {
+    $extsAllowed = array('jpg', 'jpeg', 'png', 'gif', 'svg');
+    $extUpload = strtolower( substr( strrchr($_FILES['navigation_icon_image']['name'], '.') ,1) ) ;
+
+    if (in_array($extUpload, $extsAllowed) ) { 
+
+        $image = $_FILES['navigation_icon_image']['tmp_name'];
+        $imagefile = explode(".", $_FILES["navigation_icon_image"]["name"]);
+        $renamefile = round(microtime(true)) . '.' . end($imagefile);
+        $image_upload = '../../images/';
+        move_uploaded_file($image, $image_upload . 'nav_' . $renamefile);
+        $navigation_icon = 'nav_' . $renamefile;
+    }
+}
+
+	$statment = $connect->prepare("INSERT INTO navigations (navigation_id,navigation_order, navigation_page,navigation_target,navigation_type,navigation_menu,navigation_icon) VALUES (null, :navigation_order, :navigation_page, :navigation_target, :navigation_type, :navigation_menu, :navigation_icon)");
 
 	$statment->execute(array(
 		':navigation_order' => $newOrder,
 		':navigation_page' => $page_id,
 		':navigation_target' => $navigation_target,
 		':navigation_type' => $navigation_type,
-		':navigation_menu' => $menu_id
+		':navigation_menu' => $menu_id,
+		':navigation_icon' => $navigation_icon
 		));
 }
 

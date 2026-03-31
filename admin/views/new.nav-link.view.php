@@ -28,6 +28,14 @@
        <br>
        <br>
 
+       <label>Icon Class (Font Awesome)</label>
+       <input type="text" name="navigation_icon_class" class="form-control" placeholder="e.g. ti ti-home" />
+       <br>
+
+       <label>Icon Image</label>
+       <input type="file" name="navigation_icon_image" class="form-control" accept="image/*" />
+       <br>
+
        <input type="text" name="navigation_type" value="custom" hidden="true" />
        <input type="text" name="menu_id" value="<?php echo $_GET["id"]; ?>" hidden="true" />
        <input type="text" name="navigation_order" hidden="true" />

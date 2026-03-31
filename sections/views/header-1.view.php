@@ -69,12 +69,39 @@
         <?php foreach($navigationHeader as $item): ?>
                  <?php if ($item['navigation_type'] == 'custom') { ?>
                     <?php if($item['navigation_url'] == '/'){ ?>
-                    <li <?php if ($index_url == "index.php") echo ' class="uk-active"'; ?>><a href="<?php echo $urlPath->home(); ?>" target="<?php echo $item['navigation_target']; ?>"><?php echo echoOutput($item['navigation_label']); ?></a></li>
+                    <li <?php if ($index_url == "index.php") echo ' class="uk-active"'; ?>><a href="<?php echo $urlPath->home(); ?>" target="<?php echo $item['navigation_target']; ?>">
+                        <?php if (!empty($item['navigation_icon'])): ?>
+                            <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
+                                <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
+                            <?php else: ?>
+                                <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; vertical-align: middle;"></i>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php echo echoOutput($item['navigation_label']); ?>
+                    </a></li>
                     <?php }else{ ?>
-                    <li <?php if ($current_url == $item['navigation_url']) echo ' class="uk-active"'; ?>><a href="<?php echo $item['navigation_url']; ?>" target="<?php echo $item['navigation_target']; ?>"><?php echo echoOutput($item['navigation_label']); ?></a></li>
+                    <li <?php if ($current_url == $item['navigation_url']) echo ' class="uk-active"'; ?>><a href="<?php echo $item['navigation_url']; ?>" target="<?php echo $item['navigation_target']; ?>">
+                        <?php if (!empty($item['navigation_icon'])): ?>
+                            <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
+                                <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
+                            <?php else: ?>
+                                <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; vertical-align: middle;"></i>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php echo echoOutput($item['navigation_label']); ?>
+                    </a></li>
                     <?php } ?>
                  <?php } else { ?>
-                     <li <?php if ($current_url == $item['navigation_url']) echo ' class="uk-active"'; ?>><a href="<?php echo $urlPath->page($item['navigation_url']); ?>" target="<?php echo $item['navigation_target']; ?>"><?php echo echoOutput($item['navigation_label']); ?></a></li>
+                     <li <?php if ($current_url == $item['navigation_url']) echo ' class="uk-active"'; ?>><a href="<?php echo $urlPath->page($item['navigation_url']); ?>" target="<?php echo $item['navigation_target']; ?>">
+                        <?php if (!empty($item['navigation_icon'])): ?>
+                            <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
+                                <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
+                            <?php else: ?>
+                                <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; vertical-align: middle;"></i>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                        <?php echo echoOutput($item['navigation_label']); ?>
+                    </a></li>
                  <?php } ?>
              <?php endforeach; ?>
         </ul>
