@@ -13,3 +13,7 @@
 @import url('./cookieconsent.min.css');
 @import url('./ionicons.css');
 @import url('./css-stars.css');
+
+.uk-navbar-nav>li>a {
+    min-height: 44px;
+}

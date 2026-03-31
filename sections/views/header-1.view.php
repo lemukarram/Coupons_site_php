@@ -1,6 +1,6 @@
 <div class="uk-container">
 
-    <nav class="tas_nav uk-navbar-container uk-padding-small uk-section-white uk-flex uk-flex-center uk-flex-middle uk-visible@m" uk-navbar>
+    <nav class="tas_nav uk-navbar-container uk-section-white uk-flex uk-flex-center uk-flex-middle uk-visible@m" uk-navbar>
 
     <div class="uk-navbar-left">
             <a class="uk-navbar-item uk-logo" href="<?php echo $urlPath->home(); ?>">
