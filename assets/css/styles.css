@@ -237,3 +237,38 @@
     color: #a00;
     text-decoration: underline;
 }
+
+/* ===================================================
+   FIX: Gap between coupon grid cards
+   =================================================== */
+
+.vch-coupon-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 20px !important;
+    column-gap: 20px !important;
+    row-gap: 24px !important;
+    margin-top: 20px;
+    /* Reset any UIkit interference */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+.vch-coupon-grid > * {
+    /* Undo UIkit uk-grid child padding that collapses gaps */
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+}
+
+@media (max-width: 1024px) {
+    .vch-coupon-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 580px) {
+    .vch-coupon-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
