@@ -565,7 +565,6 @@ $(document).ready(function(){
       var varCode = $(this).data('id');
       var varRedirect = $(this).data('redirect');
   
-      window.open(varRedirect);
       insertParam(key, varCode);
 
       /*

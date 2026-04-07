@@ -23,6 +23,10 @@
             <div><a class="uk-button uk-button-primary uk-border-pill uk-text-bold copy" data-clipboard-text="<?php echo echoOutput($couponDetails['coupon_code']); ?>" data-copy="<?php echo echoOutput($translation['tr_87']); ?>" data-copied="<?php echo echoOutput($translation['tr_119']); ?>"><?php echo echoOutput($translation['tr_87']); ?></a></div>
             </div>
 
+            <div class="uk-margin-medium-top">
+            <a href="<?php echo $urlPath->redirect($couponDetails['coupon_id']); ?>" target="_blank" class="uk-button uk-button-default uk-border-pill uk-text-bold"><?php echo echoOutput($translation['tr_98']); ?></a>
+            </div>
+
             <?php if(isset($isLike)): ?>
             
                 <?php if($isLike == 0): ?>
