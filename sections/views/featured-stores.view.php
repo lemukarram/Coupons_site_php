@@ -12,21 +12,15 @@
         </div>
     </div>
 
-    <div class="uk-grid-small uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-5@l uk-grid-small" uk-grid>
+    <div class="uk-grid-small uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-6@l" uk-grid>
     <?php foreach($featuredStores as $item): ?>
-        <div class="cat_3">
+        <div class="cat_3 uk-text-center">
             <a href="<?php echo $urlPath->store($item['store_slug']); ?>">
-            <div class="uk-grid-collapse uk-flex uk-flex-middle" uk-grid>
-                <div class="uk-width-auto">
-                    <div class="cover uk-cover-container">
+                <div class="cover uk-cover-container uk-border-rounded">
                     <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" uk-cover>
-                    <canvas width="60" height="60"></canvas>
-                    </div>
+                    <canvas width="120" height="80"></canvas>
                 </div>
-                <div class="uk-width-expand">
-                <h2 class="title"><?php echo echoOutput($item['store_title']); ?></h2>
-                </div>
-            </div>
+                <h2 class="title uk-margin-small-top"><?php echo echoOutput($item['store_title']); ?></h2>
             </a>
         </div>
     <?php endforeach; ?>
