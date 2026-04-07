@@ -25,7 +25,7 @@
             </form>
         </div>
 
-        <div class="uk-navbar-right">
+        <!--<div class="uk-navbar-right">
 
         <?php if (isLogged()): ?>
 
@@ -52,7 +52,7 @@
 
         <?php endif; ?>
 
-        </div>
+        </div>-->
 
     </nav>
 
@@ -85,7 +85,7 @@
                             <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
                                 <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
                             <?php else: ?>
-                                <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; vertical-align: middle;"></i>
+                                <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 3px; vertical-align: middle;"></i>
                             <?php endif; ?>
                         <?php endif; ?>
                         <?php echo echoOutput($item['navigation_label']); ?>
@@ -97,7 +97,7 @@
                             <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
                                 <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
                             <?php else: ?>
-                                <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; vertical-align: middle;"></i>
+                                <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 3px; vertical-align: middle;"></i>
                             <?php endif; ?>
                         <?php endif; ?>
                         <?php echo echoOutput($item['navigation_label']); ?>

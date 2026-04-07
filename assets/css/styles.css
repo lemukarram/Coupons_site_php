@@ -14,6 +14,12 @@
 @import url('./ionicons.css');
 @import url('./css-stars.css');
 /*some css added by MUK */
+.tas_home_3 .menu .title {
+    margin: 2px 0;
+    font-size: 14px;
+    color: var(--secondary-color);
+    font-weight: 400;
+}
 .uk-navbar-nav>li>a {
     min-height: 44px;
 }
@@ -26,6 +32,12 @@
 
 .tas_nav .uk-navbar-nav>li>a {
     color: var(--secondary-color);
+    font-size: 14px !important;
+    font-weight: 400 !important;
+}
+
+.tas_nav .uk-navbar-nav>li>a>i{
+    font-size: 16px !important;
 }
 
 .tas_nav .uk-navbar-nav>li>a:hover {
@@ -79,13 +91,11 @@
 .vch-coupon-card {
     position: relative;
     background: #ffffff;
-    border: 1px solid #e8e8e8;
-    border-radius: 6px;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 15px rgba(0,0,0,0.2);
     overflow: hidden;
     transition: box-shadow 0.2s ease;
 }
@@ -126,17 +136,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 64px;
+    height: 80px;
     margin-bottom: 14px;
     width: 100%;
 }
 
 .vch-logo-img {
-    max-height: 54px;
+    max-height: 80px;
     max-width: 140px;
     width: auto;
     height: auto;
     object-fit: contain;
+    margin-top: 16px;
 }
 
 /* --- Description text --- */
@@ -146,7 +157,7 @@
     text-align: center;
     line-height: 1.45;
     min-height: 46px;
-    margin-bottom: 14px;
+    margin-bottom: 0px;
     text-decoration: none;
     display: block;
     padding: 0 4px;
@@ -162,7 +173,7 @@
     position: relative;
     width: calc(100% + 36px);  /* bleed past card padding */
     margin-left: -18px;
-    margin-right: -18px;
+    margin-right: 6px;
     height: 18px;
     display: flex;
     align-items: center;
@@ -198,17 +209,18 @@
     display: block;
     width: 100%;
     text-align: center;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     color: #333;
-    padding: 12px 0;
+    padding: 6px 0;
     text-decoration: none;
     letter-spacing: 0.2px;
     transition: color 0.15s;
 }
 
 .vch-go-code:hover {
-    color: #cc0000;
+    color: var(--secondary-color) !important;
+    background: var(--primary-color) !important;
     text-decoration: none;
 }
 

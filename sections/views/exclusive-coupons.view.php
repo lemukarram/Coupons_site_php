@@ -42,7 +42,7 @@
 
                 <!-- Go to Code -->
                 <a class="c-open vch-go-code" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo echoOutput($item['coupon_link']); ?>" href="#">
-                    <?php echo echoOutput($translation['tr_22']); ?> <span class="vch-arrow">›</span>
+                    <?php echo echoOutput($translation['tr_22']); ?> <span class="vch-arrow">❯</span>
                 </a>
 
             </div>
