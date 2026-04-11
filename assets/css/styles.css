@@ -247,3 +247,6 @@
     color: #a00;
     text-decoration: underline;
 }
+.vch-divider::before:hover{
+    border-bottom: 7px var(--primary-color);
+}
