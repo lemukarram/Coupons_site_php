@@ -18,7 +18,23 @@ if (isset($_SESSION['user_email'])){
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             
-            foreach ($_POST['sections'] as $name => $data) {
+            // We need to merge the data from both tables (Order & Custom Content)
+            // Because they both use the same array name "sections"
+            
+            $all_sections_data = $_POST['sections'];
+
+            foreach ($all_sections_data as $name => $data) {
+                
+                // Get existing values
+                $current_stmt = $connect->prepare("SELECT * FROM home_sections WHERE section_name = :name");
+                $current_stmt->execute([':name' => $name]);
+                $current = $current_stmt->fetch(PDO::FETCH_ASSOC);
+
+                if(!$current) continue;
+
+                // We don't use cleardata() here because we want to allow the [h2] tags
+                // The parseCustomTags() function handles the safe conversion to HTML on frontend
+                
                 $stmt = $connect->prepare("UPDATE home_sections SET 
                     section_title = :title, 
                     section_description = :description, 
@@ -33,22 +49,24 @@ if (isset($_SESSION['user_email'])){
                     step3_icon = :step3_icon
                     WHERE section_name = :name");
                 
-                $stmt->execute([
-                    ':title' => $data['title'],
-                    ':description' => isset($data['description']) ? $data['description'] : NULL,
-                    ':content' => isset($data['content']) ? $data['content'] : NULL,
-                    ':order' => isset($data['order']) ? (int)$data['order'] : 0,
-                    ':status' => isset($data['status']) ? (int)$data['status'] : 0,
-                    ':step1_title' => isset($data['step1_title']) ? $data['step1_title'] : NULL,
-                    ':step1_icon' => isset($data['step1_icon']) ? $data['step1_icon'] : NULL,
-                    ':step2_title' => isset($data['step2_title']) ? $data['step2_title'] : NULL,
-                    ':step2_icon' => isset($data['step2_icon']) ? $data['step2_icon'] : NULL,
-                    ':step3_title' => isset($data['step3_title']) ? $data['step3_title'] : NULL,
-                    ':step3_icon' => isset($data['step3_icon']) ? $data['step3_icon'] : NULL,
+                $params = [
+                    ':title' => isset($data['title']) ? $data['title'] : $current['section_title'],
+                    ':description' => isset($data['description']) ? $data['description'] : $current['section_description'],
+                    ':content' => isset($data['content']) ? $data['content'] : $current['section_content'],
+                    ':order' => isset($data['order']) ? (int)$data['order'] : (int)$current['section_order'],
+                    ':status' => isset($data['status']) ? (int)$data['status'] : (int)$current['section_status'],
+                    ':step1_title' => isset($data['step1_title']) ? $data['step1_title'] : $current['step1_title'],
+                    ':step1_icon' => isset($data['step1_icon']) ? $data['step1_icon'] : $current['step1_icon'],
+                    ':step2_title' => isset($data['step2_title']) ? $data['step2_title'] : $current['step2_title'],
+                    ':step2_icon' => isset($data['step2_icon']) ? $data['step2_icon'] : $current['step2_icon'],
+                    ':step3_title' => isset($data['step3_title']) ? $data['step3_title'] : $current['step3_title'],
+                    ':step3_icon' => isset($data['step3_icon']) ? $data['step3_icon'] : $current['step3_icon'],
                     ':name' => $name
-                ]);
+                ];
 
-                // Handle Image Upload for each section if provided
+                $stmt->execute($params);
+
+                // Handle Image Upload
                 if (isset($_FILES['section_image_'.$name]) && $_FILES['section_image_'.$name]['error'] == 0) {
                     $image_name = $_FILES['section_image_'.$name]['name'];
                     $image_temp = $_FILES['section_image_'.$name]['tmp_name'];
@@ -57,12 +75,13 @@ if (isset($_SESSION['user_email'])){
                     $path = "../../images/".$new_image_name;
                     
                     if (move_uploaded_file($image_temp, $path)) {
-                        $stmt = $connect->prepare("UPDATE home_sections SET section_image = :image WHERE section_name = :name");
-                        $stmt->execute([':image' => $new_image_name, ':name' => $name]);
+                        $img_stmt = $connect->prepare("UPDATE home_sections SET section_image = :image WHERE section_name = :name");
+                        $img_stmt->execute([':image' => $new_image_name, ':name' => $name]);
                     }
                 }
             }
             header('Location: ' . $_SERVER['PHP_SELF'] . '?success=true');
+            exit();
         }
 
         $sections = [];
