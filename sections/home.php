@@ -5,19 +5,7 @@ $featuredStores = getFeaturedStores($connect);
 $menuCategories = getMenuCategories($connect);
 $getSliders = getSliders($connect);
 
-require './sections/home_sections.php';
-
-if ($theme['th_homestyle'] == 'home1') {
-
-	require './sections/views/home-1.view.php';
-
-}elseif ($theme['th_homestyle'] == 'home2') {
-	
-	require './sections/views/home-2.view.php';
-
-}elseif ($theme['th_homestyle'] == 'home3') {
-	
-	require './sections/views/home-3.view.php';
-}
+// This file now only prepares data. The rendering is handled in all_sections.php or index.view.php
+// But we keep it for compatibility if some parts still rely on these variables.
 
 ?>

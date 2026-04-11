@@ -23,6 +23,8 @@ if (isset($_SESSION['user_email'])){
                     section_title = :title, 
                     section_description = :description, 
                     section_content = :content,
+                    section_order = :order,
+                    section_status = :status,
                     step1_title = :step1_title,
                     step1_icon = :step1_icon,
                     step2_title = :step2_title,
@@ -33,8 +35,10 @@ if (isset($_SESSION['user_email'])){
                 
                 $stmt->execute([
                     ':title' => $data['title'],
-                    ':description' => $data['description'],
+                    ':description' => isset($data['description']) ? $data['description'] : NULL,
                     ':content' => isset($data['content']) ? $data['content'] : NULL,
+                    ':order' => isset($data['order']) ? (int)$data['order'] : 0,
+                    ':status' => isset($data['status']) ? (int)$data['status'] : 0,
                     ':step1_title' => isset($data['step1_title']) ? $data['step1_title'] : NULL,
                     ':step1_icon' => isset($data['step1_icon']) ? $data['step1_icon'] : NULL,
                     ':step2_title' => isset($data['step2_title']) ? $data['step2_title'] : NULL,
@@ -62,7 +66,7 @@ if (isset($_SESSION['user_email'])){
         }
 
         $sections = [];
-        $query = $connect->query("SELECT * FROM home_sections");
+        $query = $connect->query("SELECT * FROM home_sections ORDER BY section_order ASC");
         while ($row = $query->fetch()) {
             $sections[$row['section_name']] = $row;
         }
