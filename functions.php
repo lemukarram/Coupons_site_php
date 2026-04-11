@@ -1163,6 +1163,48 @@ function getClientIp($single = 2) {
     return $ips;
 }
 
+function getHomeSection($connect, $name){
+    try {
+        $sentence = $connect->prepare("SELECT * FROM home_sections WHERE section_name = :name LIMIT 1");
+        $sentence->execute([':name' => $name]);
+        return $sentence->fetch();
+    } catch (PDOException $e) {
+        return [
+            'section_title' => '',
+            'section_description' => '',
+            'section_content' => '',
+            'section_image' => '',
+            'step1_title' => '',
+            'step1_icon' => '',
+            'step2_title' => '',
+            'step2_icon' => '',
+            'step3_title' => '',
+            'step3_icon' => ''
+        ];
+    }
+}
+
+function parseCustomTags($text) {
+    $find = [
+        '/\[h2\](.*?)\[\/h2\]/is',
+        '/\[h3\](.*?)\[\/h3\]/is',
+        '/\[b\](.*?)\[\/b\]/is',
+        '/\[i\](.*?)\[\/i\]/is',
+        '/\[list\](.*?)\[\/list\]/is',
+        '/\[item\](.*?)\[\/item\]/is'
+    ];
+    $replace = [
+        '<h2 class="uk-h2">$1</h2>',
+        '<h3 class="uk-h3">$1</h3>',
+        '<strong>$1</strong>',
+        '<em>$1</em>',
+        '<ul class="uk-list uk-list-bullet">$1</ul>',
+        '<li>$1</li>'
+    ];
+    return preg_replace($find, $replace, $text);
+}
+
 $arrayLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+
 
 ?>

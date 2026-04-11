@@ -102,6 +102,13 @@
                     </li>
 
                     <li>
+                        <a href="../controller/home_sections.php">
+                            <span class="icon-thumbnail"><i class="dripicons-home"></i></span>
+                            <span class="title">Home Sections</span>
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="../controller/settings.php">
                             <span class="icon-thumbnail"><i class="dripicons-gear"></i></span>
                             <span class="title"><?php echo _SETTINGS; ?></span>

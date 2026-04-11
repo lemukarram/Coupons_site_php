@@ -363,6 +363,34 @@ $('.new-subscriber form').on("submit", function(event){
 });
 
 'use strict';
+$('#submit-subscriber-alt').closest('form').on("submit", function(event){ 
+
+  event.preventDefault();  
+
+  var $this = $('#submit-subscriber-alt');
+  var loadingText = '<span class="anim-rotate" uk-icon="refresh"></span>';
+  if ($('#submit-subscriber-alt').html() !== loadingText) {
+    $this.html(loadingText);
+  }
+
+  $.ajax({
+    type: 'POST',
+    url: SITEURL+"/controllers/add-subscriber.php",
+    data: {
+      subscriber_email:$("#subscriber_email_alt").val(),
+    },
+    success: function(data) {
+
+      setTimeout(function(){
+        $('#showresults-alt').html(data);
+        $this.html($this.val());
+      }, 1000);
+
+    }
+  });
+});
+
+'use strict';
 $('.newsletter form').on("submit", function(event){ 
 
   event.preventDefault();  

@@ -5,6 +5,8 @@ $featuredStores = getFeaturedStores($connect);
 $menuCategories = getMenuCategories($connect);
 $getSliders = getSliders($connect);
 
+require './sections/home_sections.php';
+
 if ($theme['th_homestyle'] == 'home1') {
 
 	require './sections/views/home-1.view.php';
