@@ -265,3 +265,12 @@
     color: #ffffff;
     margin-top: -30px;
 }
+
+.how-to-use-section .uk-card-default .uk-card-title{
+    color: var(--primary-color) !important;
+}
+
+.tas-footer .tas-widgets .tas-follow a{
+    background-color: var(--primary-color) !important;
+}
+.tas-copyright {margin-top: 0px !important;}

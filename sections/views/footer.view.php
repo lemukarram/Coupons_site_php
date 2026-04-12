@@ -31,19 +31,19 @@
                 <ul class="tas-follow uk-iconnav">
                     <?php foreach($socialMedia as $item): ?>
                         <?php if (!empty($item['st_facebook'])): ?>
-                        <li><a href="<?php echo $item['st_facebook'] ?>" uk-icon="icon: facebook" class="uk-icon-button uk-button-secondary"></a></li>
+                        <li><a href="<?php echo $item['st_facebook'] ?>" uk-icon="icon: facebook" class="uk-icon-button"></a></li>
                         <?php endif;?>
                         <?php if (!empty($item['st_twitter'])): ?>
-                        <li><a href="<?php echo $item['st_twitter'] ?>" uk-icon="icon: twitter" class="uk-icon-button uk-button-secondary"></a></li>
+                        <li><a href="<?php echo $item['st_twitter'] ?>" uk-icon="icon: twitter" class="uk-icon-button "></a></li>
                         <?php endif;?> 
                         <?php if (!empty($item['st_youtube'])): ?>
-                        <li><a href="<?php echo $item['st_youtube'] ?>" uk-icon="icon: youtube" class="uk-icon-button uk-button-secondary"></a></li>
+                        <li><a href="<?php echo $item['st_youtube'] ?>" uk-icon="icon: youtube" class="uk-icon-button "></a></li>
                         <?php endif;?>
                         <?php if (!empty($item['st_linkedin'])): ?>
-                        <li><a href="<?php echo $item['st_linkedin'] ?>" uk-icon="icon: linkedin" class="uk-icon-button uk-button-secondary"></a></li>
+                        <li><a href="<?php echo $item['st_linkedin'] ?>" uk-icon="icon: linkedin" class="uk-icon-button "></a></li>
                         <?php endif;?>
                         <?php if (!empty($item['st_instagram'])): ?>
-                        <li><a href="<?php echo $item['st_instagram'] ?>" uk-icon="icon: instagram" class="uk-icon-button uk-button-secondary"></a></li>
+                        <li><a href="<?php echo $item['st_instagram'] ?>" uk-icon="icon: instagram" class="uk-icon-button "></a></li>
                         <?php endif;?>
                     <?php endforeach; ?>
                 </ul>
