@@ -45,7 +45,7 @@
 }
 
 .uk-form-large:not(textarea):not([multiple]):not([size]){
-    height: 32px !important;
+    height: 54px !important;
 }
 
 .box-shadow-bottom{
@@ -249,4 +249,19 @@
 }
 .vch-divider::before:hover{
     border-bottom: 7px var(--primary-color);
+}
+
+.uk-margin-large-bottom{
+    margin-bottom: 20px !important;
+}
+
+.uk-margin-large-top{
+    margin-top: 20px !important;
+}
+
+.how-to-use-section .uk-icon-button {
+    width: 70px; height: 70px; 
+    background: rgba(var(--primary-color-rgb), 0.1); 
+    color: #ffffff;
+    margin-top: -30px;
 }
