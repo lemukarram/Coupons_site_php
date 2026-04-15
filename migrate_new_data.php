@@ -3,6 +3,9 @@
  * Migration Script: Clear previous data and import new data from CSV
  */
 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 require 'config.php';
 require 'functions.php';
 
@@ -27,9 +30,14 @@ foreach ($tablesToClear as $table) {
     logMsg("Table '$table' cleared.");
 }
 
-// Helper to generate slug and handle duplicates (simplified for migration)
+// Helper to generate slug and handle duplicates
 function getUniqueSlug($connect, $table, $column, $title) {
-    $slug = convertSlug($title);
+    if (function_exists('convertSlug')) {
+        $slug = convertSlug($title);
+    } else {
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
+    }
+    
     $originalSlug = $slug;
     $i = 1;
     
@@ -45,27 +53,49 @@ function getUniqueSlug($connect, $table, $column, $title) {
 // 2. IMPORT CATEGORIES
 logMsg("Importing categories...");
 $categoryMapping = []; // OldID => NewID
-if (($handle = fopen("data/categories.csv", "r")) !== FALSE) {
-    $headers = fgetcsv($handle); // ID,Name,Icon,Banner,Description,MetaTittle,MetaKeyword,MetaDescription
+$csvPath = "data/categories.csv";
+
+if (!file_exists($csvPath)) {
+    die("Error: $csvPath not found.\n");
+}
+
+if (($handle = fopen($csvPath, "r")) !== FALSE) {
+    $headers = fgetcsv($handle); 
+    logMsg("CSV Headers: " . implode(", ", $headers));
+    
+    $rowCount = 0;
     while (($data = fgetcsv($handle)) !== FALSE) {
-        if (empty($data[0])) continue;
+        $rowCount++;
+        if (empty($data[0])) {
+            logMsg("Skipping empty row at line $rowCount");
+            continue;
+        }
         
         $oldId = $data[0];
         $title = $data[1];
-        $slug = getUniqueSlug($connect, 'categories', 'category_slug', $title);
         
-        $stmt = $connect->prepare("INSERT INTO categories (category_title, category_slug, category_icon, category_description, category_seotitle, category_seodescription, category_featured, category_menu, category_status) VALUES (:title, :slug, :icon, :description, :seotitle, :seodescription, 1, 1, 1)");
-        
-        $stmt->execute([
-            ':title' => $title,
-            ':slug' => $slug,
-            ':icon' => !empty($data[2]) ? str_replace('fa ', '', $data[2]) : 'tag', // Clean font-awesome prefix if needed for Tabler
-            ':description' => $data[4],
-            ':seotitle' => $data[5],
-            ':seodescription' => $data[7]
-        ]);
-        
-        $categoryMapping[$oldId] = $connect->lastInsertId();
+        try {
+            $slug = getUniqueSlug($connect, 'categories', 'category_slug', $title);
+            
+            $stmt = $connect->prepare("INSERT INTO categories (category_title, category_slug, category_icon, category_description, category_seotitle, category_seodescription, category_featured, category_menu, category_status, category_image) VALUES (:title, :slug, :icon, :description, :seotitle, :seodescription, 1, 1, 1, '')");
+            
+            $icon = !empty($data[2]) ? str_replace(['fa ', 'fa-solid ', 'fas '], '', $data[2]) : 'tag';
+
+            $stmt->execute([
+                ':title' => $title,
+                ':slug' => $slug,
+                ':icon' => $icon,
+                ':description' => isset($data[4]) ? $data[4] : '',
+                ':seotitle' => isset($data[5]) ? $data[5] : '',
+                ':seodescription' => isset($data[7]) ? $data[7] : ''
+            ]);
+            
+            $newId = $connect->lastInsertId();
+            $categoryMapping[$oldId] = $newId;
+            // logMsg("Imported Category: $title (ID: $newId)");
+        } catch (Exception $e) {
+            logMsg("Error importing category '$title': " . $e->getMessage());
+        }
     }
     fclose($handle);
 }
