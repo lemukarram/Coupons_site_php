@@ -1,6 +1,6 @@
 <?php
 /**
- * Migration Script: Bulletproof Import with Smart Categorization & Image Linking
+ * Migration Script: Bulletproof Import with Smart Categorization, Image Linking & Homepage Optimization
  */
 
 error_reporting(E_ALL);
@@ -52,9 +52,9 @@ function getUniqueSlug($connect, $table, $column, $title) {
 }
 
 // 2. PRE-LOAD STORE LOGOS
-$logoMap = []; // Name => LogoFile
+$logoMap = []; 
 if (file_exists("data/stores.csv") && ($handle = fopen("data/stores.csv", "r")) !== FALSE) {
-    fgetcsv($handle); // skip headers
+    fgetcsv($handle); 
     while (($data = fgetcsv($handle)) !== FALSE) {
         if (!empty($data[1])) $logoMap[strtolower(trim($data[1]))] = trim($data[3]);
     }
@@ -104,11 +104,12 @@ if (($handle = fopen("data/categories.csv", "r")) !== FALSE) {
     fclose($handle);
 }
 
-// 4. IMPORT STORES
+// 4. IMPORT STORES (Optimized for Homepage)
 logMsg("Importing Stores...");
 $storeMapping = []; 
-$storeImageMapping = []; // NewStoreID => ImageName
+$storeImageMapping = []; 
 $storesCsv = "data/stores_all.csv";
+$storeCount = 0;
 
 if (($handle = fopen($storesCsv, "r")) !== FALSE) {
     $headers = fgetcsv($handle);
@@ -118,19 +119,23 @@ if (($handle = fopen($storesCsv, "r")) !== FALSE) {
         $oldId = $data[$offset]; $title = trim($data[$offset + 1]);
         $logo = $logoMap[strtolower($title)] ?? '';
         
+        // Only feature the first 12 stores for the homepage
+        $isFeatured = ($storeCount < 12) ? 1 : 0;
+        
         try {
             $slug = getUniqueSlug($connect, 'stores', 'store_slug', $title);
-            $stmt = $connect->prepare("INSERT INTO stores (store_title, store_slug, store_url, store_description, store_seotitle, store_seodescription, store_featured, store_status, store_image) VALUES (:title, :slug, :url, :description, :seotitle, :seodescription, 1, 1, :image)");
-            $stmt->execute([':title' => $title, ':slug' => $slug, ':url' => $data[$offset + 8] ?? $data[$offset + 2] ?? '', ':description' => $data[$offset + 10] ?? '', ':seotitle' => $data[$offset + 3] ?? '', ':seodescription' => $data[$offset + 5] ?? '', ':image' => $logo]);
+            $stmt = $connect->prepare("INSERT INTO stores (store_title, store_slug, store_url, store_description, store_seotitle, store_seodescription, store_featured, store_status, store_image) VALUES (:title, :slug, :url, :description, :seotitle, :seodescription, :featured, 1, :image)");
+            $stmt->execute([':title' => $title, ':slug' => $slug, ':url' => $data[$offset + 8] ?? $data[$offset + 2] ?? '', ':description' => $data[$offset + 10] ?? '', ':seotitle' => $data[$offset + 3] ?? '', ':seodescription' => $data[$offset + 5] ?? '', ':featured' => $isFeatured, ':image' => $logo]);
             $newId = $connect->lastInsertId();
             $storeMapping[$oldId] = $newId;
             $storeImageMapping[$newId] = $logo;
+            $storeCount++;
         } catch (Exception $e) { logMsg("Error store '$title': " . $e->getMessage()); }
     }
     fclose($handle);
 }
 
-// 5. IMPORT COUPONS
+// 5. IMPORT COUPONS (Corrected Mapping)
 logMsg("Importing Coupons...");
 $couponCount = 0;
 if (($handle = fopen("data/coupons.csv", "r")) !== FALSE) {
@@ -150,11 +155,25 @@ if (($handle = fopen("data/coupons.csv", "r")) !== FALSE) {
             $slug = getUniqueSlug($connect, 'coupons', 'coupon_slug', $title);
             $expiry = !empty($data[13]) ? date('Y-m-d H:i:s', strtotime($data[13])) : NULL;
             $stmt = $connect->prepare("INSERT INTO coupons (coupon_title, coupon_slug, coupon_description, coupon_category, coupon_subcategory, coupon_store, coupon_code, coupon_link, coupon_expire, coupon_status, coupon_author, coupon_featured, coupon_exclusive, coupon_created, coupon_image) VALUES (:title, :slug, :description, :category, :subcategory, :store, :code, :link, :expire, 1, 1, 0, 0, NOW(), :image)");
-            $stmt->execute([':title' => $title, ':slug' => $slug, ':description' => !empty($data[5]) ? $data[5] : ($data[24] ?? ''), ':category' => $newParentCatId, ':subcategory' => $newSubCatId, ':store' => $newStoreId, ':code' => $data[11] ?? '', ':link' => $data[4] ?? '', ':expire' => $expiry, ':image' => $image]);
+            
+            // Corrected Coupon Mapping based on CSV analysis:
+            // 4: RedirectUrl, 5: Description, 10: Code, 13: Expiry
+            $stmt->execute([
+                ':title' => $title, 
+                ':slug' => $slug, 
+                ':description' => !empty($data[5]) ? $data[5] : ($data[24] ?? ''), 
+                ':category' => $newParentCatId, 
+                ':subcategory' => $newSubCatId, 
+                ':store' => $newStoreId, 
+                ':code' => $data[11] ?? $data[10] ?? '', 
+                ':link' => $data[4] ?? '', 
+                ':expire' => $expiry, 
+                ':image' => $image
+            ]);
             $couponCount++;
         } catch (Exception $e) { logMsg("Error coupon '$title': " . $e->getMessage()); }
     }
     fclose($handle);
 }
-logMsg("Migration completed! Coupons: $couponCount, Stores: " . count($storeMapping));
+logMsg("Migration completed! Coupons: $couponCount, Stores: $storeCount");
 ?>

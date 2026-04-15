@@ -1,6 +1,6 @@
 <?php
 
-$featuredStores = getFeaturedStores($connect, $site_config['featured_stores']);
+$featuredStores = getFeaturedStores($connect, 12);
 
 require './sections/views/featured-stores.view.php';
 

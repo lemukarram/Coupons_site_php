@@ -22,10 +22,13 @@
             <?php $getStores = getStoresByLetter($connect, $char); ?>
             <?php foreach($getStores as $item): ?>
                 
-                <div>
-                    <a class="uk-text-secondary uk-text-truncate" href="<?php echo $urlPath->store($item['store_slug']); ?>">
-                    <img class="uk-border-rounded" src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" width="50" height="50">
-                    <span class="uk-text-middle uk-margin-small-left"><?php echo echoOutput($item['store_title']); ?></span>
+                <div class="cat_3 uk-text-center">
+                    <a href="<?php echo $urlPath->store($item['store_slug']); ?>">
+                        <div class="cover uk-cover-container uk-border-rounded">
+                            <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" uk-cover>
+                            <canvas width="120" height="80"></canvas>
+                        </div>
+                        <h2 class="title uk-margin-small-top uk-text-truncate"><?php echo echoOutput($item['store_title']); ?></h2>
                     </a>
                 </div>
 
@@ -38,10 +41,13 @@
             <?php $getStores = getStoresByLetter($connect); ?>
             <?php foreach($getStores as $item): ?>
                 
-                <div>
-                    <a class="uk-text-secondary uk-text-truncate" href="<?php echo $urlPath->store($item['store_slug']); ?>">
-                    <img class="uk-border-rounded" src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" width="50" height="50">
-                    <span class="uk-text-middle uk-margin-small-left"><?php echo echoOutput($item['store_title']); ?></span>
+                <div class="cat_3 uk-text-center">
+                    <a href="<?php echo $urlPath->store($item['store_slug']); ?>">
+                        <div class="cover uk-cover-container uk-border-rounded">
+                            <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" uk-cover>
+                            <canvas width="120" height="80"></canvas>
+                        </div>
+                        <h2 class="title uk-margin-small-top uk-text-truncate"><?php echo echoOutput($item['store_title']); ?></h2>
                     </a>
                 </div>
 
