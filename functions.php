@@ -1208,6 +1208,22 @@ function parseCustomTags($text) {
     return preg_replace($find, $replace, $text);
 }
 
+function getStoreBackgroundColor($id) {
+    $colors = [
+        '#F0F4FF', // Light Blue
+        '#F5FFF0', // Light Green
+        '#FFF9F0', // Light Peach
+        '#FFF0F5', // Light Pink
+        '#F5F0FF', // Light Lavender
+        '#F0FFFD', // Light Cyan
+        '#FFFDF0', // Light Yellow
+        '#F0FFF5', // Light Mint
+        '#FFF5F0', // Light Apricot
+        '#F8F9FA'  // Off White
+    ];
+    return $colors[$id % count($colors)];
+}
+
 $arrayLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 
