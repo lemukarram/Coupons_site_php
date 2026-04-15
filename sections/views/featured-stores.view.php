@@ -16,9 +16,8 @@
     <?php foreach($featuredStores as $item): ?>
         <div class="cat_3 uk-text-center">
             <a href="<?php echo $urlPath->store($item['store_slug']); ?>">
-                <div class="cover uk-cover-container uk-border-rounded uk-flex uk-flex-middle uk-flex-center" style="background-color: <?php echo getStoreBackgroundColor($item['store_id']); ?>;">
-                    <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" style="object-fit: contain; width: 100%; height: 100%; padding: 10px;">
-                    <canvas width="120" height="80"></canvas>
+                <div class="cover uk-border-rounded uk-flex uk-flex-middle uk-flex-center" style="background-color: <?php echo getStoreBackgroundColor($item['store_id']); ?>; height: 80px;">
+                    <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" style="object-fit: contain; width: 100%; height: 100%; padding: 10px; max-height: 80px;">
                 </div>
                 <h2 class="title uk-margin-small-top"><?php echo echoOutput($item['store_title']); ?></h2>
             </a>
