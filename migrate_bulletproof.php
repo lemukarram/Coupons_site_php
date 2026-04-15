@@ -1,6 +1,6 @@
 <?php
 /**
- * Migration Script: Bulletproof Import with FIXED Dates & Exclusivity
+ * Migration Script: Bulletproof Import with Fixed Image Mapping & Taglines
  */
 
 error_reporting(E_ALL);
@@ -62,17 +62,7 @@ function getUniqueSlug($connect, $table, $column, $title) {
     return $slug;
 }
 
-// 2. PRE-LOAD STORE LOGOS
-$logoMap = []; 
-if (file_exists("data/stores.csv") && ($handle = fopen("data/stores.csv", "r")) !== FALSE) {
-    fgetcsv($handle); 
-    while (($data = fgetcsv($handle)) !== FALSE) {
-        if (!empty($data[1])) $logoMap[strtolower(trim($data[1]))] = trim($data[3]);
-    }
-    fclose($handle);
-}
-
-// 3. SMART CATEGORIZATION
+// 2. SMART CATEGORIZATION
 logMsg("Creating Smart Parent Categories...");
 $parentStructure = [
     'Tech & Electronics' => ['Mobile & Accessories', 'Electronics', 'Computer & Laptops', 'Software', 'Ineternet & Cellular'],
@@ -115,10 +105,10 @@ if (($handle = fopen("data/categories.csv", "r")) !== FALSE) {
     fclose($handle);
 }
 
-// 4. IMPORT STORES
+// 3. IMPORT STORES
 logMsg("Importing Stores...");
 $storeMapping = []; 
-$storeImageMapping = []; 
+$storeImageMap = []; // oldStoreId => imageFileName
 $storesCsv = "data/stores_all.csv";
 $storeCount = 0;
 
@@ -127,24 +117,29 @@ if (($handle = fopen($storesCsv, "r")) !== FALSE) {
     $offset = (empty($headers[0])) ? 1 : 0;
     while (($data = fgetcsv($handle)) !== FALSE) {
         if (!isset($data[$offset]) || empty($data[$offset])) continue;
-        $oldId = $data[$offset]; $title = trim($data[$offset + 1]);
-        $logo = $logoMap[strtolower($title)] ?? '';
+        $oldId = $data[$offset]; 
+        $title = trim($data[$offset + 1]);
+        
+        // Fix: ID maps to Image (1 -> 1.png)
+        $storeImage = $oldId . ".png";
+        
         $isFeatured = ($storeCount < 12) ? 1 : 0;
         
         try {
             $slug = getUniqueSlug($connect, 'stores', 'store_slug', $title);
             $stmt = $connect->prepare("INSERT INTO stores (store_title, store_slug, store_url, store_description, store_seotitle, store_seodescription, store_featured, store_status, store_image) VALUES (:title, :slug, :url, :description, :seotitle, :seodescription, :featured, 1, :image)");
-            $stmt->execute([':title' => $title, ':slug' => $slug, ':url' => $data[$offset + 8] ?? $data[$offset + 2] ?? '', ':description' => $data[$offset + 10] ?? '', ':seotitle' => $data[$offset + 3] ?? '', ':seodescription' => $data[$offset + 5] ?? '', ':featured' => $isFeatured, ':image' => $logo]);
+            $stmt->execute([':title' => $title, ':slug' => $slug, ':url' => $data[$offset + 8] ?? $data[$offset + 2] ?? '', ':description' => $data[$offset + 10] ?? '', ':seotitle' => $data[$offset + 3] ?? '', ':seodescription' => $data[$offset + 5] ?? '', ':featured' => $isFeatured, ':image' => $storeImage]);
+            
             $newId = $connect->lastInsertId();
             $storeMapping[$oldId] = $newId;
-            $storeImageMapping[$newId] = $logo;
+            $storeImageMap[$oldId] = $storeImage; // Track for coupons
             $storeCount++;
         } catch (Exception $e) { logMsg("Error store '$title': " . $e->getMessage()); }
     }
     fclose($handle);
 }
 
-// 5. IMPORT COUPONS
+// 4. IMPORT COUPONS
 logMsg("Importing Coupons...");
 $couponCount = 0;
 if (($handle = fopen("data/coupons.csv", "r")) !== FALSE) {
@@ -154,34 +149,41 @@ if (($handle = fopen("data/coupons.csv", "r")) !== FALSE) {
         $title = trim($data[1]);
         if (is_numeric($title) && (float)$title > 0 && (float)$title < 1) $title = ((float)$title * 100) . "% OFF";
         
-        $oldCatId = $data[2]; $oldStoreId = $data[3];
+        $oldCatId = $data[2]; 
+        $oldStoreId = $data[3];
+        
         $newParentCatId = $parentOfSubMapping[$oldCatId] ?? 0;
         $newSubCatId = $subCategoryMapping[$oldCatId] ?? 0;
         $newStoreId = $storeMapping[$oldStoreId] ?? 0;
-        $image = $storeImageMapping[$newStoreId] ?? '';
         
-        // Handle Exclusive Flag (Mapping index 7 'type of coupon' or index 19 'ShowOnHome')
-        $isExclusive = ($data[7] == '1' || $data[19] == '1') ? 1 : 0;
+        // Change: Use store's image for coupon
+        $couponImage = $storeImageMap[$oldStoreId] ?? '';
+        
+        // Change: featured/exclusive if CSV Image column (index 12) is not empty
+        $csvImage = trim($data[12] ?? '');
+        $isFeatured = (!empty($csvImage)) ? 1 : 0;
+        $isExclusive = (!empty($csvImage)) ? 1 : 0;
         
         try {
             $slug = getUniqueSlug($connect, 'coupons', 'coupon_slug', $title);
-            $expiry = excelToDate($data[13] ?? $data[12]); // FIXED DATE HANDLER
+            $expiry = excelToDate($data[13] ?? '');
             
-            $stmt = $connect->prepare("INSERT INTO coupons (coupon_title, coupon_slug, coupon_description, coupon_category, coupon_subcategory, coupon_store, coupon_code, coupon_link, coupon_expire, coupon_status, coupon_author, coupon_featured, coupon_exclusive, coupon_created, coupon_image) VALUES (:title, :slug, :description, :category, :subcategory, :store, :code, :link, :expire, 1, 1, :featured, :exclusive, NOW(), :image)");
+            $stmt = $connect->prepare("INSERT INTO coupons (coupon_title, coupon_slug, coupon_description, coupon_tagline, coupon_category, coupon_subcategory, coupon_store, coupon_code, coupon_link, coupon_expire, coupon_status, coupon_author, coupon_featured, coupon_exclusive, coupon_verify, coupon_created, coupon_image) VALUES (:title, :slug, :description, :tagline, :category, :subcategory, :store, :code, :link, :expire, 1, 1, :featured, :exclusive, 1, NOW(), :image)");
             
             $stmt->execute([
                 ':title' => $title, 
                 ':slug' => $slug, 
                 ':description' => !empty($data[5]) ? $data[5] : ($data[24] ?? ''), 
+                ':tagline' => $data[6] ?? '', // Unnamed column next to Description
                 ':category' => $newParentCatId, 
                 ':subcategory' => $newSubCatId, 
                 ':store' => $newStoreId, 
-                ':code' => $data[11] ?? $data[10] ?? '', 
+                ':code' => $data[11] ?? '', 
                 ':link' => $data[4] ?? '', 
                 ':expire' => $expiry, 
-                ':image' => $image,
-                ':exclusive' => $isExclusive,
-                ':featured' => $isExclusive // Also feature them if they are exclusive
+                ':image' => $couponImage,
+                ':featured' => $isFeatured,
+                ':exclusive' => $isExclusive
             ]);
             $couponCount++;
         } catch (Exception $e) { logMsg("Error coupon '$title': " . $e->getMessage()); }
