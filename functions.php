@@ -527,8 +527,8 @@ function getItemsGallery($connect, $itemId){
     return $sentence->fetchAll();
 }
 
-function getFeaturedStores($connect){
-    $sentence = $connect->prepare("SELECT stores.*, (SELECT COUNT(*) FROM coupons WHERE coupons.coupon_store = stores.store_id AND coupon_status = 1) AS total_items FROM stores WHERE stores.store_featured = 1 AND stores.store_status = 1");
+function getFeaturedStores($connect, $limit = 12){
+    $sentence = $connect->prepare("SELECT stores.*, (SELECT COUNT(*) FROM coupons WHERE coupons.coupon_store = stores.store_id AND coupon_status = 1) AS total_items FROM stores WHERE stores.store_featured = 1 AND stores.store_status = 1 Limit {$limit}");
     $sentence->execute();
     return $sentence->fetchAll();
 }
