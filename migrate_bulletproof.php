@@ -1,6 +1,6 @@
 <?php
 /**
- * Migration Script: Bulletproof Import with Smart Categorization, Image Linking & Homepage Optimization
+ * Migration Script: Bulletproof Import with FIXED Dates & Exclusivity
  */
 
 error_reporting(E_ALL);
@@ -19,6 +19,17 @@ if (!$connect) {
 
 function logMsg($msg) {
     echo "[" . date('Y-m-d H:i:s') . "] " . $msg . "\n";
+}
+
+// Helper to convert Excel Serial Date to MySQL Format
+function excelToDate($excelDate) {
+    if (empty($excelDate)) return NULL;
+    if (is_numeric($excelDate)) {
+        $unixTimestamp = ($excelDate - 25569) * 86400;
+        return date('Y-m-d H:i:s', $unixTimestamp);
+    }
+    $timestamp = strtotime($excelDate);
+    return $timestamp ? date('Y-m-d H:i:s', $timestamp) : NULL;
 }
 
 // 1. ENSURE SCHEMA & CLEANUP
@@ -82,7 +93,7 @@ foreach (array_keys($parentStructure) as $pName) {
     $parentMapping[$pName] = $connect->lastInsertId();
 }
 
-logMsg("Importing 37 Categories as Subcategories...");
+logMsg("Importing Subcategories...");
 $subCategoryMapping = []; 
 $parentOfSubMapping = []; 
 if (($handle = fopen("data/categories.csv", "r")) !== FALSE) {
@@ -104,7 +115,7 @@ if (($handle = fopen("data/categories.csv", "r")) !== FALSE) {
     fclose($handle);
 }
 
-// 4. IMPORT STORES (Optimized for Homepage)
+// 4. IMPORT STORES
 logMsg("Importing Stores...");
 $storeMapping = []; 
 $storeImageMapping = []; 
@@ -118,8 +129,6 @@ if (($handle = fopen($storesCsv, "r")) !== FALSE) {
         if (!isset($data[$offset]) || empty($data[$offset])) continue;
         $oldId = $data[$offset]; $title = trim($data[$offset + 1]);
         $logo = $logoMap[strtolower($title)] ?? '';
-        
-        // Only feature the first 12 stores for the homepage
         $isFeatured = ($storeCount < 12) ? 1 : 0;
         
         try {
@@ -135,7 +144,7 @@ if (($handle = fopen($storesCsv, "r")) !== FALSE) {
     fclose($handle);
 }
 
-// 5. IMPORT COUPONS (Corrected Mapping)
+// 5. IMPORT COUPONS
 logMsg("Importing Coupons...");
 $couponCount = 0;
 if (($handle = fopen("data/coupons.csv", "r")) !== FALSE) {
@@ -151,13 +160,15 @@ if (($handle = fopen("data/coupons.csv", "r")) !== FALSE) {
         $newStoreId = $storeMapping[$oldStoreId] ?? 0;
         $image = $storeImageMapping[$newStoreId] ?? '';
         
+        // Handle Exclusive Flag (Mapping index 7 'type of coupon' or index 19 'ShowOnHome')
+        $isExclusive = ($data[7] == '1' || $data[19] == '1') ? 1 : 0;
+        
         try {
             $slug = getUniqueSlug($connect, 'coupons', 'coupon_slug', $title);
-            $expiry = !empty($data[13]) ? date('Y-m-d H:i:s', strtotime($data[13])) : NULL;
-            $stmt = $connect->prepare("INSERT INTO coupons (coupon_title, coupon_slug, coupon_description, coupon_category, coupon_subcategory, coupon_store, coupon_code, coupon_link, coupon_expire, coupon_status, coupon_author, coupon_featured, coupon_exclusive, coupon_created, coupon_image) VALUES (:title, :slug, :description, :category, :subcategory, :store, :code, :link, :expire, 1, 1, 0, 0, NOW(), :image)");
+            $expiry = excelToDate($data[13] ?? $data[12]); // FIXED DATE HANDLER
             
-            // Corrected Coupon Mapping based on CSV analysis:
-            // 4: RedirectUrl, 5: Description, 10: Code, 13: Expiry
+            $stmt = $connect->prepare("INSERT INTO coupons (coupon_title, coupon_slug, coupon_description, coupon_category, coupon_subcategory, coupon_store, coupon_code, coupon_link, coupon_expire, coupon_status, coupon_author, coupon_featured, coupon_exclusive, coupon_created, coupon_image) VALUES (:title, :slug, :description, :category, :subcategory, :store, :code, :link, :expire, 1, 1, :featured, :exclusive, NOW(), :image)");
+            
             $stmt->execute([
                 ':title' => $title, 
                 ':slug' => $slug, 
@@ -168,7 +179,9 @@ if (($handle = fopen("data/coupons.csv", "r")) !== FALSE) {
                 ':code' => $data[11] ?? $data[10] ?? '', 
                 ':link' => $data[4] ?? '', 
                 ':expire' => $expiry, 
-                ':image' => $image
+                ':image' => $image,
+                ':exclusive' => $isExclusive,
+                ':featured' => $isExclusive // Also feature them if they are exclusive
             ]);
             $couponCount++;
         } catch (Exception $e) { logMsg("Error coupon '$title': " . $e->getMessage()); }
