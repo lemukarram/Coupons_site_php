@@ -178,6 +178,17 @@
 
         </div>
 
+        <div class="block col-md-12">
+            <label><?php echo _TABLEFIELDIMAGE; ?></label>
+            <div class="new-image" id="image-preview">
+                <?php if($page['page_image']): ?>
+                    <img src="../../images/<?php echo $page['page_image']; ?>" style="width: 100%; height: auto; margin-bottom: 10px;">
+                <?php endif; ?>
+            </div>
+            <input type="hidden" value="<?php echo $page['page_image']; ?>" name="page_image_save">
+            <input type="file" name="page_image" class="form-control" accept="image/*">
+        </div>
+
         <button class="btn btn-primary" type="submit" name="save"><?php echo _UPDATEITEM; ?></button>
 
         <?php if (is_default_page($connect, $page['page_id'])) { ?>

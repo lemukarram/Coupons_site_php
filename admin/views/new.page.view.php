@@ -114,6 +114,11 @@
 
       </div>
 
+      <div class="block col-md-12">
+            <label><?php echo _TABLEFIELDIMAGE; ?></label>
+            <input type="file" name="page_image" class="form-control" accept="image/*">
+      </div>
+
       <button class="btn btn-primary" type="submit" name="save"><?php echo _SAVECHANGES; ?></button>
 
     </div>

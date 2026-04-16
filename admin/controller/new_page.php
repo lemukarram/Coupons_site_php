@@ -32,33 +32,46 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 			$page_ad_header = cleardata($_POST['page_ad_header']);
 			$page_ad_footer = cleardata($_POST['page_ad_footer']);
 			$page_ad_sidebar = cleardata($_POST['page_ad_sidebar']);
+			$page_image = $_FILES['page_image'];
+
+			if (empty($page_image['name'])) {
+			    $image = null;
+			} else {
+			    $image_file = explode('.', $page_image['name']);
+			    $image_extension = end($image_file);
+			    $image_name = time() . '.' . $image_extension;
+			    $image_path = "../../images/" . $image_name;
+			    move_uploaded_file($page_image['tmp_name'], $image_path);
+			    $image = $image_name;
+			}
+
 			$converted_slug = convertSlug(cleardata($_POST['page_title']));
 			$exists = get_page_slug($connect, $converted_slug);
 
 			if ($exists > 0){
-				$new_number = $exists + 1;
-				$slug = $converted_slug."-".$new_number;
+			        $new_number = $exists + 1;
+			        $slug = $converted_slug."-".$new_number;
 			}else{
-				$slug = $converted_slug;
+			        $slug = $converted_slug;
 			}
 
-			$statment = $connect->prepare("INSERT INTO pages (page_id, page_title, page_seotitle, page_content, page_seodescription, page_status, page_slug, page_template, page_private, page_footer, page_ad_header, page_ad_footer, page_ad_sidebar) VALUES (null, :page_title, :page_seotitle, :page_content, :page_seodescription, :page_status, :page_slug, :page_template, :page_private, :page_footer, :page_ad_header, :page_ad_footer, :page_ad_sidebar)");
+			$statment = $connect->prepare("INSERT INTO pages (page_id, page_title, page_seotitle, page_content, page_image, page_seodescription, page_status, page_slug, page_template, page_private, page_footer, page_ad_header, page_ad_footer, page_ad_sidebar) VALUES (null, :page_title, :page_seotitle, :page_content, :page_image, :page_seodescription, :page_status, :page_slug, :page_template, :page_private, :page_footer, :page_ad_header, :page_ad_footer, :page_ad_sidebar)");
 
 			$statment->execute(array(
-				':page_title' => $page_title,
-				':page_seotitle' => $page_seotitle,
-				':page_content' => $page_content,
-				':page_seodescription' => $page_seodescription,
-				':page_status' => $page_status,
-				':page_slug' => $slug,
-				':page_template' => $page_template,
-				':page_private' => $page_private,
-				':page_footer' => $page_footer,
-				':page_ad_header' => $page_ad_header,
-				':page_ad_footer' => $page_ad_footer,
-				':page_ad_sidebar' => $page_ad_sidebar
+			        ':page_title' => $page_title,
+			        ':page_seotitle' => $page_seotitle,
+			        ':page_content' => $page_content,
+			        ':page_image' => $image,
+			        ':page_seodescription' => $page_seodescription,
+			        ':page_status' => $page_status,
+			        ':page_slug' => $slug,
+			        ':page_template' => $page_template,
+			        ':page_private' => $page_private,
+			        ':page_footer' => $page_footer,
+			        ':page_ad_header' => $page_ad_header,
+			        ':page_ad_footer' => $page_ad_footer,
+			        ':page_ad_sidebar' => $page_ad_sidebar
 			));
-
 			header('Location: ./pages.php');
 }
 

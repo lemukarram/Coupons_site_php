@@ -31,6 +31,22 @@ function get_post_by_id($connect, $id){
     return $sentence->fetch();
 }
 
+function get_post_per_id($connect, $id){
+    $sentence = $connect->prepare("SELECT * FROM posts WHERE post_id = :post_id LIMIT 1");
+    $sentence->execute(array(':post_id' => $id));
+    return $sentence->fetchAll();
+}
+
+function get_post_slug($connect, $slug){
+    $sentence = $connect->prepare("SELECT COUNT(*) FROM posts WHERE post_slug = :slug");
+    $sentence->execute(array(':slug' => $slug));
+    return $sentence->fetchColumn();
+}
+
+function id_post($id){
+    return (int)cleardata($id);
+}
+
 function get_all_blog_comments($connect){
     $sentence = $connect->prepare("SELECT blog_comments.*, posts.post_title FROM blog_comments LEFT JOIN posts ON blog_comments.comment_post = posts.post_id ORDER BY comment_date DESC");
     $sentence->execute();

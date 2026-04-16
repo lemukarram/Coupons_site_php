@@ -1,7 +1,7 @@
 <?php
 require "core.php";
 
-$slugItem = clearGetData(getSlugItem());
+$slugItem = isset($_GET['slug']) ? clearGetData($_GET['slug']) : clearGetData(getSlugItem());
 
 if(empty($slugItem)){
     header('Location: '. $urlPath->blog());

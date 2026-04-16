@@ -42,46 +42,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	$page_ad_header = cleardata($_POST['page_ad_header']);
 	$page_ad_footer = cleardata($_POST['page_ad_footer']);
 	$page_ad_sidebar = cleardata($_POST['page_ad_sidebar']);
+	$page_image_save = $_POST['page_image_save'];
+	$page_image = $_FILES['page_image'];
+
+	if (empty($page_image['name'])) {
+	    $image = $page_image_save;
+	} else {
+	    $image_file = explode('.', $page_image['name']);
+	    $image_extension = end($image_file);
+	    $image_name = time() . '.' . $image_extension;
+	    $image_path = "../../images/" . $image_name;
+	    move_uploaded_file($page_image['tmp_name'], $image_path);
+	    $image = $image_name;
+	}
 
 	$page_slug = cleardata($_POST['page_slug']);
 
 	if (empty($page_slug)) {
-		$slug = $_POST['page_slug_save'];
+	        $slug = $_POST['page_slug_save'];
 	}else{
 
-		$converted_slug = convertSlug($_POST['page_slug']);
-		$exists = get_page_slug($connect, $converted_slug);
+	        $converted_slug = convertSlug($_POST['page_slug']);
+	        $exists = get_page_slug($connect, $converted_slug);
 
-		if ($exists > 0){
-			$new_number = $exists + 1;
-			$slug = $converted_slug."-".$new_number;
-		}else{
+	        if ($exists > 0 && $converted_slug != $_POST['page_slug_save']){
+	                $new_number = $exists + 1;
+	                $slug = $converted_slug."-".$new_number;
+	        }else{
 
-			$slug = $converted_slug;
-		}
+	                $slug = $converted_slug;
+	        }
 	}
 
-$statment = $connect->prepare(
-	"UPDATE pages SET page_id = :page_id, page_title = :page_title, page_template = :page_template, page_seotitle = :page_seotitle, page_content = :page_content, page_seodescription = :page_seodescription, page_status = :page_status, page_slug = :page_slug, page_private = :page_private, page_footer = :page_footer, page_ad_header = :page_ad_header, page_ad_footer = :page_ad_footer, page_ad_sidebar = :page_ad_sidebar WHERE page_id = :page_id"
+	$statment = $connect->prepare(
+	"UPDATE pages SET page_title = :page_title, page_template = :page_template, page_seotitle = :page_seotitle, page_content = :page_content, page_image = :page_image, page_seodescription = :page_seodescription, page_status = :page_status, page_slug = :page_slug, page_private = :page_private, page_footer = :page_footer, page_ad_header = :page_ad_header, page_ad_footer = :page_ad_footer, page_ad_sidebar = :page_ad_sidebar WHERE page_id = :page_id"
 	);
 
-$statment->execute(array(
+	$statment->execute(array(
 
-		':page_id' => $page_id,
-		':page_title' => $page_title,
-		':page_seotitle' => $page_seotitle,
-		':page_content' => $page_content,
-		':page_seodescription' => $page_seodescription,
-		':page_status' => $page_status,
-		':page_slug' => $slug,
-		':page_template' => $page_template,
-		':page_private' => $page_private,
-		':page_footer' => $page_footer,
-		':page_ad_header' => $page_ad_header,
-		':page_ad_footer' => $page_ad_footer,
-		':page_ad_sidebar' => $page_ad_sidebar
-		));
-
+	        ':page_id' => $page_id,
+	        ':page_title' => $page_title,
+	        ':page_seotitle' => $page_seotitle,
+	        ':page_content' => $page_content,
+	        ':page_image' => $image,
+	        ':page_seodescription' => $page_seodescription,
+	        ':page_status' => $page_status,
+	        ':page_slug' => $slug,
+	        ':page_template' => $page_template,
+	        ':page_private' => $page_private,
+	        ':page_footer' => $page_footer,
+	        ':page_ad_header' => $page_ad_header,
+	        ':page_ad_footer' => $page_ad_footer,
+	        ':page_ad_sidebar' => $page_ad_sidebar
+	        ));
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 }else{

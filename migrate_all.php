@@ -38,6 +38,14 @@ try {
     echo "<p class='success'>Table 'posts' created/verified.</p>";
     $connect->exec($sql_comments);
     echo "<p class='success'>Table 'blog_comments' created/verified.</p>";
+    
+    // Add page_image column to pages table
+    try {
+        $connect->exec("ALTER TABLE pages ADD COLUMN page_image VARCHAR(255) DEFAULT NULL AFTER page_content");
+        echo "<p class='success'>Column 'page_image' added to 'pages' table.</p>";
+    } catch (PDOException $e) {
+        // Might already exist
+    }
 } catch (PDOException $e) {
     echo "<p class='error'>Error creating tables: " . $e->getMessage() . "</p>";
 }
