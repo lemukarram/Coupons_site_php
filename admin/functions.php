@@ -19,6 +19,31 @@ require_once __DIR__ . '/../classes/phpmailer/vendor/phpmailer/phpmailer/src/Exc
 require_once __DIR__ . '/../classes/phpmailer/vendor/phpmailer/phpmailer/src/PHPMailer.php';
 require_once __DIR__ . '/../classes/phpmailer/vendor/phpmailer/phpmailer/src/SMTP.php';
 
+function get_all_posts($connect){
+    $sentence = $connect->prepare("SELECT * FROM posts ORDER BY post_created DESC");
+    $sentence->execute();
+    return $sentence->fetchAll();
+}
+
+function get_post_by_id($connect, $id){
+    $sentence = $connect->prepare("SELECT * FROM posts WHERE post_id = :post_id LIMIT 1");
+    $sentence->execute(array(':post_id' => $id));
+    return $sentence->fetch();
+}
+
+function get_all_blog_comments($connect){
+    $sentence = $connect->prepare("SELECT blog_comments.*, posts.post_title FROM blog_comments LEFT JOIN posts ON blog_comments.comment_post = posts.post_id ORDER BY comment_date DESC");
+    $sentence->execute();
+    return $sentence->fetchAll();
+}
+
+function get_comment_by_id($connect, $id){
+    $sentence = $connect->prepare("SELECT * FROM blog_comments WHERE comment_id = :comment_id LIMIT 1");
+    $sentence->execute(array(':comment_id' => $id));
+    return $sentence->fetch();
+}
+
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;

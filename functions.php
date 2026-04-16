@@ -1224,7 +1224,36 @@ function getStoreBackgroundColor($id) {
     return $colors[$id % count($colors)];
 }
 
-$arrayLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+$arrayLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+function getPosts($connect, $limit = 10){
+    $sentence = $connect->prepare("SELECT * FROM posts WHERE post_status = 1 ORDER BY post_created DESC LIMIT :limit");
+    $sentence->bindParam(':limit', $limit, PDO::PARAM_INT);
+    $sentence->execute();
+    return $sentence->fetchAll();
+}
+
+function getPostBySlug($connect, $slug){
+    $sentence = $connect->prepare("SELECT * FROM posts WHERE post_slug = :post_slug AND post_status = 1 LIMIT 1");
+    $sentence->execute(array(':post_slug' => $slug));
+    return $sentence->fetch();
+}
+
+function getCommentsByPost($connect, $post_id){
+    $sentence = $connect->prepare("SELECT * FROM blog_comments WHERE comment_post = :post_id AND comment_status = 1 ORDER BY comment_date DESC");
+    $sentence->execute(array(':post_id' => $post_id));
+    return $sentence->fetchAll();
+}
+
+function addComment($connect, $post_id, $name, $email, $content){
+    $sentence = $connect->prepare("INSERT INTO blog_comments (comment_post, comment_name, comment_email, comment_content, comment_status) VALUES (:post_id, :name, :email, :content, 1)");
+    return $sentence->execute(array(
+        ':post_id' => $post_id,
+        ':name' => $name,
+        ':email' => $email,
+        ':content' => $content
+    ));
+}
 
 
 ?>

@@ -54,6 +54,13 @@
             </li>
 
             <li>
+                <a href="../controller/posts.php">
+                    <span class="icon-thumbnail"><i class="dripicons-blog"></i></span>
+                    <span class="title"><?php echo _POSTS; ?></span>
+                </a>
+            </li>
+
+            <li>
                 <a href="../controller/users.php">
                     <span class="icon-thumbnail"><i class="dripicons-user"></i></span>
                     <span class="title"><?php echo _USERS; ?></span>
@@ -64,6 +71,13 @@
                 <a href="../controller/subscribers.php">
                     <span class="icon-thumbnail"><i class="dripicons-bell"></i></span>
                     <span class="title"><?php echo _SUBSCRIBERS; ?></span>
+                </a>
+            </li>
+
+            <li>
+                <a href="../controller/blog_comments.php">
+                    <span class="icon-thumbnail"><i class="dripicons-message"></i></span>
+                    <span class="title"><?php echo _COMMENTS; ?></span>
                 </a>
             </li>
 

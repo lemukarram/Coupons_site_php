@@ -18,6 +18,8 @@ define("_PROFILE", "Profile");
 define("_SUBSCRIBERS", "Subscribers");
 define("_COMMENTS", "Comments");
 define("_SLIDERS", "Sliders");
+define("_BLOG", "Blog");
+define("_POSTS", "Posts");
 
 //Table Tags
 define("_TABLEFIELDID", "Id");

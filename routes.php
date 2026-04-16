@@ -184,6 +184,14 @@ class Routes {
         }
     }
 
+    public function blog() {
+        return $this->domain.'/blog';
+    }
+
+    public function post($slug) {
+        return $this->domain.'/blog/'.$slug;
+    }
+
     public function profile($action = NULL) {
 
         if ($action) {
