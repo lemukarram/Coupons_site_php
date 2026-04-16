@@ -4,7 +4,7 @@ require "core.php";
 $posts = getPosts($connect, 20);
 
 // Seo Title
-$titleSeoHeader = getSeoTitle($translation['tr_1'], _POSTS);
+$titleSeoHeader = getSeoTitle($translation['tr_1'], 'Blog');
 
 // Seo Description
 $descriptionSeoHeader = getSeoDescription($translation['tr_3']);

@@ -1227,10 +1227,16 @@ function getStoreBackgroundColor($id) {
 $arrayLetters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
 function getPosts($connect, $limit = 10){
-    $sentence = $connect->prepare("SELECT * FROM posts WHERE post_status = 1 ORDER BY post_created DESC LIMIT :limit");
-    $sentence->bindParam(':limit', $limit, PDO::PARAM_INT);
-    $sentence->execute();
-    return $sentence->fetchAll();
+    try {
+        $sentence = $connect->prepare("SELECT * FROM posts WHERE post_status = 1 ORDER BY post_created DESC LIMIT :limit");
+        $sentence->bindParam(':limit', $limit, PDO::PARAM_INT);
+        if (!$sentence->execute()) {
+            return [];
+        }
+        return $sentence->fetchAll();
+    } catch (Exception $e) {
+        return [];
+    }
 }
 
 function getPostBySlug($connect, $slug){

@@ -1,6 +1,6 @@
 <section class="uk-section uk-section-muted">
     <div class="uk-container">
-        <h1 class="uk-heading-line uk-text-center"><span><?php echo _POSTS; ?></span></h1>
+        <h1 class="uk-heading-line uk-text-center"><span>Blog</span></h1>
         
         <div class="uk-grid-medium uk-child-width-1-2@m uk-grid-match" uk-grid>
             <?php foreach($posts as $post): ?>
