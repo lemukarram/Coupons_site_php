@@ -1,0 +1,31 @@
+Options -MultiViews
+RewriteEngine On
+
+RewriteRule ^index index.php [L]
+RewriteRule ^error error.php [L]
+RewriteRule ^offline offline.php [L]
+RewriteRule ^signin signin.php [L]
+RewriteRule ^signup signup.php [L]
+RewriteRule ^signout signout.php [L]
+RewriteRule ^forgot forgot.php [L]
+RewriteRule ^profile profile.php [L]
+RewriteRule ^reset reset.php [L]
+RewriteRule sitemap.xml sitemap.php
+
+RewriteRule ^store/([^/]+) single-store.php?slug=$1&%{QUERY_STRING} [L]
+RewriteRule ^redirect/([^/]+) redirect.php?c=$1&%{QUERY_STRING} [L]
+
+RewriteRule ^blog/?$ blog.php [L]
+RewriteRule ^blog/([^/]+)/?$ single-post.php?slug=$1&%{QUERY_STRING} [L,QSA]
+
+# If the request is not for a valid directory
+RewriteCond %{REQUEST_FILENAME} !-d
+# If the request is not for a valid file
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^([^/]+)/?$ single-page.php?slug=$1&%{QUERY_STRING} [L,QSA]
+
+<Files config.php>
+order allow,deny
+deny from all
+</Files>
