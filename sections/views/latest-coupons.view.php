@@ -27,7 +27,7 @@
 
                 <!-- Logo / Image -->
                 <a class="c-open vch-logo-wrap" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo $urlPath->redirect($item['coupon_id']); ?>" href="#">
-                    <img src="<?php echo $urlPath->image($item['coupon_image'] ? $item['coupon_image'] : $item['store_image']); ?>" alt="<?php echo echoOutput($item['coupon_title']); ?>" class="vch-logo-img">
+                    <img src="<?php echo $urlPath->image(fixImg($item['coupon_image'] ? $item['coupon_image'] : $item['store_image'])); ?>" alt="<?php echo echoOutput($item['coupon_title']); ?>" class="vch-logo-img">
                 </a>
 
                 <!-- Description -->

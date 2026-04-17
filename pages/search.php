@@ -1,6 +1,6 @@
 <?php
 
-if(getSlugCategory()){
+if(getSlugCategory() || getSlugSubCategory()){
     require './pages/category-detail.php';
     exit;
 }

@@ -133,7 +133,7 @@
                     <div class="h-coupon-middle">
                         <div class="h-coupon-logo">
                             <?php if($item['store_image']): ?>
-                                <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>">
+                                <img src="<?php echo $urlPath->image(fixImg($item['store_image'])); ?>" alt="<?php echo echoOutput($item['store_title']); ?>">
                             <?php else: ?>
                                 <div class="no-image"><i class="ti ti-percentage"></i></div>
                             <?php endif; ?>

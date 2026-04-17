@@ -12,7 +12,7 @@
         <div class="uk-width-1-1 uk-width-auto@s">
         <div class="uk-cover-container uk-border-rounded logo-cover">
         <canvas width="250" height="250"></canvas>
-        <img src="<?php echo $urlPath->image($itemDetails['store_image']); ?>" alt="<?php echo echoOutput($itemDetails['store_title']); ?>" uk-cover>
+        <img src="<?php echo $urlPath->image(fixImg($itemDetails['store_image'])); ?>" alt="<?php echo echoOutput($itemDetails['store_title']); ?>" uk-cover>
         </div>
         </div>
 
@@ -86,7 +86,7 @@
                     <div class="h-coupon-middle">
                         <div class="h-coupon-logo">
                             <?php if($item['store_image']): ?>
-                                <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>">
+                                <img src="<?php echo $urlPath->image(fixImg($item['store_image'])); ?>" alt="<?php echo echoOutput($item['store_title']); ?>">
                             <?php else: ?>
                                 <div class="no-image"><i class="ti ti-percentage"></i></div>
                             <?php endif; ?>

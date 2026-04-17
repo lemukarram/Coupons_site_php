@@ -591,6 +591,15 @@ function getCategories($connect){
     return $sentence->fetchAll();
 }
 
+function getCategoryById($connect, $id){
+    $sentence = $connect->prepare("SELECT * FROM categories WHERE category_status = 1 AND category_id = :id LIMIT 1");
+    $sentence->execute(array(
+		':id' => $id,
+		));
+    $row = $sentence->fetch();
+    return $row;
+}
+
 function getCategoryBySlug($connect, $slug){
     $sentence = $connect->prepare("SELECT * FROM categories WHERE category_status = 1 AND category_slug = :slug LIMIT 1");
     $sentence->execute(array(
@@ -760,7 +769,7 @@ function getCouponsByCategory($connect, $items_per_page, $itemId){
     
     $limit = (getNumPage() > 1) ? getNumPage() * $items_per_page - $items_per_page : 0;
     
-    $sqlQuery = "SELECT SQL_CALC_FOUND_ROWS coupons.*, (SELECT AVG(rating) FROM reviews WHERE reviews.item = coupons.coupon_id AND reviews.status = 1) AS coupon_rating, categories.category_title AS category_title, subcategories.subcategory_title AS subcategory_title, stores.store_title AS store_title, users.user_name AS author_name, (SELECT COUNT(*) FROM reviews WHERE reviews.item = coupons.coupon_id AND reviews.status = 1) AS total_reviews FROM coupons LEFT JOIN categories ON coupon_category = categories.category_id LEFT JOIN stores ON store_id = stores.store_id LEFT JOIN users ON coupon_author = users.user_id LEFT JOIN subcategories ON coupon_subcategory = subcategories.subcategory_id LEFT JOIN reviews ON reviews.item = coupons.coupon_id WHERE coupons.coupon_category = '".$itemId."' AND coupons.coupon_status = 1 AND coupons.coupon_start <= '".getDateByTimeZone()."' AND ('".getDateByTimeZone()."' < coupons.coupon_expire OR coupons.coupon_expire IS NULL OR coupons.coupon_expire = '') GROUP BY coupons.coupon_id ORDER BY coupons.coupon_created DESC LIMIT $limit, $items_per_page";
+    $sqlQuery = "SELECT SQL_CALC_FOUND_ROWS coupons.*, (SELECT AVG(rating) FROM reviews WHERE reviews.item = coupons.coupon_id AND reviews.status = 1) AS coupon_rating, categories.category_title AS category_title, subcategories.subcategory_title AS subcategory_title, stores.store_id AS store_id, stores.store_title AS store_title, stores.store_image AS store_image, stores.store_slug AS store_slug, users.user_name AS author_name, (SELECT COUNT(*) FROM reviews WHERE reviews.item = coupons.coupon_id AND reviews.status = 1) AS total_reviews FROM coupons LEFT JOIN categories ON coupon_category = categories.category_id LEFT JOIN stores ON coupon_store = stores.store_id LEFT JOIN users ON coupon_author = users.user_id LEFT JOIN subcategories ON coupon_subcategory = subcategories.subcategory_id LEFT JOIN reviews ON reviews.item = coupons.coupon_id WHERE coupons.coupon_category = '".$itemId."' AND coupons.coupon_status = 1 AND coupons.coupon_start <= '".getDateByTimeZone()."' AND ('".getDateByTimeZone()."' < coupons.coupon_expire OR coupons.coupon_expire IS NULL OR coupons.coupon_expire = '') GROUP BY coupons.coupon_id ORDER BY coupons.coupon_created DESC LIMIT $limit, $items_per_page";
     $sentence = $connect->prepare($sqlQuery);
     $sentence->execute();
 
@@ -770,11 +779,20 @@ function getCouponsByCategory($connect, $items_per_page, $itemId){
     return array('items' => $items, 'total' => $total);
 }
 
+function getSubCategoryBySlug($connect, $slug){
+    $sentence = $connect->prepare("SELECT * FROM subcategories WHERE subcategory_status = 1 AND subcategory_slug = :slug LIMIT 1");
+    $sentence->execute(array(
+		':slug' => $slug,
+		));
+    $row = $sentence->fetch();
+    return $row;
+}
+
 function getCouponsBySubCategory($connect, $items_per_page, $itemId){
     
     $limit = (getNumPage() > 1) ? getNumPage() * $items_per_page - $items_per_page : 0;
     
-    $sqlQuery = "SELECT SQL_CALC_FOUND_ROWS coupons.*, (SELECT AVG(rating) FROM reviews WHERE reviews.item = coupons.coupon_id AND reviews.status = 1) AS coupon_rating, categories.category_title AS category_title, subcategories.subcategory_title AS subcategory_title, stores.store_title AS store_title, users.user_name AS author_name, (SELECT COUNT(*) FROM reviews WHERE reviews.item = coupons.coupon_id AND reviews.status = 1) AS total_reviews FROM coupons LEFT JOIN categories ON coupon_category = categories.category_id LEFT JOIN stores ON store_id = stores.store_id LEFT JOIN users ON coupon_author = users.user_id LEFT JOIN subcategories ON coupon_subcategory = subcategories.subcategory_id LEFT JOIN reviews ON reviews.item = coupons.coupon_id WHERE coupons.coupon_subcategory = '".$itemId."' AND coupons.coupon_status = 1 AND coupons.coupon_start <= '".getDateByTimeZone()."' AND ('".getDateByTimeZone()."' < coupons.coupon_expire OR coupons.coupon_expire IS NULL OR coupons.coupon_expire = '') GROUP BY coupons.coupon_id ORDER BY coupons.coupon_created DESC LIMIT $limit, $items_per_page";
+    $sqlQuery = "SELECT SQL_CALC_FOUND_ROWS coupons.*, (SELECT AVG(rating) FROM reviews WHERE reviews.item = coupons.coupon_id AND reviews.status = 1) AS coupon_rating, categories.category_title AS category_title, subcategories.subcategory_title AS subcategory_title, stores.store_id AS store_id, stores.store_title AS store_title, stores.store_image AS store_image, stores.store_slug AS store_slug, users.user_name AS author_name, (SELECT COUNT(*) FROM reviews WHERE reviews.item = coupons.coupon_id AND reviews.status = 1) AS total_reviews FROM coupons LEFT JOIN categories ON coupon_category = categories.category_id LEFT JOIN stores ON coupon_store = stores.store_id LEFT JOIN users ON coupon_author = users.user_id LEFT JOIN subcategories ON coupon_subcategory = subcategories.subcategory_id LEFT JOIN reviews ON reviews.item = coupons.coupon_id WHERE coupons.coupon_subcategory = '".$itemId."' AND coupons.coupon_status = 1 AND coupons.coupon_start <= '".getDateByTimeZone()."' AND ('".getDateByTimeZone()."' < coupons.coupon_expire OR coupons.coupon_expire IS NULL OR coupons.coupon_expire = '') GROUP BY coupons.coupon_id ORDER BY coupons.coupon_created DESC LIMIT $limit, $items_per_page";
     $sentence = $connect->prepare($sqlQuery);
     $sentence->execute();
 
@@ -1258,6 +1276,24 @@ function getCommentsByPost($connect, $post_id){
     $sentence = $connect->prepare("SELECT * FROM blog_comments WHERE comment_post = :post_id AND comment_status = 1 ORDER BY comment_date DESC");
     $sentence->execute(array(':post_id' => $post_id));
     return $sentence->fetchAll();
+}
+
+function fixImageExtension($filename) {
+    if (empty($filename)) return "";
+    // If the database has .png but the user says they have .jpg
+    // We can try to replace .png with .jpg if requested by the browser
+    // But better to just handle it here in the string before echoing.
+    if (strpos($filename, '.png') !== false) {
+        // You can uncomment the line below if you want to force .jpg for all .png pointers
+        // return str_replace('.png', '.jpg', $filename);
+    }
+    return $filename;
+}
+
+function fixImg($filename) {
+    if (empty($filename)) return "";
+    // User reported that database has .png but files are .jpg
+    return str_replace('.png', '.jpg', $filename);
 }
 
 function addComment($connect, $post_id, $name, $email, $content){
