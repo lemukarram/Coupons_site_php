@@ -1292,8 +1292,7 @@ function fixImageExtension($filename) {
 
 function fixImg($filename) {
     if (empty($filename)) return "";
-    // User reported that database has .png but files are .jpg
-    return str_replace('.png', '.jpg', $filename);
+    return $filename;
 }
 
 function addComment($connect, $post_id, $name, $email, $content){
