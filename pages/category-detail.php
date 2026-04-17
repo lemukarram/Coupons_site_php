@@ -54,4 +54,8 @@ $total = $getResults['total'];
 
 $numPages = numTotalPages($total, $site_config['page_limit']);
 
+// Fetch categories and stores for sidebar
+$getCategories = getCategories($connect);
+$getStores = getStores($connect, 20);
+
 require './pages/views/category-detail.view.php';

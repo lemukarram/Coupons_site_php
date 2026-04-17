@@ -1,5 +1,3 @@
-<?php require './sections/header.php'; ?>
-
 <div class="cat-banner">
     <div class="uk-container">
         <div class="cat-banner-grid">
@@ -25,7 +23,7 @@
                     <h4><?php echo echoOutput($translation['tr_92'] ?? 'Related categories:'); ?></h4>
                     <div class="cat-tags">
                         <?php foreach($subcategories as $sub): ?>
-                        <a href="<?php echo $urlPath->search(['category' => $item['category_slug'], 'subcategory' => $sub['subcategory_slug']]); ?>" class="cat-tag">
+                        <a href="<?php echo $urlPath->search(['category' => $item['category_slug'] ?? $parentCategory['category_slug'], 'subcategory' => $sub['subcategory_slug']]); ?>" class="cat-tag">
                             <?php echo echoOutput($sub['subcategory_title']); ?>
                         </a>
                         <?php endforeach; ?>
@@ -150,4 +148,4 @@
 </div>
 
 <?php require './sections/views/search-modal.view.php'; ?>
-<?php require './sections/footer.php'; ?>
+<?php // require './sections/footer.php'; ?>

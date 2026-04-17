@@ -2,7 +2,7 @@
 
 if(getSlugCategory() || getSlugSubCategory()){
     require './pages/category-detail.php';
-    exit;
+    return; // Use return instead of exit to allow single-page.php to continue
 }
 
 $getCategories = getCategories($connect);

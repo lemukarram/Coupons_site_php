@@ -288,10 +288,12 @@
 
 .h-coupon-item {
     background: #fff;
-    border: 1px solid #e5e5e5;
+    border: 1px solid #f0f0f0;
     margin-bottom: 20px;
     position: relative;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .h-coupon-card {
@@ -300,7 +302,7 @@
 }
 
 .h-coupon-left {
-    width: 150px;
+    width: 140px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -309,38 +311,43 @@
     text-align: center;
     border-right: 2px dashed #e03030;
     position: relative;
+    background: #fff;
 }
 
 .h-coupon-left .discount-val {
-    font-size: 28px;
-    font-weight: 800;
+    font-size: 30px;
+    font-weight: 900;
     color: #e03030;
     line-height: 1;
 }
 
 .h-coupon-left .discount-type {
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
     color: #e03030;
     text-transform: uppercase;
+    margin-top: 5px;
 }
 
 .h-coupon-middle {
     flex: 1;
     display: flex;
     padding: 20px;
+    background: #fff;
+    align-items: center;
 }
 
 .h-coupon-logo {
-    width: 80px;
-    height: 80px;
-    margin-right: 20px;
+    width: 90px;
+    height: 90px;
+    margin-right: 25px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid #f0f0f0;
-    padding: 5px;
-    border-radius: 4px;
+    border: 1px solid #f5f5f5;
+    padding: 8px;
+    border-radius: 6px;
+    flex-shrink: 0;
 }
 
 .h-coupon-logo img {
@@ -354,23 +361,26 @@
 }
 
 .h-coupon-content .title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333;
-    margin: 0 0 10px 0;
-    line-height: 1.3;
+    font-size: 20px;
+    font-weight: 700;
+    color: #222;
+    margin: 0 0 12px 0;
+    line-height: 1.2;
 }
 
 .h-coupon-content .more-details-btn {
     font-size: 13px;
-    color: #666;
+    color: #e03030;
     text-decoration: none;
     display: flex;
     align-items: center;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .h-coupon-content .more-details-btn i {
-    margin-left: 5px;
+    margin-left: 6px;
+    font-size: 10px;
 }
 
 .h-coupon-right {
@@ -380,20 +390,27 @@
     align-items: center;
     justify-content: center;
     padding: 20px;
+    background: #fff;
 }
 
 .h-coupon-btn {
     background: #e03030;
     color: #fff !important;
-    padding: 12px 20px;
-    border-radius: 4px;
-    font-weight: 600;
+    padding: 14px 24px;
+    border-radius: 6px;
+    font-weight: 700;
     text-decoration: none;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    font-size: 15px;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.h-coupon-btn:hover {
+    background: #c02020;
+    text-decoration: none;
 }
 
 .h-coupon-btn i {
@@ -401,20 +418,21 @@
 }
 
 .h-coupon-footer {
-    border-top: 1px solid #f0f0f0;
-    padding: 8px 20px;
+    border-top: 1px solid #f8f8f8;
+    padding: 10px 20px;
     background: #fafafa;
     text-align: right;
 }
 
 .h-coupon-footer a {
     font-size: 13px;
-    color: #e03030;
+    color: #666;
     text-decoration: none;
 }
 
 .h-coupon-footer a:hover {
     text-decoration: underline;
+    color: #e03030;
 }
 
 .h-coupon-item .vch-ribbon {
@@ -422,20 +440,43 @@
     right: 0px;
 }
 
-/* Extra info below title */
 .h-coupon-extra {
     margin-top: 15px;
     font-size: 12px;
-    color: #888;
+    color: #999;
+    display: flex;
+    align-items: center;
 }
 
 .h-coupon-details-box {
-    padding: 15px 20px;
+    padding: 20px;
     border-top: 1px solid #f0f0f0;
     font-size: 14px;
-    color: #555;
-    line-height: 1.5;
+    color: #666;
+    line-height: 1.6;
+    background: #fdfdfd;
 }
+
+@media (max-width: 768px) {
+    .h-coupon-card {
+        flex-direction: column;
+    }
+    .h-coupon-left {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px dashed #e03030;
+        padding: 15px;
+    }
+    .h-coupon-right {
+        width: 100%;
+    }
+    .h-coupon-logo {
+        width: 60px;
+        height: 60px;
+        margin-right: 15px;
+    }
+}
+
 
 /* ===================================================
    Category Detail Page Styles
