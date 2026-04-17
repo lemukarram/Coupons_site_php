@@ -591,6 +591,15 @@ function getCategories($connect){
     return $sentence->fetchAll();
 }
 
+function getCategoryBySlug($connect, $slug){
+    $sentence = $connect->prepare("SELECT * FROM categories WHERE category_status = 1 AND category_slug = :slug LIMIT 1");
+    $sentence->execute(array(
+		':slug' => $slug,
+		));
+    $row = $sentence->fetch();
+    return $row;
+}
+
 function getTagCategoryBySlug($slug){
     $sentence = connect()->prepare("SELECT * FROM categories WHERE category_status = 1 AND category_slug = :slug LIMIT 1");
     $sentence->execute(array(
@@ -1261,10 +1270,10 @@ function addComment($connect, $post_id, $name, $email, $content){
     ));
 }
 
-
-?>
 function getStoresByCategorySlug($connect, $slug){
     $sentence = $connect->prepare("SELECT DISTINCT stores.* FROM stores JOIN coupons ON stores.store_id = coupons.coupon_store JOIN categories ON coupons.coupon_category = categories.category_id WHERE categories.category_slug = :slug AND stores.store_status = 1 AND stores.store_featured = 1 LIMIT 10");
     $sentence->execute(array(':slug' => $slug));
     return $sentence->fetchAll();
 }
+
+?>

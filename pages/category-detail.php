@@ -7,14 +7,13 @@ if(!$slugCategory){
     exit;
 }
 
-$category = getTagCategoryBySlug($slugCategory);
+// Fetch the full category row instead of just the title
+$category = getCategoryBySlug($connect, $slugCategory);
 
 if(!$category){
     header('Location: '. $urlPath->home());
     exit;
 }
-
-$category = $category[0]; // getTagCategoryBySlug returns fetchAll()
 
 // SEO
 $titleSeoHeader = getSeoTitle($translation['tr_1'], $category['category_title']);
