@@ -101,7 +101,16 @@
 }
 
 .vch-coupon-card:hover {
-    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.vch-coupon-card:hover .vch-go-code {
+    background-color: #e03030 !important;
+    color: #ffffff !important;
+}
+
+.vch-coupon-card:hover .vch-arrow {
+    color: #ffffff !important;
 }
 
 /* --- Exclusive Ribbon (top-right corner) --- */
@@ -273,4 +282,320 @@
 .tas-footer .tas-widgets .tas-follow a{
     background-color: var(--primary-color) !important;
 }
-.tas-copyright {margin-top: 0px !important;}
+/* ===================================================
+   Horizontal Coupon Style (all-coupon.png)
+   =================================================== */
+
+.h-coupon-item {
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    margin-bottom: 20px;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.h-coupon-card {
+    display: flex;
+    min-height: 140px;
+}
+
+.h-coupon-left {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    text-align: center;
+    border-right: 2px dashed #e03030;
+    position: relative;
+}
+
+.h-coupon-left .discount-val {
+    font-size: 28px;
+    font-weight: 800;
+    color: #e03030;
+    line-height: 1;
+}
+
+.h-coupon-left .discount-type {
+    font-size: 14px;
+    font-weight: 700;
+    color: #e03030;
+    text-transform: uppercase;
+}
+
+.h-coupon-middle {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+}
+
+.h-coupon-logo {
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #f0f0f0;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.h-coupon-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.h-coupon-content {
+    flex: 1;
+}
+
+.h-coupon-content .title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+}
+
+.h-coupon-content .more-details-btn {
+    font-size: 13px;
+    color: #666;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.h-coupon-content .more-details-btn i {
+    margin-left: 5px;
+}
+
+.h-coupon-right {
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.h-coupon-btn {
+    background: #e03030;
+    color: #fff !important;
+    padding: 12px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 15px;
+}
+
+.h-coupon-btn i {
+    font-size: 18px;
+}
+
+.h-coupon-footer {
+    border-top: 1px solid #f0f0f0;
+    padding: 8px 20px;
+    background: #fafafa;
+    text-align: right;
+}
+
+.h-coupon-footer a {
+    font-size: 13px;
+    color: #e03030;
+    text-decoration: none;
+}
+
+.h-coupon-footer a:hover {
+    text-decoration: underline;
+}
+
+.h-coupon-item .vch-ribbon {
+    top: 0px;
+    right: 0px;
+}
+
+/* Extra info below title */
+.h-coupon-extra {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #888;
+}
+
+.h-coupon-details-box {
+    padding: 15px 20px;
+    border-top: 1px solid #f0f0f0;
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* ===================================================
+   Category Detail Page Styles
+   =================================================== */
+
+.cat-banner {
+    background: #fdfdfd;
+    padding: 40px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cat-banner-grid {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.cat-banner-img {
+    width: 350px;
+    flex-shrink: 0;
+}
+
+.cat-banner-img img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.cat-banner-content {
+    flex: 1;
+}
+
+.cat-banner-content .breadcrumb {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.cat-banner-content .breadcrumb a {
+    color: #666;
+    text-decoration: none;
+}
+
+.cat-banner-content h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #e03030;
+    margin: 0 0 15px 0;
+}
+
+.cat-banner-content .description {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* Related Categories Buttons */
+.related-cats {
+    margin-top: 30px;
+}
+
+.related-cats h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #e03030;
+    margin-bottom: 15px;
+}
+
+.cat-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.cat-tag {
+    display: inline-block;
+    padding: 8px 16px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.cat-tag:hover {
+    border-color: #e03030;
+    color: #e03030;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Featured Stores Scroller */
+.feat-stores-section {
+    margin: 30px 0;
+}
+
+.feat-stores-section h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e03030;
+    margin-bottom: 20px;
+}
+
+.feat-stores-grid {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 15px;
+}
+
+.feat-store-item {
+    width: 140px;
+    flex-shrink: 0;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 15px;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: transform 0.2s;
+}
+
+.feat-store-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    text-decoration: none;
+}
+
+.feat-store-logo {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.feat-store-logo img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.feat-store-name {
+    font-size: 12px;
+    color: #444;
+    font-weight: 600;
+}
+
+@media (max-width: 960px) {
+    .cat-banner-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .cat-banner-img {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+}

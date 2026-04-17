@@ -1,5 +1,10 @@
 <?php
 
+if(getSlugCategory()){
+    require './pages/category-detail.php';
+    exit;
+}
+
 $getCategories = getCategories($connect);
 $getStores = getStores($connect, 20);
 

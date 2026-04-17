@@ -68,82 +68,65 @@
 
                 <?php foreach($items as $item): ?>
 
-<div class="tas_card_5">
-<div class="uk-grid-collapse uk-margin card uk-flex uk-flex-middle" uk-grid>
-<div class="left uk-width-auto">
+            <div class="h-coupon-item">
+                <div class="h-coupon-card">
+                    
+                    <?php 
+                        $tagline = echoOutput($item['coupon_tagline']);
+                        $parts = explode(' ', $tagline, 2);
+                        $discount_val = $parts[0] ?? '';
+                        $discount_type = $parts[1] ?? '';
+                    ?>
 
-<div class="uk-cover-container">
-<?php if($item['store_image']): ?>
-<img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['coupon_title']); ?>" uk-cover>
-<canvas width="60" height="60"></canvas>
-<?php endif; ?>
-<?php if(!$item['store_image']): ?>
-<div class="no-image"><i class="ti ti-percentage"></i></div>
-<?php endif; ?>
+                    <div class="h-coupon-left">
+                        <span class="discount-val"><?php echo $discount_val; ?></span>
+                        <span class="discount-type"><?php echo $discount_type; ?></span>
+                    </div>
 
-</div>
+                    <div class="h-coupon-middle">
+                        <div class="h-coupon-logo">
+                            <?php if($item['store_image']): ?>
+                                <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>">
+                            <?php else: ?>
+                                <div class="no-image"><i class="ti ti-percentage"></i></div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="h-coupon-content">
+                            <h3 class="title"><?php echo echoOutput($item['coupon_title']); ?></h3>
+                            <a class="more-details-btn" uk-toggle="target: #toggle_<?php echo echoOutput($item['coupon_id']); ?>; animation: uk-animation-fade">
+                                <?php echo echoOutput($translation['tr_99']); ?> <i class="ti ti-chevron-down"></i>
+                            </a>
+                            
+                            <div class="h-coupon-extra">
+                                <?php if(!empty(echoOutput($item['coupon_expire']))): ?>
+                                    <span><?php echo echoOutput($translation['tr_24']); ?> <?php echo formatDate($item['coupon_expire']); ?></span>
+                                <?php endif; ?>
+                                <?php if(isVerified(echoOutput($item['coupon_verify']))): ?>
+                                    <span class="uk-margin-small-left"><i class="ti ti-check uk-text-success"></i> <?php echo echoOutput($translation['tr_26']); ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
 
-</div>
-<div class="body uk-width-expand">
-<div class="uk-grid-small" uk-grid>
+                    <div class="h-coupon-right">
+                        <?php if(isExclusive(echoOutput($item['coupon_exclusive']))): ?>
+                            <div class="vch-ribbon">
+                                <span><?php echo echoOutput($translation['tr_16']); ?></span>
+                            </div>
+                        <?php endif; ?>
+                        
+                        <a class="h-coupon-btn c-open" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo echoOutput($item['coupon_link']); ?>">
+                            <?php echo echoOutput($translation['tr_22']); ?> <i class="ti ti-chevron-right"></i>
+                        </a>
+                    </div>
+                </div>
 
-<div class="uk-width-1-1 uk-width-expand@s">
-    <?php if(timeLeft(echoOutput($item['coupon_expire']))): ?>
-    <p class="tas_time"><i class="ti ti-clock"></i> <span><?php echo timeLeft(echoOutput($item['coupon_expire'])); ?></span></p>
-    <?php endif; ?>
-    <h3 class="title"><?php echo echoOutput($item['coupon_title']); ?></h3>
-<?php if(!empty($item['coupon_tagline'])): ?>
-    <p class="tagline"><?php echo echoOutput($item['coupon_tagline']); ?></p>
-<?php endif; ?>
-</div>
-<div class="uk-width-1-1 uk-width-auto@s">
-    <a class="uk-width-1-1@s uk-button btn c-open" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo echoOutput($item['coupon_link']); ?>">
-    <?php echo echoOutput($translation['tr_22']); ?>
-    </a>
-</div>
-
-</div>
-
-</div>
-
-<div class="uk-width-1-1 info">
-
-<div class="uk-grid-small uk-flex uk-flex-middle" uk-grid>
-
-<div class="uk-width-expand uk-text-left">
-<ul class="uk-subnav" uk-margin>
-    <?php if(!empty(echoOutput($item['coupon_expire']))): ?>
-    <li><span><?php echo echoOutput($translation['tr_24']); ?> <?php echo formatDate($item['coupon_expire']); ?></span></li>
-    <?php endif; ?>
-    <?php if(isVerified(echoOutput($item['coupon_verify']))): ?>
-    <li><span><div class="verified"><i class="ti ti-check"></i> <?php echo echoOutput($translation['tr_26']); ?></div></span></li>
-    <?php endif; ?>
-    <?php if(isExclusive(echoOutput($item['coupon_exclusive']))): ?>
-    <li><span><div class="exclusive"><i class="ti ti-crown"></i> <?php echo echoOutput($translation['tr_16']); ?></div></span></li>
-    <?php endif; ?>
-</ul>
-</div>
-
-<div class="uk-width-auto uk-text-right">
-<a class="see_details" uk-toggle="target: #toggle_<?php echo echoOutput($item['coupon_id']); ?>; animation: uk-animation-fade"><?php echo echoOutput($translation['tr_99']); ?></a>
-</div>
-
-</div>
-
-<div class="uk-width-1-1" id="toggle_<?php echo echoOutput($item['coupon_id']); ?>" hidden>
-                <p class="details"><?php echo echoOutput($item['coupon_description']); ?></p>
-                <hr class="uk-margin-small">
-                <p class="uk-margin-remove reaction uk-flex uk-flex-middle">
-                    <i class="ti ti-mood-smile uk-text-success"></i> <span><?php echo echoOutput($item['total_likes']); ?></span>
-                    <i class="ti ti-mood-sad uk-text-danger"></i> <span><?php echo echoOutput($item['total_deslikes']); ?></span>
-                </p>
+                <div class="h-coupon-details-box" id="toggle_<?php echo echoOutput($item['coupon_id']); ?>" hidden>
+                    <p class="uk-margin-remove"><?php echo echoOutput($item['coupon_description']); ?></p>
+                </div>
             </div>
 
-</div>
-</div>
-</div>
-
-<?php endforeach; ?>
+            <?php endforeach; ?>
 
                 </div>
 

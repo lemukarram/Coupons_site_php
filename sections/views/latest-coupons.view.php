@@ -1,72 +1,61 @@
-<div class="uk-container uk-margin-large-top uk-margin-large-bottom" uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
+<div class="uk-container uk-margin-medium-top uk-margin-large-bottom vch-latest-section" uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
 
-<div class="tas_heading uk-grid-collapse uk-flex uk-flex-middle" uk-grid>
+    <div class="tas_heading uk-grid-collapse uk-flex uk-flex-middle" uk-grid>
         <div class="uk-width-expand">
             <h3 class="uk-heading-line uk-text-left"><span><?php echo echoOutput($translation['tr_13']); ?></span></h3>
         </div>
         <div class="uk-width-auto">
-            <a href="#" class="uk-button uk-button-default uk-border-pill btn">
+            <a href="<?php echo $urlPath->search(); ?>" class="uk-button uk-button-default uk-border-pill btn">
                 <?php echo echoOutput($translation['tr_21']); ?>
                 <i class="ti ti-chevron-right"></i>
             </a>
         </div>
     </div>
 
-        <div class="uk-grid-medium uk-grid-match uk-child-width-1-1 uk-child-width-1-2@s" uk-grid>
+    <div class="vch-coupon-grid">
 
 <?php foreach($latestCoupons as $item): ?>
 
-<div class="tas_card_5">
-    <div class="uk-grid-collapse card" uk-grid>
-        <div class="left uk-width-auto uk-flex uk-flex-middle">
+        <div class="vch-coupon-wrap">
+            <div class="vch-coupon-card">
 
-            <div class="uk-cover-container">
-            <?php if($item['store_image']): ?>
-            <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['coupon_title']); ?>" uk-cover>
-            <canvas width="60" height="60"></canvas>
-            <?php endif; ?>
-            <?php if(!$item['store_image']): ?>
-            <div class="no-image"><i class="ti ti-percentage"></i></div>
-            <?php endif; ?>
-            </div>
-
-        </div>
-        <div class="body uk-width-expand uk-flex uk-flex-middle">
-        <div class="uk-grid-collapse uk-flex uk-flex-middle" uk-grid>
-
-            <div class="uk-width-expand uk-width-medium">
-                <?php if(timeLeft(echoOutput($item['coupon_expire']))): ?>
-                <p class="tas_time"><i class="ti ti-clock"></i> <span><?php echo timeLeft(echoOutput($item['coupon_expire'])); ?></span></p>
+                <?php if(isExclusive(echoOutput($item['coupon_exclusive']))): ?>
+                    <div class="vch-ribbon">
+                        <span><?php echo echoOutput($translation['tr_16']); ?></span>
+                    </div>
                 <?php endif; ?>
-                <h3 class="title"><?php echo echoOutput($item['coupon_title']); ?></h3>
+
+                <!-- Logo / Image -->
+                <a class="c-open vch-logo-wrap" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo $urlPath->redirect($item['coupon_id']); ?>" href="#">
+                    <img src="<?php echo $urlPath->image($item['coupon_image'] ? $item['coupon_image'] : $item['store_image']); ?>" alt="<?php echo echoOutput($item['coupon_title']); ?>" class="vch-logo-img">
+                </a>
+
+                <!-- Description -->
+                <a class="c-open vch-description" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo $urlPath->redirect($item['coupon_id']); ?>" href="#">
+                    <?php echo echoOutput($item['coupon_title']); ?>
+                </a>
+
+                <!-- Dashed divider with scissors -->
+                <div class="vch-divider">
+                    <span class="vch-scissors">✂</span>
+                </div>
+
+                <!-- Go to Code -->
+                <a class="c-open vch-go-code" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo echoOutput($item['coupon_link']); ?>" href="#">
+                    <?php echo echoOutput($translation['tr_22']); ?> <span class="vch-arrow">❯</span>
+                </a>
+
             </div>
-            <div class="uk-width-auto">
-                <a class="uk-button btn c-open" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo $urlPath->redirect($item['coupon_id']); ?>" href="#">
-                <?php echo echoOutput($translation['tr_22']); ?>
+
+            <!-- Store link below card -->
+            <div class="vch-store-link">
+                <a href="<?php echo $urlPath->redirect($item['coupon_id']); ?>" class="vch-view-all c-open" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo $urlPath->redirect($item['coupon_id']); ?>">
+                    <?php echo echoOutput($translation['tr_21']); ?> <?php echo echoOutput($item['store_title'] ?? ''); ?> <?php echo echoOutput($translation['tr_16'] ?? 'vouchers'); ?>
                 </a>
             </div>
-
         </div>
-
-        </div>
-
-        <div class="uk-width-1-1 info">
-
-        <ul class="uk-subnav" uk-margin>
-            <?php if(!empty(echoOutput($item['coupon_expire']))): ?>
-            <li><span><?php echo echoOutput($translation['tr_24']); ?> <?php echo formatDate($item['coupon_expire']); ?></span></li>
-            <?php endif; ?>
-            <?php if(isVerified(echoOutput($item['coupon_verify']))): ?>
-            <li><span><div class="verified"><i class="ti ti-check"></i> <?php echo echoOutput($translation['tr_26']); ?></div></span></li>
-            <?php endif; ?>
-        </ul>
-
-        </div>
-
-    </div>
-</div>
 
 <?php endforeach; ?>
 
-</div>
+    </div>
 </div>

@@ -49,7 +49,7 @@ if ($itemDetails['page_private'] == 1 && !isLogged()) {
 
 	}elseif ($itemDetails['page_template'] == 'categories') {
 		
-		require './pages/categories.php';
+		require './pages/category-detail.php';
 
 	}elseif ($itemDetails['page_template'] == 'stores') {
 		
