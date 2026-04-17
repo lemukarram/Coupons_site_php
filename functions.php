@@ -936,7 +936,7 @@ function getFooterMenu($connect){
 
 function getNavigation($connect, $idMenu){
     
-    $sentence = $connect->prepare("SELECT navigations.navigation_id, navigations.navigation_page, navigations.navigation_target, navigations.navigation_icon, COALESCE(pages.page_slug, navigations.navigation_url) AS navigation_url, COALESCE(pages.page_title, navigations.navigation_label) AS navigation_label, navigations.navigation_type FROM navigations LEFT JOIN pages ON page_id = navigations.navigation_page WHERE navigation_menu = :menu_id ORDER BY navigation_order ASC"); 
+    $sentence = $connect->prepare("SELECT navigations.navigation_id, navigations.navigation_parent, navigations.navigation_page, navigations.navigation_target, navigations.navigation_icon, COALESCE(pages.page_slug, navigations.navigation_url) AS navigation_url, COALESCE(pages.page_title, navigations.navigation_label) AS navigation_label, navigations.navigation_type FROM navigations LEFT JOIN pages ON page_id = navigations.navigation_page WHERE navigation_menu = :menu_id ORDER BY navigation_order ASC"); 
     $sentence->execute(array(
         ':menu_id' => $idMenu,
         ));

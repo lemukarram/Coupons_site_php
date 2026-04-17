@@ -63,44 +63,60 @@
 <nav class="tas_search_nav tas_search_nav_2" uk-navbar>
     <div class="uk-navbar-center">
         <ul class="uk-navbar-nav">
-        <?php foreach($navigationHeader as $item): ?>
-                 <?php if ($item['navigation_type'] == 'custom') { ?>
-                    <?php if($item['navigation_url'] == '/'){ ?>
-                    <li <?php if ($index_url == "index.php") echo ' class="uk-active"'; ?>><a href="<?php echo $urlPath->home(); ?>" target="<?php echo $item['navigation_target']; ?>">
-                        <?php if (!empty($item['navigation_icon'])): ?>
-                            <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
-                                <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
-                            <?php else: ?>
-                                <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; vertical-align: middle;"></i>
-                            <?php endif; ?>
+        <?php 
+            // Organize navigation into a tree
+            $navTree = [];
+            foreach($navigationHeader as $nav) {
+                if (empty($nav['navigation_parent'])) {
+                    $nav['children'] = [];
+                    $navTree[$nav['navigation_id']] = $nav;
+                }
+            }
+            foreach($navigationHeader as $nav) {
+                if (!empty($nav['navigation_parent']) && isset($navTree[$nav['navigation_parent']])) {
+                    $navTree[$nav['navigation_parent']]['children'][] = $nav;
+                }
+            }
+        ?>
+        <?php foreach($navTree as $item): ?>
+            <?php 
+                $hasChildren = !empty($item['children']);
+                $navUrl = ($item['navigation_type'] == 'custom') ? ($item['navigation_url'] == '/' ? $urlPath->home() : $item['navigation_url']) : $urlPath->page($item['navigation_url']);
+                $isActive = ($item['navigation_url'] == '/' && $index_url == "index.php") || ($current_url == $item['navigation_url']);
+            ?>
+            <li class="<?php echo $isActive ? 'uk-active' : ''; ?> <?php echo $hasChildren ? 'has-submenu' : ''; ?>">
+                <a href="<?php echo $navUrl; ?>" target="<?php echo $item['navigation_target']; ?>">
+                    <?php if (!empty($item['navigation_icon'])): ?>
+                        <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
+                            <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
+                        <?php else: ?>
+                            <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; vertical-align: middle;"></i>
                         <?php endif; ?>
-                        <?php echo echoOutput($item['navigation_label']); ?>
-                    </a></li>
-                    <?php }else{ ?>
-                    <li <?php if ($current_url == $item['navigation_url']) echo ' class="uk-active"'; ?>><a href="<?php echo $item['navigation_url']; ?>" target="<?php echo $item['navigation_target']; ?>">
-                        <?php if (!empty($item['navigation_icon'])): ?>
-                            <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
-                                <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
-                            <?php else: ?>
-                                <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; vertical-align: middle;"></i>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                        <?php echo echoOutput($item['navigation_label']); ?>
-                    </a></li>
-                    <?php } ?>
-                 <?php } else { ?>
-                     <li <?php if ($current_url == $item['navigation_url']) echo ' class="uk-active"'; ?>><a href="<?php echo $urlPath->page($item['navigation_url']); ?>" target="<?php echo $item['navigation_target']; ?>">
-                        <?php if (!empty($item['navigation_icon'])): ?>
-                            <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
-                                <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
-                            <?php else: ?>
-                                <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; vertical-align: middle;"></i>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                        <?php echo echoOutput($item['navigation_label']); ?>
-                    </a></li>
-                 <?php } ?>
-             <?php endforeach; ?>
+                    <?php endif; ?>
+                    <?php echo echoOutput($item['navigation_label']); ?>
+                </a>
+
+                <?php if ($hasChildren): ?>
+                    <div class="vch-submenu">
+                        <div class="vch-submenu-grid">
+                            <?php foreach($item['children'] as $child): ?>
+                                <?php $childUrl = ($child['navigation_type'] == 'custom') ? $child['navigation_url'] : $urlPath->page($child['navigation_url']); ?>
+                                <a href="<?php echo $childUrl; ?>" class="vch-submenu-item" target="<?php echo $child['navigation_target']; ?>">
+                                    <?php if (!empty($child['navigation_icon'])): ?>
+                                        <?php if (strpos($child['navigation_icon'], '.') !== false): ?>
+                                            <img src="<?php echo $urlPath->image($child['navigation_icon']); ?>">
+                                        <?php else: ?>
+                                            <i class="<?php echo $child['navigation_icon']; ?>"></i>
+                                        <?php endif; ?>
+                                    <?php endif; ?>
+                                    <?php echo echoOutput($child['navigation_label']); ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </li>
+        <?php endforeach; ?>
         </ul>
     </div>
 

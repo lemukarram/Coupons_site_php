@@ -629,14 +629,80 @@
     font-weight: 600;
 }
 
-@media (max-width: 960px) {
-    .cat-banner-grid {
-        flex-direction: column;
-        gap: 20px;
-    }
-    .cat-banner-img {
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-    }
+/* ===================================================
+   Header Submenu Styles (2-column)
+   =================================================== */
+
+.uk-navbar-nav > li {
+    position: relative;
+}
+
+/* Submenu container */
+.vch-submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 500px;
+    background: #2c3e50; /* Dark gray/blue like in photo */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 1000;
+    padding: 15px;
+    border-top: 2px solid #e03030;
+}
+
+.uk-navbar-nav > li:hover .vch-submenu {
+    display: block;
+}
+
+.vch-submenu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+
+.vch-submenu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    color: #eee !important;
+    text-decoration: none;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    transition: background 0.2s;
+}
+
+.vch-submenu-item:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff !important;
+    text-decoration: none;
+}
+
+.vch-submenu-item i, .vch-submenu-item img {
+    width: 20px;
+    margin-right: 12px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.vch-submenu-footer {
+    grid-column: span 2;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 10px;
+    padding-top: 10px;
+    text-align: right;
+}
+
+.vch-submenu-footer a {
+    color: #fff !important;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+/* Adjustments for dropdown indicator */
+.uk-navbar-nav > li.has-submenu > a::after {
+    content: " \F0D7";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-left: 5px;
 }
