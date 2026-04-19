@@ -14,7 +14,7 @@
 
     <div class="uk-grid-small uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-6@l" uk-grid>
     <?php foreach($featuredStores as $item): ?>
-        <div class="cat_3 uk-text-center">
+        <div class="cat_3 uk-text-center" style="margin-bottom: 24px !important;">
             <a href="<?php echo $urlPath->store($item['store_slug']); ?>">
                 <div class="cover uk-border-rounded uk-flex uk-flex-middle uk-flex-center" style="background-color: <?php echo getStoreBackgroundColor($item['store_id']); ?>; height: 80px;">
                     <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" style="object-fit: cover;border-radius: 5px; width: 100%; height: 100%; max-height: 80px;">
