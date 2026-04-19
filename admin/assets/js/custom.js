@@ -569,6 +569,57 @@ $(document).ready(function(){
 });
 
 //------------------------------------------------
+
+$(document).on("click", ".edit-nav", function(e){
+    e.preventDefault();
+    var id = $(this).data("id");
+    $.ajax({
+        url: "../controller/get_navigation.php",
+        method: "POST",
+        data: {id: id},
+        dataType: "json",
+        success: function(data){
+            $('#edit_navigation_id').val(data.navigation_id);
+            $('#edit_navigation_label').val(data.navigation_label);
+            $('#edit_navigation_target').val(data.navigation_target);
+            $('#edit_navigation_parent').val(data.navigation_parent);
+            $('#edit_navigation_icon_class').val(data.navigation_icon);
+
+            if(data.navigation_type == 'page'){
+                $('#url_container').hide();
+                $('#edit_navigation_url').removeAttr('name');
+                $('#page_container').show();
+                $('#edit_navigation_page').attr('name', 'navigation_page');
+                $('#edit_navigation_page').val(data.navigation_page);
+            } else {
+                $('#page_container').hide();
+                $('#edit_navigation_page').removeAttr('name');
+                $('#url_container').show();
+                $('#edit_navigation_url').attr('name', 'navigation_url');
+                $('#edit_navigation_url').val(data.navigation_url);
+            }
+
+            $('#edit_nav_modal').modal('show');
+        }
+    });
+});
+
+$(document).on("submit", "#updateNavigation", function(e){
+    e.preventDefault();
+    $.ajax({
+        url: "../controller/edit_navigation.php",
+        method: "POST",
+        data: new FormData(this),
+        contentType: false,
+        processData: false,
+        success: function(data){
+            $('#edit_nav_modal').modal('hide');
+            location.reload();
+        }
+    });
+});
+
+//------------------------------------------------
 'use strict';
 
 $(document).ready(function(){

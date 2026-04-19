@@ -88,12 +88,12 @@
                 $isActive = ($item['navigation_url'] == '/' && $index_url == "index.php") || ($current_url == $item['navigation_url']);
             ?>
             <li class="<?php echo $isActive ? 'uk-active' : ''; ?> <?php echo $hasChildren ? 'has-submenu' : ''; ?>">
-                <a href="<?php echo $navUrl; ?>" target="<?php echo $item['navigation_target']; ?>">
+                <a href="<?php echo $navUrl; ?>" target="<?php echo $item['navigation_target']; ?>" class="uk-flex uk-flex-middle">
                     <?php if (!empty($item['navigation_icon'])): ?>
                         <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
-                            <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; vertical-align: middle;">
+                            <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; flex-shrink: 0;">
                         <?php else: ?>
-                            <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; vertical-align: middle;"></i>
+                            <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; flex-shrink: 0;"></i>
                         <?php endif; ?>
                     <?php endif; ?>
                     <span><?php echo echoOutput($item['navigation_label']); ?></span>
