@@ -36,9 +36,9 @@
                 <a href="<?php echo $navUrl; ?>" target="<?php echo $item['navigation_target']; ?>" class="uk-flex uk-flex-middle">
                     <?php if (!empty($item['navigation_icon'])): ?>
                         <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
-                            <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 8px; flex-shrink: 0;">
+                            <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 3px; flex-shrink: 0;">
                         <?php else: ?>
-                            <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; flex-shrink: 0;"></i>
+                            <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 3px; flex-shrink: 0;"></i>
                         <?php endif; ?>
                     <?php endif; ?>
                     <span><?php echo echoOutput($item['navigation_label']); ?></span>
