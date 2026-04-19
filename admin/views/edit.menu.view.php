@@ -101,8 +101,8 @@
                           <li class="ui-sortable-handle" id="item-<?php echo $nav['navigation_id']; ?>"> 
                             <span style="font-weight:bold;font-size: 14px;"><?php echo $nav['navigation_label']; ?></span>
                             <?php echo $parentLabel; ?> · <span style="font-size:12px"><?php echo $nav['navigation_url']; ?></span>
-                            <a class="delete-nav" href="../controller/delete_nav.php?id=<?php echo $nav["navigation_id"]; ?>"><i class="fa fa-trash"></i> <?php echo _DELETEITEM; ?></a>
-                            <a class="edit-nav" href="#" data-id="<?php echo $nav["navigation_id"]; ?>" style="float:right; margin-right:10px;"><i class="fa fa-edit"></i> <?php echo _EDITITEM; ?></a>
+                            <a class="delete-nav" href="../controller/delete_nav.php?id=<?php echo $nav["navigation_id"]; ?>" style="right: 5px;"><i class="fa fa-trash"></i> <?php echo _DELETEITEM; ?></a>
+                            <a class="edit-nav" href="#" data-id="<?php echo $nav["navigation_id"]; ?>" style="float:right; margin-right: 60px;"><i class="fa fa-edit"></i> <?php echo _EDITITEM; ?></a>
                           </li>
                         <?php endforeach; ?>
                       </ul>
