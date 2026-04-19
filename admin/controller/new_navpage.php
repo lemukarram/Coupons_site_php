@@ -36,6 +36,7 @@ $lang = $_POST["lang"];
 $menu_id = $_POST["menu_id"];
 
 $navigation_target = $_POST['navigation_target'];
+$navigation_parent = !empty($_POST['navigation_parent']) ? cleardata($_POST['navigation_parent']) : null;
 $navigation_type = cleardata($_POST['navigation_type']);
 
 $navigation_icon = cleardata($_POST['navigation_icon_class']);
@@ -55,7 +56,7 @@ if(isset($_FILES['navigation_icon_image']) && $_FILES['navigation_icon_image']['
     }
 }
 
-	$statment = $connect->prepare("INSERT INTO navigations (navigation_id,navigation_order, navigation_page,navigation_target,navigation_type,navigation_menu,navigation_icon) VALUES (null, :navigation_order, :navigation_page, :navigation_target, :navigation_type, :navigation_menu, :navigation_icon)");
+	$statment = $connect->prepare("INSERT INTO navigations (navigation_id,navigation_order, navigation_page,navigation_target,navigation_type,navigation_menu,navigation_icon,navigation_parent) VALUES (null, :navigation_order, :navigation_page, :navigation_target, :navigation_type, :navigation_menu, :navigation_icon, :navigation_parent)");
 
 	$statment->execute(array(
 		':navigation_order' => $newOrder,
@@ -63,7 +64,8 @@ if(isset($_FILES['navigation_icon_image']) && $_FILES['navigation_icon_image']['
 		':navigation_target' => $navigation_target,
 		':navigation_type' => $navigation_type,
 		':navigation_menu' => $menu_id,
-		':navigation_icon' => $navigation_icon
+		':navigation_icon' => $navigation_icon,
+		':navigation_parent' => $navigation_parent
 		));
 }
 

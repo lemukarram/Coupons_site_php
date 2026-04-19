@@ -203,7 +203,7 @@ function get_navigations($connect){
 
 function get_navigations_by_menu($connect, $id_menu){
 
-    $sentence = $connect->prepare("SELECT navigations.navigation_id, COALESCE(pages.page_slug, navigations.navigation_url) AS navigation_url, COALESCE(pages.page_title, navigations.navigation_label) AS navigation_label, navigations.navigation_type FROM navigations LEFT JOIN pages ON page_id = navigations.navigation_page WHERE navigation_menu = '".$id_menu."' ORDER BY navigation_order ASC"); 
+    $sentence = $connect->prepare("SELECT navigations.navigation_id, navigations.navigation_parent, COALESCE(pages.page_slug, navigations.navigation_url) AS navigation_url, COALESCE(pages.page_title, navigations.navigation_label) AS navigation_label, navigations.navigation_type FROM navigations LEFT JOIN pages ON page_id = navigations.navigation_page WHERE navigation_menu = '".$id_menu."' ORDER BY navigation_order ASC"); 
     $sentence->execute();
     return $sentence->fetchAll();
 }

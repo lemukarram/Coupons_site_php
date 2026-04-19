@@ -87,7 +87,16 @@
 
                       <ul class="listas sortable ui-sortable">
                         <?php foreach($navigations as $nav){
-                          echo '<li class="ui-sortable-handle" id="item-'.$nav['navigation_id'].'"> <span style="font-weight:bold;font-size: 14px;">' . $nav['navigation_label'] . '</span> · <span style="font-size:12px">' . $nav['navigation_url'] . '</span><a class="delete-nav" href="../controller/delete_nav.php?id=' . $nav["navigation_id"] . '"><i class="fa fa-trash"></i> '._DELETEITEM.'</a></li>';
+                          $parentLabel = "";
+                          if (!empty($nav['navigation_parent'])) {
+                              foreach($navigations as $pnav) {
+                                  if ($pnav['navigation_id'] == $nav['navigation_parent']) {
+                                      $parentLabel = ' <span class="badge badge-secondary" style="font-size:10px; font-weight:normal; vertical-align:middle;">Sub of: ' . $pnav['navigation_label'] . '</span>';
+                                      break;
+                                  }
+                              }
+                          }
+                          echo '<li class="ui-sortable-handle" id="item-'.$nav['navigation_id'].'"> <span style="font-weight:bold;font-size: 14px;">' . $nav['navigation_label'] . '</span>' . $parentLabel . ' · <span style="font-size:12px">' . $nav['navigation_url'] . '</span><a class="delete-nav" href="../controller/delete_nav.php?id=' . $nav["navigation_id"] . '"><i class="fa fa-trash"></i> '._DELETEITEM.'</a></li>';
                           }
                         ?>
 

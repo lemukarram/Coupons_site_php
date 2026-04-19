@@ -26,6 +26,15 @@
          <option value="_top">Top</option>
        </select>
        <br>
+
+       <label class="control-label">Parent Navigation</label>
+
+       <select class="custom-select form-control" name="navigation_parent">
+         <option value="" selected="">None</option>
+         <?php foreach($navigations as $nav){ ?>
+          <option value="<?php echo $nav['navigation_id']; ?>"><?php echo $nav['navigation_label']; ?></option>
+         <?php } ?>
+       </select>
        <br>
 
        <label>Icon Class (Font Awesome)</label>

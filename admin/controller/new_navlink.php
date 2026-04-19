@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 $navigation_url = cleardata($_POST['navigation_url']);
 $navigation_label = cleardata($_POST['navigation_label']);
 $navigation_target = cleardata($_POST['navigation_target']);
+$navigation_parent = !empty($_POST['navigation_parent']) ? cleardata($_POST['navigation_parent']) : null;
 $navigation_type = cleardata($_POST['navigation_type']);
 $menu_id = $_POST["menu_id"];
 
@@ -55,7 +56,7 @@ if(isset($_FILES['navigation_icon_image']) && $_FILES['navigation_icon_image']['
     }
 }
 
-$statment = $connect->prepare("INSERT INTO navigations (navigation_id,navigation_order,navigation_url,navigation_label,navigation_target,navigation_type,navigation_menu,navigation_icon) VALUES (null, :navigation_order, :navigation_url, :navigation_label, :navigation_target, :navigation_type, :navigation_menu, :navigation_icon)");
+$statment = $connect->prepare("INSERT INTO navigations (navigation_id,navigation_order,navigation_url,navigation_label,navigation_target,navigation_type,navigation_menu,navigation_icon,navigation_parent) VALUES (null, :navigation_order, :navigation_url, :navigation_label, :navigation_target, :navigation_type, :navigation_menu, :navigation_icon, :navigation_parent)");
 
 	$statment->execute(array(
 		':navigation_order' => $newOrder,
@@ -64,7 +65,8 @@ $statment = $connect->prepare("INSERT INTO navigations (navigation_id,navigation
 		':navigation_target' => $navigation_target,
 		':navigation_type' => $navigation_type,
 		':navigation_menu' => $menu_id,
-		':navigation_icon' => $navigation_icon
+		':navigation_icon' => $navigation_icon,
+		':navigation_parent' => $navigation_parent
 		));
 
 
