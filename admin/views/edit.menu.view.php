@@ -86,7 +86,8 @@
                     <fieldset>
 
                       <ul class="listas sortable ui-sortable">
-                        <?php foreach($navigations as $nav){
+                        <?php foreach($navigations as $nav): ?>
+                          <?php 
                           $parentLabel = "";
                           if (!empty($nav['navigation_parent'])) {
                               foreach($navigations as $pnav) {
@@ -95,81 +96,18 @@
                                       break;
                                   }
                               }
-                          echo '<li class="ui-sortable-handle" id="item-'.$nav['navigation_id'].'"> <span style="font-weight:bold;font-size: 14px;">' . $nav['navigation_label'] . '</span>' . $parentLabel . ' · <span style="font-size:12px">' . $nav['navigation_url'] . '</span>
-                          <a class="delete-nav" href="../controller/delete_nav.php?id=' . $nav["navigation_id"] . '"><i class="fa fa-trash"></i> '._DELETEITEM.'</a>
-                          <a class="edit-nav" href="#" data-id="' . $nav["navigation_id"] . '" style="float:right; margin-right:10px;"><i class="fa fa-edit"></i> '._EDITITEM.'</a>
-                          </li>';
                           }
                           ?>
+                          <li class="ui-sortable-handle" id="item-<?php echo $nav['navigation_id']; ?>"> 
+                            <span style="font-weight:bold;font-size: 14px;"><?php echo $nav['navigation_label']; ?></span>
+                            <?php echo $parentLabel; ?> · <span style="font-size:12px"><?php echo $nav['navigation_url']; ?></span>
+                            <a class="delete-nav" href="../controller/delete_nav.php?id=<?php echo $nav["navigation_id"]; ?>"><i class="fa fa-trash"></i> <?php echo _DELETEITEM; ?></a>
+                            <a class="edit-nav" href="#" data-id="<?php echo $nav["navigation_id"]; ?>" style="float:right; margin-right:10px;"><i class="fa fa-edit"></i> <?php echo _EDITITEM; ?></a>
+                          </li>
+                        <?php endforeach; ?>
+                      </ul>
 
-                          </ul>
-                          ...
-                          <?php require 'new.nav-page.view.php'; ?>
-
-                          <div id="edit_nav_modal" class="modal fade">
-                          <div class="modal-dialog">
-                          <div class="modal-content">
-                          <div class="modal-header">
-                          <button type="button" class="btn btn-primary close" data-dismiss="modal">&times;</button>
-                          <h4 class="modal-title"><?php echo _EDITITEM; ?></h4>
-                          </div>
-                          <div class="modal-body">
-                          <form enctype="multipart/form-data" method="post" id="updateNavigation">
-                          <div class="form-group">
-                          <input type="hidden" name="navigation_id" id="edit_navigation_id" />
-
-                          <label class="required"><?php echo _TABLEFIELDTITLE; ?></label>
-                          <input type="text" name="navigation_label" id="edit_navigation_label" class="form-control" required="" />
-
-                          <br />
-
-                          <div id="url_container">
-                          <label class="required"><?php echo _HREFURL; ?></label>
-                          <input type="text" name="navigation_url" id="edit_navigation_url" class="form-control" />
-                          </div>
-
-                          <div id="page_container" style="display:none;">
-                          <label class="control-label required"><?php echo _PAGES; ?></label>
-                          <select class="custom-select form-control" name="navigation_page" id="edit_navigation_page">
-                          <?php foreach($pages as $page){
-                          echo '<option value="'.$page['page_id'].'">'.$page['page_title'].'</option>';
-                          } ?>
-                          </select>
-                          </div>
-
-                          <br />
-                          <label class="control-label"><?php echo _HREFTARGET; ?></label>
-                          <select class="custom-select form-control" name="navigation_target" id="edit_navigation_target">
-                          <option value="_self">Self</option>
-                          <option value="_blank">Blank</option>
-                          <option value="_top">Top</option>
-                          </select>
-                          <br>
-
-                          <label class="control-label">Parent Navigation</label>
-                          <select class="custom-select form-control" name="navigation_parent" id="edit_navigation_parent">
-                          <option value="">None</option>
-                          <?php foreach($navigations as $nav){ ?>
-                          <option value="<?php echo $nav['navigation_id']; ?>"><?php echo $nav['navigation_label']; ?></option>
-                          <?php } ?>
-                          </select>
-                          <br>
-
-                          <label>Icon Class (Font Awesome)</label>
-                          <input type="text" name="navigation_icon_class" id="edit_navigation_icon_class" class="form-control" placeholder="e.g. ti ti-home" />
-                          <br>
-
-                          <label>Icon Image</label>
-                          <input type="file" name="navigation_icon_image" class="form-control" accept="image/*" />
-                          <br>
-
-                          <input type="submit" name="save" value="<?php echo _SAVECHANGES; ?>" class="btn btn-primary" />
-                          </div>
-                          </form>
-                          </div>
-                          </div>
-                          </div>
-                          </div>
+                      <?php if (!empty($navigations)){ ?>
                         <table>
                           <tr>
                             <td><button class="save btn btn-embossed btn-primary" data-id="<?php echo $menu['menu_id']; ?>"><?php echo _SAVECHANGES; ?></button></td>
@@ -230,8 +168,71 @@
 </div>
 </section>
 
+<div id="edit_nav_modal" class="modal fade">
+ <div class="modal-dialog">
+  <div class="modal-content">
+   <div class="modal-header">
+    <button type="button" class="btn btn-primary close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title"><?php echo _EDITITEM; ?></h4>
+  </div>
+  <div class="modal-body">
+    <form enctype="multipart/form-data" method="post" id="updateNavigation">
+      <div class="form-group">
+       <input type="hidden" name="navigation_id" id="edit_navigation_id" />
+       
+       <label class="required"><?php echo _TABLEFIELDTITLE; ?></label>
+       <input type="text" name="navigation_label" id="edit_navigation_label" class="form-control" required="" />
+
+       <br />
+       
+       <div id="url_container">
+           <label class="required"><?php echo _HREFURL; ?></label>
+           <input type="text" name="navigation_url" id="edit_navigation_url" class="form-control" />
+       </div>
+
+       <div id="page_container" style="display:none;">
+           <label class="control-label required"><?php echo _PAGES; ?></label>
+           <select class="custom-select form-control" name="navigation_page" id="edit_navigation_page">
+              <?php foreach($pages as $page){
+                  echo '<option value="'.$page['page_id'].'">'.$page['page_title'].'</option>';
+              } ?>
+           </select>
+       </div>
+
+       <br />
+       <label class="control-label"><?php echo _HREFTARGET; ?></label>
+       <select class="custom-select form-control" name="navigation_target" id="edit_navigation_target">
+         <option value="_self">Self</option>
+         <option value="_blank">Blank</option>
+         <option value="_top">Top</option>
+       </select>
+       <br>
+
+       <label class="control-label">Parent Navigation</label>
+       <select class="custom-select form-control" name="navigation_parent" id="edit_navigation_parent">
+         <option value="">None</option>
+         <?php foreach($navigations as $nav){ ?>
+          <option value="<?php echo $nav['navigation_id']; ?>"><?php echo $nav['navigation_label']; ?></option>
+         <?php } ?>
+       </select>
+       <br>
+
+       <label>Icon Class (Font Awesome)</label>
+       <input type="text" name="navigation_icon_class" id="edit_navigation_icon_class" class="form-control" placeholder="e.g. ti ti-home" />
+       <br>
+
+       <label>Icon Image</label>
+       <input type="file" name="navigation_icon_image" class="form-control" accept="image/*" />
+       <br>
+
+       <input type="submit" name="save" value="<?php echo _SAVECHANGES; ?>" class="btn btn-primary" />
+     </div>
+   </form>
+ </div>
+</div>
+</div>
+</div>
+
 <?php require 'new.nav-link.view.php'; ?>
 
 <?php require 'new.nav-page.view.php'; ?>
-
-
