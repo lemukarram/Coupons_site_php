@@ -96,7 +96,7 @@
                             <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 8px; vertical-align: middle;"></i>
                         <?php endif; ?>
                     <?php endif; ?>
-                    <?php echo echoOutput($item['navigation_label']); ?>
+                    <span><?php echo echoOutput($item['navigation_label']); ?></span>
                 </a>
 
                 <?php if ($hasChildren): ?>
