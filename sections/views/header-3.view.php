@@ -94,9 +94,6 @@
                         <?php endif; ?>
                     <?php endif; ?>
                     <?php echo echoOutput($item['navigation_label']); ?>
-                    <?php if ($hasChildren): ?>
-                        <i class="ti ti-chevron-down" style="margin-left: 5px; font-size: 12px; vertical-align: middle;"></i>
-                    <?php endif; ?>
                 </a>
 
                 <?php if ($hasChildren): ?>
