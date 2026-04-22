@@ -50,7 +50,7 @@
                     <div class="uk-width-1-4">
 
                         <a data-value="<?php echo echoOutput($item['store_slug']); ?>">
-                            <div class="uk-cover-container uk-border-pill uk-inline uk-light uk-visible-toggle uk-animation-toggle" tabindex="-1">
+                            <div class="uk-cover-container uk-border-pill only-store uk-inline uk-light uk-visible-toggle uk-animation-toggle" tabindex="-1">
                             <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" uk-cover>
                             <canvas width="50" height="50"></canvas>
 
