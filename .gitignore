@@ -1,3 +1,5 @@
 .htaccess
 .env
 config.php
+.servers.md
+servers.md
