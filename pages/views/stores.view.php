@@ -25,7 +25,7 @@
                 <div class="cat_3 uk-text-center" style="margin-bottom: 50px !important;">
                     <a href="<?php echo $urlPath->store($item['store_slug']); ?>">
                         <div class="cover uk-border-rounded uk-flex uk-flex-middle uk-flex-center" style="background-color: <?php echo getStoreBackgroundColor($item['store_id']); ?>; height: 80px;">
-                            <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" style="object-fit: cover; width: 100%; height: 100%; border-radius: 5px; max-height: 80px;">
+                            <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" style="object-fit: cover; width: 100%; border-radius: 5px; max-height: 80px;">
                         </div>
                         <h2 class="title uk-margin-small-top uk-text-truncate"><?php echo echoOutput($item['store_title']); ?></h2>
                     </a>
