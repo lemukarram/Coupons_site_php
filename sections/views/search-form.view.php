@@ -50,10 +50,9 @@
                     <div class="uk-width-1-4">
 
                         <a data-value="<?php echo echoOutput($item['store_slug']); ?>">
-                            <div class="uk-cover-container uk-border-pill only-store uk-inline uk-light uk-visible-toggle uk-animation-toggle" tabindex="-1">
-                            <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" uk-cover>
-                            <canvas width="50" height="50"></canvas>
-
+                            <div class="uk-border-pill only-store uk-inline uk-light uk-visible-toggle uk-animation-toggle" tabindex="-1">
+                            <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" style="object-fit: cover; width: 50px; height: 50px;">
+                            
                             <?php if(getSlugStore() != $item['store_slug']): ?>
                             <div class="uk-hidden-hover uk-animation-fade uk-flex uk-flex-middle uk-flex-center uk-animation-fast uk-overlay uk-overlay-primary uk-position-center">
                                 <i class="ti ti-plus"></i>
