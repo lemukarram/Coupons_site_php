@@ -723,3 +723,12 @@ exclusive-store.vch-ribbon{
 
 .store-img-filter {
 }
+
+
+.tas_heading .uk-border-pill{
+    border-radius: 0px;
+}
+
+.tas_heading .uk-heading-line{
+    font-weight: 300;
+}
