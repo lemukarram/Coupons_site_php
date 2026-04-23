@@ -1,6 +1,6 @@
 <!-- Section: Subscription (Dark Mode) -->
-<div class="uk-section uk-background-cover uk-light uk-flex uk-flex-center uk-flex-middle" 
-     style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(<?php echo $urlPath->image($section_subscribe['section_image'] ?: 'slider_1635355430.jpg'); ?>); min-height: 400px;">
+<div class="uk-section subscribe-section uk-background-cover uk-light uk-flex uk-flex-center uk-flex-middle" 
+     style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(<?php echo $urlPath->image($section_subscribe['section_image'] ?: 'slider_1635355430.jpg'); ?>); min-height: 300px;">
     <div class="uk-container uk-text-center">
         <h2 class="uk-heading-small uk-text-bold uk-margin-small-bottom"><?php echo echoOutput($section_subscribe['section_title']); ?></h2>
         <p class="uk-text-lead uk-margin-large-bottom"><?php echo echoOutput($section_subscribe['section_description']); ?></p>

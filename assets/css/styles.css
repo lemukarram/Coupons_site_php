@@ -49,6 +49,18 @@
     margin-top: 8px;
 }
 
+.subscribe-section input{
+    margin-top: 0px !important;
+    border-radius: 0;
+}
+
+.subscribe-section button{
+    height: 44px;
+    border-radius: 0;
+    color: white !important;
+    line-height: 44px;
+}
+
 .box-shadow-bottom{
     box-shadow: rgba(0, 14, 88, 0.1) 0px 4px 10px 0px;
 }
