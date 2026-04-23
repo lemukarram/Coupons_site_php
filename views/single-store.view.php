@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="h-coupon-right">
                                     <?php if(isExclusive(echoOutput($item['coupon_exclusive']))): ?>
-                                        <div class="vch-ribbon">
+                                        <div class="vch-ribbon exclusive-store">
                                             <span><?php echo echoOutput($translation['tr_16']); ?></span>
                                         </div>
                                     <?php endif; ?>

@@ -440,6 +440,10 @@
     right: 0px;
 }
 
+exclusive-store.vch-ribbon{
+    top: 17px;
+    right: 23px;
+}
 .h-coupon-extra {
     margin-top: 15px;
     font-size: 12px;
