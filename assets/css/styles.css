@@ -738,3 +738,14 @@ exclusive-store.vch-ribbon{
     background: #ffffff !important;
     box-shadow: 0 0px 15px rgb(0 0 0 / 8%);
 }
+
+@media (min-width: 960px) {
+    .uk-section {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+}
+
+.uk-text-bold{
+    font-weight: 300;
+}

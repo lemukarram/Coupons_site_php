@@ -4,7 +4,7 @@
         <div class="uk-grid-large uk-flex-middle" uk-grid>
             <div class="uk-width-2-3@m">
                 <h2 class="uk-text-bold uk-text-primary"><?php echo echoOutput($section_about_us['section_title']); ?></h2>
-                <div class="uk-text-lead uk-margin-medium-bottom uk-text-secondary">
+                <div class="uk-text-lead uk-text-secondary">
                     <?php echo parseCustomTags($section_about_us['section_description']); ?>
                 </div>
             </div>
