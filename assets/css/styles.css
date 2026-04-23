@@ -761,3 +761,13 @@ exclusive-store.vch-ribbon{
 .uk-text-bold{
     font-weight: 300;
 }
+
+.tas-copyright{
+    margin-top: 0px !important;
+}
+
+@media (min-width: 1200px) {
+    .uk-padding-large {
+        padding: 30px !important;
+    }
+}
