@@ -393,7 +393,7 @@ form .required:after{
 .tas_home_3 .menu{
 	box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
 	padding: 24px 40px;
-	border-radius: 6px;
+	border-radius: 0px;
 }
 
 .tas_home_3 .menu .title:hover{

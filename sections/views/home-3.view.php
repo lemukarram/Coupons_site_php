@@ -24,7 +24,7 @@
                     <?php foreach($getSliders as $item): ?>
                         <li>
                             <a href="<?php echo echoOutput($item['slider_link']); ?>">
-                            <img class="uk-border-rounded" src="<?php echo $urlPath->image(echoOutput($item['slider_image'])); ?>" alt="<?php echo echoOutput($item['slider_link']); ?>">
+                            <img src="<?php echo $urlPath->image(echoOutput($item['slider_image'])); ?>" alt="<?php echo echoOutput($item['slider_link']); ?>">
                             </a>
                         </li>
                         <?php endforeach; ?>
