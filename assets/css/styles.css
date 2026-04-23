@@ -732,3 +732,9 @@ exclusive-store.vch-ribbon{
 .tas_heading .uk-heading-line{
     font-weight: 300;
 }
+
+.cat_3 .cover{
+    border-radius: 0px;
+    background: #ffffff;
+    box-shadow: 0 0px 15px rgb(0 0 0 / 8%);
+}
