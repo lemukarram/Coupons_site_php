@@ -1,6 +1,6 @@
 <div class="uk-container">
 
-    <nav class="tas_nav uk-navbar-container uk-section-white uk-flex uk-flex-center uk-flex-middle uk-visible@m" uk-navbar>
+    <nav class="box-shadow-bottom tas_nav uk-navbar-container uk-section-white uk-flex uk-flex-center uk-flex-middle uk-visible@m" uk-navbar>
 
         <div class="uk-navbar-left">
             <a class="uk-navbar-item uk-logo" href="<?php echo $urlPath->home(); ?>">
@@ -14,7 +14,7 @@
                     <span class="uk-form-icon uk-form-icon-flip btnSubmitForm"><i class="ti ti-search"></i></span>
 
                     <?php if(!getSearchQuery() && empty(getSearchQuery())): ?>
-                    <input class="uk-input uk-width-1-1 uk-border-pill uk-form-large" name="query" placeholder="<?php echo $translation['tr_4']; ?>">
+                    <input class="uk-input uk-width-1-1  uk-form-large" name="query" placeholder="<?php echo $translation['tr_4']; ?>">
                     <?php endif; ?>
 
                     <?php if(getSearchQuery() && !empty(getSearchQuery())): ?>
@@ -27,10 +27,10 @@
 
             <!-- MAIN NAVBAR -->
 
-            <div class="box-shadow-bottom uk-preserve-color">
+            <div class=" uk-preserve-color">
             <nav class="uk-container tas_nav uk-navbar-container uk-navbar-transparent uk-visible@m" uk-navbar>
 
-                <div class="uk-navbar-center">
+                <div class="uk-navbar-left">
                     <ul class="uk-navbar-nav">
                     <?php 
                         // Organize navigation into a tree

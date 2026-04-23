@@ -45,7 +45,8 @@
 }
 
 .uk-form-large:not(textarea):not([multiple]):not([size]){
-    height: 54px !important;
+    height: 44px !important;
+    margin-top: 8px;
 }
 
 .box-shadow-bottom{
