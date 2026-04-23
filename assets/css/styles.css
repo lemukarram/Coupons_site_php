@@ -710,3 +710,15 @@ exclusive-store.vch-ribbon{
     font-weight: 900;
     margin-left: 5px;
 }
+
+.uk-border-pill.only-store {
+    border: 1px solid #cdcdcd;
+}
+
+.uk-border-pill.only-store img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
+
+.store-img-filter {
+}
