@@ -734,7 +734,7 @@ exclusive-store.vch-ribbon{
 }
 
 .cat_3 .cover{
-    border-radius: 0px;
-    background: #ffffff;
+    border-radius: 0px !important;
+    background: #ffffff !important;
     box-shadow: 0 0px 15px rgb(0 0 0 / 8%);
 }
