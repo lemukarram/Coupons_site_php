@@ -12,7 +12,15 @@
         </div>
     </div>
 
-    <div class="uk-grid-small uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-6@l" uk-grid>
+    <style>
+        @media (max-width: 640px) {
+            .featured-stores-grid {
+                margin-top: 5px !important;
+            }
+        }
+    </style>
+
+    <div class="uk-grid-small featured-stores-grid uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-6@l" uk-grid>
     <?php $count = 0; foreach($featuredStores as $item): $count++; ?>
         <div class="cat_3 uk-text-center <?php echo ($count > 6) ? 'uk-visible@s' : ''; ?>" style="margin-bottom: 24px !important;">
             <a href="<?php echo $urlPath->store($item['store_slug']); ?>">
