@@ -72,4 +72,14 @@
         color: #fff !important;
         backdrop-filter: blur(5px);
     }
+    @media (max-width: 640px) {
+        .tas_home_3 .uk-slideshow-items, 
+        .tas_home_3 .uk-position-relative[uk-slideshow] {
+            height: 150px !important;
+            min-height: 150px !important;
+        }
+        .tas_home_3 {
+            margin-bottom: 20px !important;
+        }
+    }
 </style>

@@ -5,6 +5,8 @@
             .vch-exclusive-section {
                 padding-left: 20px;
                 padding-right: 20px;
+                margin-top: 25px !important;
+                margin-bottom: 25px !important;
             }
         }
     </style>

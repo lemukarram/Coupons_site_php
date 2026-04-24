@@ -29,6 +29,10 @@
 
     <style>
         @media (max-width: 640px) {
+            .about-us-section {
+                padding-top: 25px !important;
+                padding-bottom: 25px !important;
+            }
             .about-content.truncated {
                 display: -webkit-box;
                 -webkit-line-clamp: 5;

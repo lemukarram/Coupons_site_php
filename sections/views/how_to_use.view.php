@@ -80,6 +80,10 @@
         }
         
         @media (max-width: 640px) {
+            .how-to-use-section {
+                padding-top: 25px !important;
+                padding-bottom: 25px !important;
+            }
             .step-card {
                 text-align: left;
                 padding: 15px !important;

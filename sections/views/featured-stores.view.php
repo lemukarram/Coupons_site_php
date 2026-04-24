@@ -1,4 +1,4 @@
-<div class="uk-container uk-margin-large-top uk-margin-large-bottom" uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
+<div class="uk-container uk-margin-large-top uk-margin-large-bottom featured-stores-section" uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
 
 <div class="tas_heading uk-grid-collapse uk-flex uk-flex-middle uk-margin-medium-bottom" uk-grid>
         <div class="uk-width-expand">
@@ -17,12 +17,19 @@
             .featured-stores-grid {
                 margin-top: 5px !important;
             }
+            .featured-stores-section {
+                margin-top: 25px !important;
+                margin-bottom: 25px !important;
+            }
+            .cat_3 {
+                margin-bottom: 10px !important;
+            }
         }
     </style>
 
     <div class="uk-grid-small featured-stores-grid uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-4@m uk-child-width-1-6@l" uk-grid>
     <?php $count = 0; foreach($featuredStores as $item): $count++; ?>
-        <div class="cat_3 uk-text-center <?php echo ($count > 6) ? 'uk-visible@s' : ''; ?>" style="margin-bottom: 24px !important;">
+        <div class="cat_3 uk-text-center <?php echo ($count > 6) ? 'uk-visible@s' : ''; ?>">
             <a href="<?php echo $urlPath->store($item['store_slug']); ?>">
                 <div class="cover uk-border-rounded uk-flex uk-flex-middle uk-flex-center" style="height: 80px;">
                     <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" style="object-fit: cover;border-radius: 5px; max-width: 100%; max-height: 100%;">
