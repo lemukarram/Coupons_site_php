@@ -779,6 +779,10 @@ exclusive-store.vch-ribbon{
     padding: 8px 30px !important;
 }
 
+.uk-margin-medium-bottom {
+    margin-bottom: 20px !important;
+}
+
 @media (min-width: 1200px) {
     .uk-padding-large {
         padding: 30px !important;
