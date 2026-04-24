@@ -766,8 +766,18 @@ exclusive-store.vch-ribbon{
     margin-top: 0px !important;
 }
 
+.uk-text-lead{
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.tas_mobile_nav_2{
+    padding: 16px 30px !important;
+}
+
 @media (min-width: 1200px) {
     .uk-padding-large {
         padding: 30px !important;
     }
 }
+

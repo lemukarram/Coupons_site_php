@@ -9,14 +9,14 @@
                         <div class="uk-margin-remove-bottom">
                             <a href="<?php echo $urlPath->search(['category' => $item['category_slug']]); ?>" class="cat-link uk-flex uk-flex-middle" style="font-size: 0.85rem; padding: 8px 12px; color: #333; text-decoration: none; border-radius: 6px; transition: all 0.3s ease;">
                                 <i class="<?php echo getIcon($item['category_icon']); ?> icon" style="font-size: 1.1rem; margin-right: 12px; color: var(--uk-primary-color); width: 20px; text-align: center;"></i>
-                                <span class="uk-text-truncate" style="font-weight: 500;"><?php echo echoOutput($item['category_title']); ?></span>
+                                <span class="uk-text-truncate" style="font-weight: 400;"><?php echo echoOutput($item['category_title']); ?></span>
                             </a>
                         </div>
                     <?php endforeach; ?>
                 </div>
 
                 <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #eee;">
-                    <a href="<?php echo $urlPath->categories(); ?>" class="cat-link all-cats uk-flex uk-flex-middle" style="font-size: 0.85rem; padding: 8px 12px; color: var(--uk-primary-color); font-weight: 600; text-decoration: none; border-radius: 6px; transition: all 0.3s ease;">
+                    <a href="<?php echo $urlPath->categories(); ?>" class="cat-link all-cats uk-flex uk-flex-middle" style="font-size: 0.85rem; padding: 8px 12px; color: var(--primary-color); font-weight: 400; text-decoration: none; border-radius: 6px; transition: all 0.3s ease;">
                         <i class="ti ti-apps icon" style="font-size: 1.1rem; margin-right: 12px; width: 20px; text-align: center;"></i>
                         <?php echo echoOutput($translation['tr_4'] ?? 'All Categories'); ?>
                     </a>
