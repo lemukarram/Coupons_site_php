@@ -5,7 +5,7 @@
         <div class="uk-width-1-4@m uk-visible@s">
             <div class="menu uk-card uk-card-default uk-border-rounded uk-flex uk-flex-column uk-flex-between" style="padding: 12px; background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #e5e5e5; height: 300px; box-sizing: border-box;">
                 <div class="uk-flex-1">
-                    <?php foreach(array_slice($menuCategories, 0, 4) as $item): ?>
+                    <?php foreach(array_slice($menuCategories, 0, 6) as $item): ?>
                         <div class="uk-margin-remove-bottom">
                             <a href="<?php echo $urlPath->search(['category' => $item['category_slug']]); ?>" class="cat-link uk-flex uk-flex-middle" style="font-size: 0.85rem; padding: 8px 12px; color: #333; text-decoration: none; border-radius: 6px; transition: all 0.3s ease;">
                                 <i class="<?php echo getIcon($item['category_icon']); ?> icon" style="font-size: 1.1rem; margin-right: 12px; color: var(--uk-primary-color); width: 20px; text-align: center;"></i>
