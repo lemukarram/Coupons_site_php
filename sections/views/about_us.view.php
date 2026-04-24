@@ -21,7 +21,7 @@
                     <div id="about-content" class="about-content">
                         <?php echo parseCustomTags($section_about_us['section_description']); ?>
                     </div>
-                    <button id="about-view-more" class="uk-button uk-button-text uk-margin-small-top uk-hidden" style="color: var(--uk-primary-color); text-transform: none; font-weight: bold;">View more</button>
+                    <button id="about-view-more" class="uk-button uk-button-text uk-margin-small-top uk-hidden" style="color: var(--primary-color); text-transform: none; font-weight: bold;">View more</button>
                 </div>
             </div>
         </div>

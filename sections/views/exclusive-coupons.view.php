@@ -1,4 +1,4 @@
-<div class="uk-container uk-margin-medium-top uk-margin-large-bottom vch-exclusive-section" uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
+<div class="uk-container uk-margin-top uk-margin-large-bottom vch-exclusive-section" uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
 
     <style>
         @media (max-width: 640px) {
