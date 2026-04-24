@@ -1,11 +1,20 @@
 <div class="uk-container uk-margin-medium-top uk-margin-large-bottom vch-exclusive-section" uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
 
+    <style>
+        @media (max-width: 640px) {
+            .vch-exclusive-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+        }
+    </style>
+
     <div class="tas_heading uk-grid-collapse uk-flex uk-flex-middle" uk-grid>
         <div class="uk-width-expand">
-            <h3 class="uk-heading-line uk-text-left"><span><?php echo echoOutput($translation['tr_12']); ?></span></h3>
+            <h3 class="uk-heading-line uk-text-left"><span><?php echo echoOutput($translation['tr_6']); ?></span></h3>
         </div>
         <div class="uk-width-auto">
-            <a href="<?php echo $urlPath->search(['filter' => 'exclusive']); ?>" class="uk-button uk-button-default uk-border-pill btn">
+            <a href="<?php echo $urlPath->search(); ?>" class="uk-button uk-button-default uk-border-pill btn">
                 <?php echo echoOutput($translation['tr_21']); ?>
                 <i class="ti ti-chevron-right"></i>
             </a>
