@@ -593,41 +593,27 @@ $(document).ready(function(){
       var varCode = $(this).data('id');
       var varRedirect = $(this).data('redirect');
 
+      // 1. Prepare the Redirect Link (Store link)
       if (!varRedirect || varRedirect === '#' || varRedirect === '') {
           varRedirect = SITEURL + "/redirect/" + varCode;
       }
       
-      // Ensure absolute URL for redirection
+      // Ensure absolute URL for store redirection
       if (varRedirect && !/^https?:\/\//i.test(varRedirect) && !varRedirect.startsWith('/') && !varRedirect.startsWith('http')) {
           varRedirect = 'https://' + varRedirect;
       }
-  
-      // Open store link in new tab
-      window.open(varRedirect, '_blank');
 
-      // Smooth modal popup via AJAX on current tab
-      $.ajax({
-        url: SITEURL + "/controllers/get-modal.php",
-        type: "GET",
-        data: { id: varCode },
-        success: function(response) {
-            // Remove existing modal if any
-            $('#singleModal').remove();
-            // Append new modal
-            var $modal = $(response);
-            // Remove hardcoded open states for smooth UIkit transition
-            $modal.removeClass('uk-open').css('display', 'none');
-            $('body').append($modal);
-            // Show modal using UIkit
-            UIkit.modal('#singleModal').show();
-            // Update URL without reload
-            window.history.pushState(null, null, '?c=' + varCode);
-        },
-        error: function() {
-            // Fallback if AJAX fails
-            window.location.href = '?c=' + varCode;
-        }
-      });
+      // 2. Prepare the Popup Link (Current page with the coupon parameter)
+      // We use the current URL but strip existing query params to keep it clean
+      var currentUrl = window.location.protocol + '//' + window.location.host + window.location.pathname;
+      var popupUrl = currentUrl + "?c=" + varCode;
+  
+      // 3. Open the Popup in a NEW TAB (The browser will shift focus here)
+      window.open(popupUrl, '_blank');
+
+      // 4. Redirect the PREVIOUS (Current) TAB to the store link
+      window.location.href = varRedirect;
+
     });
   });
 
