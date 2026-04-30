@@ -1,4 +1,4 @@
-<div class="uk-container uk-margin-medium-top uk-margin-large-bottom vch-latest-section" uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
+<div class="uk-container uk-margin-medium-top uk-margin-large-bottom vch-latest-section">
 
     <div class="tas_heading uk-grid-collapse uk-flex uk-flex-middle" uk-grid>
         <div class="uk-width-expand">

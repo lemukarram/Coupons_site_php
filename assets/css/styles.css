@@ -90,7 +90,9 @@
    Voucher-style Exclusive Coupons Grid
    =================================================== */
 
-.vch-exclusive-section {
+.vch-exclusive-section,
+.vch-featured-section,
+.vch-latest-section {
     padding-top: 10px;
 }
 

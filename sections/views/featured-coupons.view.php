@@ -1,4 +1,4 @@
-<div class="uk-container uk-margin-medium-top uk-margin-large-bottom vch-featured-section" uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
+<div class="uk-container uk-margin-medium-top uk-margin-large-bottom vch-featured-section">
 
     <div class="tas_heading uk-grid-collapse uk-flex uk-flex-middle" uk-grid>
         <div class="uk-width-expand">
@@ -27,7 +27,7 @@
 
                 <!-- Logo / Image -->
                 <a class="c-open vch-logo-wrap" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo $urlPath->redirect($item['coupon_id']); ?>" href="#">
-                    <img src="<?php echo $urlPath->image(fixImg($item['coupon_image'])); ?>" alt="<?php echo echoOutput($item['coupon_title']); ?>" class="vch-logo-img">
+                    <img src="<?php echo $urlPath->image(fixImg($item['coupon_image'] ? $item['coupon_image'] : $item['store_image'])); ?>" alt="<?php echo echoOutput($item['coupon_title']); ?>" class="vch-logo-img">
                 </a>
 
                 <!-- Description -->

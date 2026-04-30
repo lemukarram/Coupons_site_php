@@ -1,4 +1,4 @@
-<div class="uk-container uk-margin-top uk-margin-large-bottom vch-exclusive-section" uk-scrollspy="target: > div; cls: uk-animation-fade; delay: 100">
+<div class="uk-container uk-margin-top uk-margin-large-bottom vch-exclusive-section">
 
     <style>
         @media (max-width: 640px) {
@@ -38,7 +38,7 @@
 
                 <!-- Logo / Image -->
                 <a class="c-open vch-logo-wrap" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo $urlPath->redirect($item['coupon_id']); ?>" href="#">
-                    <img src="<?php echo $urlPath->image(fixImg($item['coupon_image'])); ?>" alt="<?php echo echoOutput($item['coupon_title']); ?>" class="vch-logo-img">
+                    <img src="<?php echo $urlPath->image(fixImg($item['coupon_image'] ? $item['coupon_image'] : $item['store_image'])); ?>" alt="<?php echo echoOutput($item['coupon_title']); ?>" class="vch-logo-img">
                 </a>
 
                 <!-- Description -->
@@ -61,7 +61,7 @@
             <!-- Store link below card -->
             <div class="vch-store-link">
                 <a href="<?php echo $urlPath->redirect($item['coupon_id']); ?>" class="vch-view-all c-open" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo $urlPath->redirect($item['coupon_id']); ?>">
-                    <?php echo echoOutput($translation['tr_21']); ?> <?php echo echoOutput($item['coupon_store'] ?? ''); ?> <?php echo echoOutput($translation['tr_16'] ?? 'vouchers'); ?>
+                    <?php echo echoOutput($translation['tr_21']); ?> <?php echo echoOutput($item['store_title'] ?? ''); ?> <?php echo echoOutput($translation['tr_16'] ?? 'vouchers'); ?>
                 </a>
             </div>
         </div>
