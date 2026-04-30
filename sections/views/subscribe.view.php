@@ -6,15 +6,15 @@
         <p class="uk-text-lead uk-margin-medium-bottom" style="font-size: 1.1rem;"><?php echo echoOutput($section_subscribe['section_description']); ?></p>
         
         <div class="uk-flex uk-flex-center">
-            <form class="uk-grid-small uk-width-xlarge uk-width-1-1@s" uk-grid style="max-width: 100%;">
+            <form class="uk-grid-collapse uk-width-xlarge uk-width-1-1@s" uk-grid style="max-width: 100%;">
                 <div class="uk-width-expand@s uk-width-1-1">
                     <div class="uk-inline uk-width-1-1">
                         <span class="uk-form-icon" uk-icon="icon: mail"></span>
-                        <input class="uk-input uk-form-large uk-border-pill uk-background-default uk-text-secondary" type="email" id="subscriber_email_alt" placeholder="<?php echo echoOutput($translation['tr_46']); ?>">
+                        <input class="uk-input uk-form-large uk-text-secondary" type="email" id="subscriber_email_alt" placeholder="<?php echo echoOutput($translation['tr_46']); ?>">
                     </div>
                 </div>
-                <div class="uk-width-auto@s uk-width-1-1 uk-margin-small-top uk-margin-remove-top@s">
-                    <button class="uk-button uk-button-primary uk-button-large uk-border-pill uk-width-1-1 uk-width-auto@s" type="submit" id="submit-subscriber-alt">
+                <div class="uk-width-auto@s uk-width-1-1">
+                    <button class="uk-button uk-button-primary uk-button-large uk-width-1-1 uk-width-auto@s" type="submit" id="submit-subscriber-alt">
                         <?php echo echoOutput($translation['tr_45']); ?>
                     </button>
                 </div>

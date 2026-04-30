@@ -51,14 +51,34 @@
 
 .subscribe-section input{
     margin-top: 0px !important;
-    border-radius: 0;
+    border-radius: 50px 0 0 50px !important;
+    height: 50px !important;
 }
 
 .subscribe-section button{
-    height: 44px;
-    border-radius: 0;
+    height: 50px !important;
+    border-radius: 0 50px 50px 0 !important;
     color: white !important;
-    line-height: 44px;
+    line-height: 50px;
+    margin-top: 0px !important;
+}
+
+.uk-border-pill.only-store {
+    border: 1px solid #eee;
+    background: #fff;
+    padding: 8px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px !important;
+}
+
+.uk-border-pill.only-store img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain;
 }
 
 .box-shadow-bottom{
@@ -726,15 +746,6 @@ exclusive-store.vch-ribbon{
     font-family: "Font Awesome 5 Free";
     font-weight: 900;
     margin-left: 5px;
-}
-
-.uk-border-pill.only-store {
-    border: 1px solid #cdcdcd;
-}
-
-.uk-border-pill.only-store img {
-    max-width: 100% !important;
-    max-height: 100% !important;
 }
 
 .store-img-filter {

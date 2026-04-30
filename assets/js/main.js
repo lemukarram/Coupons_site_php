@@ -587,27 +587,50 @@ $(document).ready(function(){
 
   'use strict';
   $(document).ready(function(){
-    $('.c-open').on('click', function(){
+    $('.c-open').on('click', function(e){
+      e.preventDefault();
   
-      var key = 'c';
       var varCode = $(this).data('id');
       var varRedirect = $(this).data('redirect');
   
-      insertParam(key, varCode);
+      // Redirect opener or open new tab
+      if (window.opener && window.opener !== window) {
+          try {
+              window.opener.location.href = varRedirect;
+          } catch (err) {
+              window.open(varRedirect, '_blank');
+          }
+      } else {
+          window.open(varRedirect, '_blank');
+      }
 
-      /*
-      window.open(SITEURL+"?code="+varCode);
-      window.location = varRedirect;*/
-  
+      // Smooth modal popup via AJAX
+      $.ajax({
+        url: SITEURL + "/controllers/get-modal.php",
+        type: "GET",
+        data: { id: varCode },
+        success: function(response) {
+            // Remove existing modal if any
+            $('#singleModal').remove();
+            // Append new modal
+            $('body').append(response);
+            // Show modal using UIkit
+            UIkit.modal('#singleModal').show();
+            // Update URL without reload
+            window.history.pushState(null, null, '?c=' + varCode);
+        }
+      });
     });
   });
 
   'use strict';
   $(document).ready(function(){
-    $('.c-close').on('click', function(){
+    $('body').on('click', '.c-close', function(){
   
       var key = 'c';
-      removeParam(key);
+      var url = new URL(window.location.href);
+      url.searchParams.delete(key);
+      window.history.pushState(null, null, url.pathname + url.search);
   
     });
   });
