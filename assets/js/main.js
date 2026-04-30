@@ -587,24 +587,25 @@ $(document).ready(function(){
 
   'use strict';
   $(document).ready(function(){
-    $('.c-open').on('click', function(e){
+    $(document).on('click', '.c-open', function(e){
       e.preventDefault();
   
       var varCode = $(this).data('id');
       var varRedirect = $(this).data('redirect');
-  
-      // Redirect opener or open new tab
-      if (window.opener && window.opener !== window) {
-          try {
-              window.opener.location.href = varRedirect;
-          } catch (err) {
-              window.open(varRedirect, '_blank');
-          }
-      } else {
-          window.open(varRedirect, '_blank');
-      }
 
-      // Smooth modal popup via AJAX
+      if (!varRedirect || varRedirect === '#' || varRedirect === '') {
+          varRedirect = SITEURL + "/redirect/" + varCode;
+      }
+      
+      // Ensure absolute URL for redirection
+      if (varRedirect && !/^https?:\/\//i.test(varRedirect) && !varRedirect.startsWith('/') && !varRedirect.startsWith('http')) {
+          varRedirect = 'https://' + varRedirect;
+      }
+  
+      // Open store link in new tab
+      window.open(varRedirect, '_blank');
+
+      // Smooth modal popup via AJAX on current tab
       $.ajax({
         url: SITEURL + "/controllers/get-modal.php",
         type: "GET",
@@ -613,11 +614,18 @@ $(document).ready(function(){
             // Remove existing modal if any
             $('#singleModal').remove();
             // Append new modal
-            $('body').append(response);
+            var $modal = $(response);
+            // Remove hardcoded open states for smooth UIkit transition
+            $modal.removeClass('uk-open').css('display', 'none');
+            $('body').append($modal);
             // Show modal using UIkit
             UIkit.modal('#singleModal').show();
             // Update URL without reload
             window.history.pushState(null, null, '?c=' + varCode);
+        },
+        error: function() {
+            // Fallback if AJAX fails
+            window.location.href = '?c=' + varCode;
         }
       });
     });
