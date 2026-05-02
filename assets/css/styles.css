@@ -45,19 +45,19 @@
 }
 
 .uk-form-large:not(textarea):not([multiple]):not([size]){
-    height: 44px !important;
+    height: 50px !important;
     margin-top: 8px;
 }
 
 .subscribe-section input{
     margin-top: 0px !important;
-    border-radius: 50px 0 0 50px !important;
+    border-radius: 5px 0 0 5px !important;
     height: 50px !important;
 }
 
 .subscribe-section button{
     height: 50px !important;
-    border-radius: 0 50px 50px 0 !important;
+    border-radius: 0 5px 5px 0 !important;
     color: white !important;
     line-height: 50px;
     margin-top: 0px !important;
@@ -795,7 +795,19 @@ exclusive-store.vch-ribbon{
 .uk-margin-medium-bottom {
     margin-bottom: 20px !important;
 }
-
+.coupon-modal .coupon{
+    border-radius: 6px;
+}
+.coupon .uk-text-secondary.uk-text-bold {
+    font-weight: bold;
+}
+.uk-border-round-6 {
+    border-radius: 6px;
+}
+.primary-color{
+    background-color: var(--primary-color);
+    color: #ffffff;
+}
 @media (min-width: 1200px) {
     .uk-padding-large {
         padding: 30px !important;
