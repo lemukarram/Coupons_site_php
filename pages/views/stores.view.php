@@ -7,10 +7,10 @@
 <div class="uk-width-1-1 uk-width-expand@m">
 
     <div class="uk-flex uk-flex-center uk-grid-small" uk-grid>
+            <a class="uk-link-text" href="#section-09" uk-scroll>0-9</a>
         <?php foreach ($arrayLetters as $char): ?>
             <a class="uk-link-text" href="#section-<?php echo echoOutput($char); ?>" uk-scroll><?php echo echoOutput($char); ?></a>
         <?php endforeach; ?>
-            <a class="uk-link-text" href="#section-09" uk-scroll>0-9</a>
     </div>
 
     <!-- Search Field -->
@@ -18,12 +18,34 @@
         <div class="uk-inline uk-width-1-1">
             <span class="uk-form-icon" uk-icon="icon: search"></span>
             <input class="uk-input uk-form-large uk-border-rounded" type="text" id="storeSearchInput" placeholder="Search Stores">
-            <button class="uk-button uk-button-primary uk-position-center-right uk-margin-small-right uk-border-rounded uk-visible@s" id="storeSearchBtn">Search Store</button>
+            <button class="uk-button uk-button-primary uk-position-center-right uk-margin-small-right uk-border-rounded uk-visible@s" id="storeSearchBtn" style="margin-top: 4px;">Search Store</button>
         </div>
         <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-top uk-border-rounded uk-hidden@s" id="storeSearchBtnMobile">Search Store</button>
     </div>
 
     <div class="uk-margin-medium-top uk-margin-bottom">
+
+    <h3 class="uk-heading-line uk-text-bold" id="section-09"><span>0-9</span></h3>
+    <div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-5@m uk-child-width-1-6@l uk-grid-small" id="grid-09" uk-grid>
+            <?php $getStores = getStoresByLetter($connect); ?>
+            <?php $i = 0; foreach($getStores as $item): $i++; ?>
+                
+                <div class="cat_3 uk-text-center store-card" style="margin-bottom: 50px !important; <?php echo ($i > 20) ? 'display: none;' : ''; ?>" data-title="<?php echo strtolower(echoOutput($item['store_title'])); ?>">
+                    <a href="<?php echo $urlPath->store($item['store_slug']); ?>">
+                        <div class="cover uk-border-rounded uk-flex uk-flex-middle uk-flex-center" style="background-color: <?php echo getStoreBackgroundColor($item['store_id']); ?>; height: 80px;">
+                            <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" style="object-fit: cover; width: 100%; height: 100%; border-radius: 5px; max-height: 80px;">
+                        </div>
+                        <h2 class="title uk-margin-small-top uk-text-truncate"><?php echo echoOutput($item['store_title']); ?></h2>
+                    </a>
+                </div>
+
+            <?php endforeach; ?>
+        </div>
+        <?php if(count($getStores) > 20): ?>
+            <div class="uk-text-center uk-margin-medium-top uk-margin-medium-bottom">
+                <button class="uk-button uk-button-default uk-border-rounded view-more-btn" data-target="grid-09">View More</button>
+            </div>
+        <?php endif; ?>
 
         <?php foreach ($arrayLetters as $char): ?>
         <h3 class="uk-heading-line uk-text-bold" id="section-<?php echo echoOutput($char); ?>"><span><?php echo echoOutput($char); ?></span></h3>
@@ -49,28 +71,6 @@
             </div>
         <?php endif; ?>
     <?php endforeach; ?>
-
-    <h3 class="uk-heading-line uk-text-bold" id="section-09"><span>0-9</span></h3>
-    <div class="uk-child-width-1-2 uk-child-width-1-3@s uk-child-width-1-5@m uk-child-width-1-6@l uk-grid-small" id="grid-09" uk-grid>
-            <?php $getStores = getStoresByLetter($connect); ?>
-            <?php $i = 0; foreach($getStores as $item): $i++; ?>
-                
-                <div class="cat_3 uk-text-center store-card" style="margin-bottom: 50px !important; <?php echo ($i > 20) ? 'display: none;' : ''; ?>" data-title="<?php echo strtolower(echoOutput($item['store_title'])); ?>">
-                    <a href="<?php echo $urlPath->store($item['store_slug']); ?>">
-                        <div class="cover uk-border-rounded uk-flex uk-flex-middle uk-flex-center" style="background-color: <?php echo getStoreBackgroundColor($item['store_id']); ?>; height: 80px;">
-                            <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" style="object-fit: cover; width: 100%; height: 100%; border-radius: 5px; max-height: 80px;">
-                        </div>
-                        <h2 class="title uk-margin-small-top uk-text-truncate"><?php echo echoOutput($item['store_title']); ?></h2>
-                    </a>
-                </div>
-
-            <?php endforeach; ?>
-        </div>
-        <?php if(count($getStores) > 20): ?>
-            <div class="uk-text-center uk-margin-medium-top uk-margin-medium-bottom">
-                <button class="uk-button uk-button-default uk-border-rounded view-more-btn" data-target="grid-09">View More</button>
-            </div>
-        <?php endif; ?>
     </div>
 
     <script>

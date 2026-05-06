@@ -501,6 +501,12 @@ exclusive-store.vch-ribbon{
 }
 
 @media (max-width: 768px) {
+    .uk-grid, .uk-grid-medium, .uk-grid-small, .uk-grid-large, .uk-grid-column-small, .uk-grid-column-medium, .uk-grid-column-large {
+        margin-left: 0 !important;
+    }
+    .uk-grid > *, .uk-grid-medium > *, .uk-grid-small > *, .uk-grid-large > *, .uk-grid-column-small > *, .uk-grid-column-medium > *, .uk-grid-column-large > * {
+        padding-left: 0 !important;
+    }
     .h-coupon-card {
         flex-direction: column;
     }
