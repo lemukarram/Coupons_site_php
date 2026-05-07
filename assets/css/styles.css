@@ -506,33 +506,45 @@ exclusive-store.vch-ribbon{
     }
     .uk-grid > *, .uk-grid-medium > *, .uk-grid-small > *, .uk-grid-large > *, .uk-grid-column-small > *, .uk-grid-column-medium > *, .uk-grid-column-large > * {
         padding-left: 0 !important;
+    @media (max-width: 768px) {
+        .h-coupon-card {
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .h-coupon-left {
+            width: 25%;
+            border-right: 1px dashed #e03030;
+            border-bottom: none;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .h-coupon-middle {
+            width: 75%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .h-coupon-right {
+            width: 100%;
+            padding: 0 10px 10px 10px;
+            box-sizing: border-box;
+        }
+        .h-coupon-logo {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        .h-coupon-content .title {
+            font-size: 15px;
+        }
+        .h-coupon-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 10px;
+            font-size: 14px;
+        }
     }
-    .h-coupon-card {
-        flex-direction: column;
-    }
-    .h-coupon-left {
-        width: 100%;
-        border-right: none;
-        border-bottom: 2px dashed #e03030;
-        padding: 15px;
-    }
-    .h-coupon-right {
-        width: 100%;
-    }
-    .h-coupon-logo {
-        width: 60px;
-        height: 60px;
-        margin-right: 15px;
-    }
-    .h-coupon-middle {
-        padding: 15px;
-    }
-    .h-coupon-content .title {
-        font-size: 16px;
-    }
-    .h-coupon-btn {
-        padding: 10px 15px;
-        font-size: 14px;
     }
 }
 
