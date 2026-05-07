@@ -35,7 +35,7 @@
     </div>
 </div>
 
-<div class="uk-container page uk-margin-medium-top">
+<div class="uk-container page uk-margin-medium-top mobile-margin">
     <div class="uk-grid-large" uk-grid>
 
         <!-- SIDEBAR -->
@@ -56,7 +56,7 @@
 
             <?php if(!empty($featuredStores)): ?>
             <div class="feat-stores-section">
-                <h3><?php echo echoOutput($translation['tr_93'] ?? 'Featured Stores'); ?></h3>
+                <h3 class="hide_mobile"><?php echo echoOutput($translation['tr_93'] ?? 'Featured Stores'); ?></h3>
                 <div class="feat-stores-grid">
                     <?php foreach($featuredStores as $st): ?>
                     <a href="<?php echo $urlPath->store($st['store_slug']); ?>" class="feat-store-item">
@@ -71,7 +71,7 @@
             <?php endif; ?>
 
             <div class="uk-margin-medium-top">
-                <h3 class="uk-text-bold uk-margin-bottom"><?php echo echoOutput($itemTitle); ?> <?php echo echoOutput($translation['tr_16'] ?? 'vouchers'); ?> for <?php echo date('F Y'); ?></h3>
+                <h3 class="uk-text-bold uk-margin-bottom hide_mobile"><?php echo echoOutput($itemTitle); ?> <?php echo echoOutput($translation['tr_16'] ?? 'vouchers'); ?> for <?php echo date('F Y'); ?></h3>
                 
                 <?php if(!empty($items)): ?>
                     <div class="uk-grid-medium uk-child-width-1-1" uk-grid>

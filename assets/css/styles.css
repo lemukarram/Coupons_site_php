@@ -904,3 +904,11 @@ exclusive-store.vch-ribbon{
     }
 }
 
+@media (max-width: 767px) {
+    .mobile-margin {
+        margin-top: 20px !important;
+    }
+
+    .hide_mobile{ display: none !important;}
+}
+

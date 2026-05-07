@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<div class="uk-container page uk-margin-medium-top">
+<div class="uk-container page uk-margin-medium-top mobile-margin">
     <div class="uk-grid-large" uk-grid>
 
         <!-- SIDEBAR -->
@@ -62,7 +62,7 @@
             </div>
 
             <div class="uk-margin-medium-top">
-                <h3 class="uk-text-bold uk-margin-bottom"><?php echo echoOutput($itemDetails['store_title']); ?> <?php echo echoOutput($translation['tr_91']); ?> for <?php echo date('F Y'); ?></h3>
+                <h3 class="uk-text-bold uk-margin-bottom hide_mobile"><?php echo echoOutput($itemDetails['store_title']); ?> <?php echo echoOutput($translation['tr_91']); ?> for <?php echo date('F Y'); ?></h3>
                 
                 <?php if(!empty($items)): ?>
                     <div class="uk-grid-medium uk-child-width-1-1" uk-grid>
