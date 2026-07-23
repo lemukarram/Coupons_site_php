@@ -4,3 +4,7 @@ config.php
 .servers.md
 servers.md
 *.md
+
+# Keep Claude Code skills version-controlled despite the *.md rule above
+!.claude/
+!.claude/skills/**/*.md
