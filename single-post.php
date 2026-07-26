@@ -24,6 +24,10 @@ $descriptionSeoHeader = getSeoDescription($translation['tr_3'], $post['post_cont
 // Canonical URL
 $canonicalUrl = $urlPath->post($slugItem);
 
+// Open Graph — article type with post image
+$ogType  = 'article';
+$ogImage = !empty($post['post_image']) ? $urlPath->image($post['post_image']) : '';
+
 include './header.php';
 include './sections/header.php';
 

@@ -34,6 +34,9 @@ $descriptionSeoHeader = getSeoDescription($translation['tr_3'], $itemDetails['st
 // Canonical URL — always the clean slug URL, strips any ?c=XX param
 $canonicalUrl = $urlPath->store($slugItem);
 
+// Open Graph image — store logo
+$ogImage = !empty($itemDetails['store_image']) ? $urlPath->image($itemDetails['store_image']) : '';
+
 // Page Title
 $pageTitle = $itemDetails['store_title'];
 

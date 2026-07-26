@@ -9,14 +9,34 @@
 <?php endif; ?>
 <?php if(isset($descriptionSeoHeader) && !empty($descriptionSeoHeader)): ?>
 <meta name="description" content="<?php echo echoOutput($descriptionSeoHeader); ?>">
-<?php if(isset($itemDetails) && !empty($itemDetails)): ?>
-<?php if(!empty($itemDetails['image'])): ?>
-<meta property="og:image" content="<?php echo $urlPath->image($itemDetails['image']); ?>" />
-<?php endif; ?>
-<?php endif; ?>
 <?php endif; ?>
 <?php if (isset($canonicalUrl) && !empty($canonicalUrl)): ?>
 <link rel="canonical" href="<?php echo echoOutput($canonicalUrl); ?>">
+<?php endif; ?>
+<?php
+// Open Graph & Twitter Card — uses $ogImage set by entry point, falls back to site logo
+$_ogUrl   = isset($canonicalUrl) ? $canonicalUrl : SITE_URL;
+$_ogType  = isset($ogType) ? $ogType : 'website';
+$_ogDesc  = isset($descriptionSeoHeader) ? $descriptionSeoHeader : '';
+$_ogImage = isset($ogImage) && !empty($ogImage)
+    ? $ogImage
+    : (isset($theme['th_logo']) ? $urlPath->image($theme['th_logo']) : '');
+?>
+<?php if (isset($titleSeoHeader) && !empty($titleSeoHeader)): ?>
+<meta property="og:type" content="<?php echo echoOutput($_ogType); ?>">
+<meta property="og:site_name" content="<?php echo echoOutput($translation['tr_1']); ?>">
+<meta property="og:title" content="<?php echo echoOutput($titleSeoHeader); ?>">
+<meta property="og:description" content="<?php echo echoOutput($_ogDesc); ?>">
+<meta property="og:url" content="<?php echo echoOutput($_ogUrl); ?>">
+<?php if (!empty($_ogImage)): ?>
+<meta property="og:image" content="<?php echo echoOutput($_ogImage); ?>">
+<?php endif; ?>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="<?php echo echoOutput($titleSeoHeader); ?>">
+<meta name="twitter:description" content="<?php echo echoOutput($_ogDesc); ?>">
+<?php if (!empty($_ogImage)): ?>
+<meta name="twitter:image" content="<?php echo echoOutput($_ogImage); ?>">
+<?php endif; ?>
 <?php endif; ?>
 <link rel="stylesheet" href="<?php echo $urlPath->assets_css('styles.css'); ?>">
 <?php if ($langDir == 'rtl'): ?>
