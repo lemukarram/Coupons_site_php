@@ -9,7 +9,7 @@
     <div class="uk-navbar-center">
 
 		<a class="uk-navbar-item uk-logo" href="<?php echo $urlPath->home(); ?>">
-		<img src="<?php echo $urlPath->image($theme['th_logo']); ?>">
+		<img src="<?php echo $urlPath->image($theme['th_logo']); ?>" alt="<?php echo echoOutput($translation['tr_1']); ?>">
 		</a>
 
     </div>

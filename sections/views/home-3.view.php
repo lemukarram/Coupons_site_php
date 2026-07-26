@@ -33,7 +33,7 @@
                     <?php foreach($getSliders as $item): ?>
                         <li>
                             <a href="<?php echo echoOutput($item['slider_link']); ?>">
-                                <img src="<?php echo $urlPath->image(echoOutput($item['slider_image'])); ?>" alt="<?php echo echoOutput($item['slider_link']); ?>" uk-cover>
+                                <img src="<?php echo $urlPath->image(echoOutput($item['slider_image'])); ?>" alt="" uk-cover>
                             </a>
                         </li>
                     <?php endforeach; ?>

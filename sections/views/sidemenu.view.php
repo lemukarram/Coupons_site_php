@@ -73,7 +73,7 @@
                 <a href="<?php echo $navUrl; ?>" target="<?php echo $item['navigation_target']; ?>" style="font-weight: 400;">
                     <?php if (!empty($item['navigation_icon'])): ?>
                         <?php if (strpos($item['navigation_icon'], '.') !== false): ?>
-                            <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" style="width: 18px; height: 18px; margin-right: 10px; flex-shrink: 0;">
+                            <img src="<?php echo $urlPath->image($item['navigation_icon']); ?>" alt="" style="width: 18px; height: 18px; margin-right: 10px; flex-shrink: 0;">
                         <?php else: ?>
                             <i class="<?php echo $item['navigation_icon']; ?>" style="margin-right: 10px; flex-shrink: 0;"></i>
                         <?php endif; ?>
@@ -89,7 +89,7 @@
                                 <a href="<?php echo $childUrl; ?>" target="<?php echo $child['navigation_target']; ?>" style="font-weight: 400;">
                                     <?php if (!empty($child['navigation_icon'])): ?>
                                         <?php if (strpos($child['navigation_icon'], '.') !== false): ?>
-                                            <img src="<?php echo $urlPath->image($child['navigation_icon']); ?>" style="width: 16px; height: 16px; margin-right: 10px; flex-shrink: 0;">
+                                            <img src="<?php echo $urlPath->image($child['navigation_icon']); ?>" alt="" style="width: 16px; height: 16px; margin-right: 10px; flex-shrink: 0;">
                                         <?php else: ?>
                                             <i class="<?php echo $child['navigation_icon']; ?>" style="margin-right: 10px; flex-shrink: 0;"></i>
                                         <?php endif; ?>
