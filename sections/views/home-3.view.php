@@ -1,5 +1,7 @@
 <div class="tas_home_3 uk-container uk-margin-small-top uk-margin-medium-bottom">
 
+<h1 class="uk-margin-small-bottom uk-text-center"><?php echo echoOutput($translation['tr_7']); ?></h1>
+
     <div class="uk-grid-small" uk-grid uk-grid-match>
 
         <div class="uk-width-1-4@m uk-visible@s">
