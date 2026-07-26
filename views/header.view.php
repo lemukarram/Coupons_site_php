@@ -55,7 +55,11 @@ var SITEURL = "<?php echo SITE_URL; ?>";
 var IMAGES_FOLDER = "<?php echo $urlPath->image(); ?>";
 </script>
 <?php if(isset($settings['st_analytics']) && !empty($settings['st_analytics'])): ?>
+<?php if(!empty($_COOKIE['cc_analytics']) && $_COOKIE['cc_analytics'] === '1'): ?>
 <?php echo $settings['st_analytics']; ?>
+<?php else: ?>
+<script>window.__analyticsCode=<?php echo json_encode($settings['st_analytics']); ?>;</script>
+<?php endif; ?>
 <?php endif; ?>
 
 </head> 
