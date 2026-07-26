@@ -49,6 +49,13 @@ if($slugSubCategory){
 $titleSeoHeader = getSeoTitle($translation['tr_1'], $itemTitle);
 $descriptionSeoHeader = getSeoDescription($translation['tr_3'], $itemDescription, $itemSeoDescription);
 
+// Canonical URL — clean category/subcategory URL, no pagination or sort params
+if ($slugSubCategory) {
+    $canonicalUrl = $urlPath->search(['subcategory' => $slugSubCategory]);
+} else {
+    $canonicalUrl = $urlPath->search(['category' => $slugCategory]);
+}
+
 $items = $getResults['items'];
 $total = $getResults['total'];
 

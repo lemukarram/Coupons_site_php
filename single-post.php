@@ -21,6 +21,9 @@ $titleSeoHeader = getSeoTitle($translation['tr_1'], $post['post_title']);
 // Seo Description
 $descriptionSeoHeader = getSeoDescription($translation['tr_3'], $post['post_content'], $post['post_seodescription']);
 
+// Canonical URL
+$canonicalUrl = $urlPath->post($slugItem);
+
 include './header.php';
 include './sections/header.php';
 

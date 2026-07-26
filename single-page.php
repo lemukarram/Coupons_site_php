@@ -25,6 +25,9 @@ $titleSeoHeader = getSeoTitle($translation['tr_1'], $itemDetails['page_title']);
 // Seo Description
 $descriptionSeoHeader = getSeoDescription($translation['tr_3'], $itemDetails['page_content'], $itemDetails['page_seodescription']);
 
+// Canonical URL — clean slug, no query params
+$canonicalUrl = $urlPath->page($slugItem);
+
 // Page Title
 $pageTitle = $itemDetails['page_title'];
 

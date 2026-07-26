@@ -15,6 +15,9 @@
 <?php endif; ?>
 <?php endif; ?>
 <?php endif; ?>
+<?php if (isset($canonicalUrl) && !empty($canonicalUrl)): ?>
+<link rel="canonical" href="<?php echo echoOutput($canonicalUrl); ?>">
+<?php endif; ?>
 <link rel="stylesheet" href="<?php echo $urlPath->assets_css('styles.css'); ?>">
 <?php if ($langDir == 'rtl'): ?>
 <script type="text/javascript"> window.FontAwesomeConfig = { autoReplaceSvg: false }</script>

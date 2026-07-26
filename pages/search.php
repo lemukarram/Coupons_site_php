@@ -15,6 +15,9 @@ $total = $getResults['total'];
 
 $numPages = numTotalPages($total, $site_config['page_limit']);
 
+// Canonical URL — general search page, no query params
+$canonicalUrl = $urlPath->search();
+
 require './pages/views/search.view.php';
 
 ?>

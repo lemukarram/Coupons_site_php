@@ -31,6 +31,9 @@ $titleSeoHeader = getSeoTitle(empty($itemDetails['store_seotitle']) ? $itemDetai
 // Seo Description
 $descriptionSeoHeader = getSeoDescription($translation['tr_3'], $itemDetails['store_description'], $itemDetails['store_seodescription']);
 
+// Canonical URL — always the clean slug URL, strips any ?c=XX param
+$canonicalUrl = $urlPath->store($slugItem);
+
 // Page Title
 $pageTitle = $itemDetails['store_title'];
 

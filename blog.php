@@ -9,6 +9,9 @@ $titleSeoHeader = getSeoTitle($translation['tr_1'], 'Blog');
 // Seo Description
 $descriptionSeoHeader = getSeoDescription($translation['tr_3']);
 
+// Canonical URL
+$canonicalUrl = $urlPath->blog();
+
 include './header.php';
 include './sections/header.php';
 
