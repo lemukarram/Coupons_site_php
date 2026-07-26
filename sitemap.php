@@ -10,14 +10,6 @@
 </url>
 <?php endforeach; ?>
 
-<?php $getCoupons = getCoupons($connect); ?>
-<?php foreach($getCoupons as $item): ?>
-<url>
-<loc><?php echo $urlPath->sharelink($item['store_slug'], $item['coupon_id']); ?></loc>
-<lastmod><?php echo formatXmlDate($item['coupon_updated']); ?></lastmod>
-</url>
-<?php endforeach; ?>
-
 <?php $getStores = getStores($connect); ?>
 <?php foreach($getStores as $item): ?>
 <url>
