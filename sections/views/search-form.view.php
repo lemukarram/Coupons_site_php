@@ -4,14 +4,15 @@
         <form class="searchForm">
             <div class="uk-margin">
                 <div class="uk-inline uk-width-1-1">
+                    <label for="search-query" class="sr-only"><?php echo echoOutput($translation['tr_137']); ?></label>
                     <span class="uk-form-icon uk-form-icon-flip" uk-icon="icon: search"></span>
 
                     <?php if(!getSearchQuery() && empty(getSearchQuery())): ?>
-                    <input class="uk-input uk-border-rounded uk-form-large" name="query" placeholder="<?php echo echoOutput($translation['tr_137']); ?>" type="search">
+                    <input class="uk-input uk-border-rounded uk-form-large" id="search-query" name="query" placeholder="<?php echo echoOutput($translation['tr_137']); ?>" type="search">
                     <?php endif; ?>
 
                     <?php if(getSearchQuery() && !empty(getSearchQuery())): ?>
-                    <input class="uk-input uk-border-rounded uk-form-large" name="query" value="<?php echo echoOutput(getSearchQuery()); ?>" placeholder="<?php echo echoOutput($translation['tr_137']); ?>" type="search">
+                    <input class="uk-input uk-border-rounded uk-form-large" id="search-query" name="query" value="<?php echo echoOutput(getSearchQuery()); ?>" placeholder="<?php echo echoOutput($translation['tr_137']); ?>" type="search">
                     <?php endif; ?>
 
                 </div>

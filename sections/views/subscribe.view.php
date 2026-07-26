@@ -9,6 +9,7 @@
             <form class="uk-grid-collapse uk-width-xlarge uk-width-1-1@s" uk-grid style="max-width: 100%;">
                 <div class="uk-width-expand@s uk-width-1-1">
                     <div class="uk-inline uk-width-1-1">
+                        <label for="subscriber_email_alt" class="sr-only"><?php echo echoOutput($translation['tr_46']); ?></label>
                         <span class="uk-form-icon" uk-icon="icon: mail"></span>
                         <input class="uk-input uk-form-large uk-text-secondary" type="email" id="subscriber_email_alt" placeholder="<?php echo echoOutput($translation['tr_46']); ?>">
                     </div>

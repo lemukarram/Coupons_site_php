@@ -6,7 +6,8 @@
         </div>
         <div class="uk-modal-body" uk-overflow-auto>
 
-        <input id="filterInput_2" class="uk-input uk-border-rounded" type="text" placeholder="">
+        <label for="filterInput_2" class="sr-only"><?php echo echoOutput($translation['tr_138']); ?></label>
+        <input id="filterInput_2" class="uk-input uk-border-rounded" type="text" placeholder="<?php echo echoOutput($translation['tr_138']); ?>…">
 
         <ul id="filterData_2" class="uk-nav-default filterStore uk-grid-collapse uk-margin uk-child-width-1-2 uk-child-width-1-3@s" uk-nav uk-grid>
             <?php foreach ($getModalStores as $item): ?>
