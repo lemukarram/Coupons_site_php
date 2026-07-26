@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html dir="<?php echo $langDir; ?>" <?php echo (isset($fullHeight)) ? ' class="uk-height-1-1"' : NULL ?>>
+<html lang="<?php echo isset($langCode) ? echoOutput($langCode) : 'de'; ?>" dir="<?php echo $langDir; ?>" <?php echo (isset($fullHeight)) ? ' class="uk-height-1-1"' : NULL ?>>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0"/>
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="shortcut icon" href="<?php echo $urlPath->image($theme['th_favicon']); ?>">
 <?php if(isset($titleSeoHeader) && !empty($titleSeoHeader)): ?>
 <title><?php echo echoOutput($titleSeoHeader); ?></title>
