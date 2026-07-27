@@ -32,7 +32,7 @@
         <div class="cat_3 uk-text-center <?php echo ($count > 6) ? 'uk-visible@s' : ''; ?>">
             <a href="<?php echo $urlPath->store($item['store_slug']); ?>">
                 <div class="cover uk-border-rounded uk-flex uk-flex-middle uk-flex-center" style="height: 80px;">
-                    <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" style="object-fit: cover;border-radius: 5px; max-width: 100%; max-height: 100%;">
+                    <img src="<?php echo $urlPath->image($item['store_image']); ?>" alt="<?php echo echoOutput($item['store_title']); ?>" loading="lazy" style="object-fit: cover;border-radius: 5px; max-width: 100%; max-height: 100%;">
                 </div>
                 <h3 class="title uk-margin-small-top"><?php echo echoOutput($item['store_title']); ?></h3>
             </a>

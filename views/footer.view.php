@@ -1,3 +1,6 @@
+<script src="<?php echo $urlPath->assets_js('jquery.js'); ?>"></script>
+<script src="<?php echo $urlPath->assets_js('uikit.js'); ?>"></script>
+<script src="<?php echo $urlPath->assets_js('uikit-icons.js'); ?>"></script>
 <script src="<?php echo $urlPath->assets_js('nice-select.min.js'); ?>"></script>
 <script src="<?php echo $urlPath->assets_js('datatables.min.js'); ?>"></script>
 <script src="<?php echo $urlPath->assets_js('datatables.uikit.min.js'); ?>"></script>

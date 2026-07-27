@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.google.com">
+<link rel="preconnect" href="https://secure.gravatar.com">
 <link rel="shortcut icon" href="<?php echo $urlPath->image($theme['th_favicon']); ?>">
 <?php if(isset($titleSeoHeader) && !empty($titleSeoHeader)): ?>
 <title><?php echo echoOutput($titleSeoHeader); ?></title>
@@ -44,9 +47,6 @@ $_ogImage = isset($ogImage) && !empty($ogImage)
 <link rel="stylesheet" href="<?php echo $urlPath->assets_css('uikit-rtl.css'); ?>">
 <link rel="stylesheet" href="<?php echo $urlPath->assets_css('theme-rtl.css'); ?>">
 <?php endif;?>
-<script src="<?php echo $urlPath->assets_js('jquery.js'); ?>"></script>
-<script src="<?php echo $urlPath->assets_js('uikit.js'); ?>"></script>
-<script src="<?php echo $urlPath->assets_js('uikit-icons.js'); ?>"></script>
 <?php if(!empty($siteKey)): ?><script async src="https://www.google.com/recaptcha/api.js"></script><?php endif; ?>
 
 <script type="text/javascript">

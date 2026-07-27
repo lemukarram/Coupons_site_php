@@ -98,7 +98,7 @@
 
     <div class="uk-width-1-2 uk-flex uk-flex-left uk-flex-middle">
         <div>
-        <h5 class="uk-text-small uk-margin-remove"><?php echo $total; ?> <?php echo echoOutput($translation['tr_96']); ?></h5>
+        <h1 class="uk-text-small uk-margin-remove"><?php if(getSearchQuery()): ?><strong><?php echo echoOutput(getSearchQuery()); ?></strong> &mdash; <?php endif; ?><?php echo $total; ?> <?php echo echoOutput($translation['tr_96']); ?></h1>
         </div>
     </div>
 

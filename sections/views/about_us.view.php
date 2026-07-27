@@ -5,7 +5,7 @@
             <!-- Graphics First on Mobile -->
             <div class="uk-width-1-3@m uk-text-center">
                 <?php if($section_about_us['section_image']): ?>
-                <img src="<?php echo $urlPath->image($section_about_us['section_image']); ?>" alt="About Us Graphics" class="uk-responsive-width uk-border-rounded">
+                <img src="<?php echo $urlPath->image($section_about_us['section_image']); ?>" alt="About Us Graphics" loading="lazy" class="uk-responsive-width uk-border-rounded">
                 <?php else: ?>
                 <div class="uk-background-secondary uk-padding-large uk-light uk-border-rounded">
                     <i class="ti ti-info-circle uk-text-primary" style="font-size: 80px;"></i>
