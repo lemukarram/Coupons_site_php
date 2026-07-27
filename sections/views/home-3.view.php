@@ -32,9 +32,13 @@
                     <ul class="uk-slideshow-items" style="height: 300px;">
                     <?php foreach($getSliders as $item): ?>
                         <li>
+                            <?php if (!empty($item['slider_link']) && $item['slider_link'] !== '#'): ?>
                             <a href="<?php echo echoOutput($item['slider_link']); ?>">
                                 <img src="<?php echo $urlPath->image(echoOutput($item['slider_image'])); ?>" alt="" uk-cover>
                             </a>
+                            <?php else: ?>
+                                <img src="<?php echo $urlPath->image(echoOutput($item['slider_image'])); ?>" alt="" uk-cover>
+                            <?php endif; ?>
                         </li>
                     <?php endforeach; ?>
                     </ul>
