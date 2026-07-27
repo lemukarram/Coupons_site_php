@@ -363,9 +363,14 @@ $('.new-subscriber form').on("submit", function(event){
 });
 
 'use strict';
-$('#submit-subscriber-alt').closest('form').on("submit", function(event){ 
+$('#submit-subscriber-alt').closest('form').on("submit", function(event){
 
-  event.preventDefault();  
+  event.preventDefault();
+
+  if ($('#gdpr_consent_alt').length && !$('#gdpr_consent_alt').prop('checked')) {
+    $('#showresults-alt').html("<div class='uk-text-danger uk-text-small uk-text-center uk-border-rounded uk-margin-small-top'>Please accept the Privacy Policy before subscribing.</div>");
+    return;
+  }
 
   var $this = $('#submit-subscriber-alt');
   var loadingText = '<span class="anim-rotate" uk-icon="refresh"></span>';
@@ -378,6 +383,7 @@ $('#submit-subscriber-alt').closest('form').on("submit", function(event){
     url: SITEURL+"/controllers/add-subscriber.php",
     data: {
       subscriber_email:$("#subscriber_email_alt").val(),
+      gdpr_consent: $('#gdpr_consent_alt').prop('checked') ? 1 : 0,
     },
     success: function(data) {
 

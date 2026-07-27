@@ -6,6 +6,11 @@ $validateEmail = false;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
+    if (empty($_POST['gdpr_consent'])) {
+        echo "<div class='uk-text-danger uk-text-small uk-text-center uk-border-rounded uk-margin-small-top'>Please accept the Privacy Policy before subscribing.</div>";
+        exit();
+    }
+
     $subscriber_email = filter_var(strtolower($_POST['subscriber_email']), FILTER_SANITIZE_EMAIL);
 
     if (empty($subscriber_email)) {

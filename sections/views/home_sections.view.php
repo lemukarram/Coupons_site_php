@@ -111,6 +111,12 @@
                         <?php echo echoOutput($translation['tr_45']); ?>
                     </button>
                 </div>
+                <div class="uk-width-1-1 uk-margin-small-top uk-text-left" style="max-width:520px;margin-left:auto;margin-right:auto;">
+                    <label style="cursor:pointer;font-size:0.82rem;color:rgba(255,255,255,0.88);display:flex;align-items:flex-start;gap:8px;">
+                        <input type="checkbox" id="gdpr_consent_alt" class="uk-checkbox" style="margin-top:2px;flex-shrink:0;">
+                        <span>I agree to the <a href="<?php echo $urlPath->privacy(); ?>" style="color:#fff;text-decoration:underline;" target="_blank">Privacy Policy</a> and consent to receive newsletters and deals.</span>
+                    </label>
+                </div>
             </form>
         </div>
         <div id="showresults-alt" class="uk-margin-top"></div>
