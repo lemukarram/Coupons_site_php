@@ -15,6 +15,8 @@
 <?php endif; ?>
 <?php if (isset($canonicalUrl) && !empty($canonicalUrl)): ?>
 <link rel="canonical" href="<?php echo echoOutput($canonicalUrl); ?>">
+<link rel="alternate" hreflang="de" href="<?php echo echoOutput($canonicalUrl); ?>">
+<link rel="alternate" hreflang="x-default" href="<?php echo echoOutput($canonicalUrl); ?>">
 <?php endif; ?>
 <?php
 // Open Graph & Twitter Card — uses $ogImage set by entry point, falls back to site logo
@@ -42,6 +44,9 @@ $_ogImage = isset($ogImage) && !empty($ogImage)
 <?php endif; ?>
 <?php endif; ?>
 <link rel="stylesheet" href="<?php echo $urlPath->assets_css('styles.css'); ?>">
+<?php if (isset($heroImageUrl) && !empty($heroImageUrl)): ?>
+<link rel="preload" as="image" href="<?php echo echoOutput($heroImageUrl); ?>" fetchpriority="high">
+<?php endif; ?>
 <?php if ($langDir == 'rtl'): ?>
 <script type="text/javascript"> window.FontAwesomeConfig = { autoReplaceSvg: false }</script>
 <link rel="stylesheet" href="<?php echo $urlPath->assets_css('uikit-rtl.css'); ?>">
@@ -61,8 +66,11 @@ var IMAGES_FOLDER = "<?php echo $urlPath->image(); ?>";
 <script>window.__analyticsCode=<?php echo json_encode($settings['st_analytics']); ?>;</script>
 <?php endif; ?>
 <?php endif; ?>
+<?php if (isset($schemaJsonLd) && !empty($schemaJsonLd)): ?>
+<script type="application/ld+json"><?php echo $schemaJsonLd; ?></script>
+<?php endif; ?>
 
-</head> 
+</head>
 <body <?php echo (isset($fullHeight)) ? 'class="uk-height-1-1"' : NULL ?>>
 
 <div id="preloader">

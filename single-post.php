@@ -28,6 +28,21 @@ $canonicalUrl = $urlPath->post($slugItem);
 $ogType  = 'article';
 $ogImage = !empty($post['post_image']) ? $urlPath->image($post['post_image']) : '';
 
+// JSON-LD: BlogPosting
+$schemaJsonLd = json_encode([
+    '@context' => 'https://schema.org',
+    '@type' => 'BlogPosting',
+    'headline' => $post['post_title'],
+    'url' => $canonicalUrl,
+    'datePublished' => isset($post['post_date']) ? $post['post_date'] : '',
+    'image' => $ogImage ?: '',
+    'publisher' => [
+        '@type' => 'Organization',
+        'name' => $translation['tr_1'],
+        'url' => SITE_URL
+    ]
+], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
 include './header.php';
 include './sections/header.php';
 
