@@ -25,8 +25,11 @@ $total = $getResults['total'];
 
 $numPages = numTotalPages($total, $site_config['page_limit']);
 
-// Seo Title
-$titleSeoHeader = getSeoTitle(empty($itemDetails['store_seotitle']) ? $itemDetails['store_title'] : $itemDetails['store_seotitle']);
+// Seo Title — use seotitle if set, otherwise generate keyword-rich fallback
+$_storeTitle = !empty($itemDetails['store_seotitle'])
+    ? $itemDetails['store_seotitle']
+    : $itemDetails['store_title'] . ' Discount Codes & Vouchers';
+$titleSeoHeader = getSeoTitle($translation['tr_1'], $_storeTitle);
 
 // Seo Description
 $descriptionSeoHeader = getSeoDescription($translation['tr_3'], $itemDetails['store_description'], $itemDetails['store_seodescription']);

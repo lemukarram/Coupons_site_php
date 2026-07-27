@@ -18,8 +18,9 @@ $comments = getCommentsByPost($connect, $post['post_id']);
 // Seo Title
 $titleSeoHeader = getSeoTitle($translation['tr_1'], $post['post_title']);
 
-// Seo Description
-$descriptionSeoHeader = getSeoDescription($translation['tr_3'], $post['post_content'], $post['post_seodescription']);
+// Seo Description — truncate content to 155 chars when no explicit SEO description is set
+$_postExcerpt = mb_substr(strip_tags($post['post_content']), 0, 155);
+$descriptionSeoHeader = getSeoDescription($translation['tr_3'], $_postExcerpt, $post['post_seodescription']);
 
 // Canonical URL
 $canonicalUrl = $urlPath->post($slugItem);

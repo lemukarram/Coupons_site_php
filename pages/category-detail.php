@@ -46,7 +46,7 @@ if($slugSubCategory){
 }
 
 // SEO
-$titleSeoHeader = getSeoTitle($translation['tr_1'], $itemTitle);
+$titleSeoHeader = getSeoTitle($translation['tr_1'], $itemTitle . ' Coupons & Deals');
 $descriptionSeoHeader = getSeoDescription($translation['tr_3'], $itemDescription, $itemSeoDescription);
 
 // Canonical URL — clean category/subcategory URL, no pagination or sort params

@@ -3,7 +3,7 @@
 require "core.php";
 
 // Seo Title
-$titleSeoHeader = getSeoTitle($translation['tr_1']);
+$titleSeoHeader = $translation['tr_1'] . ' – Discount Codes & Vouchers';
 
 // Seo Description
 $descriptionSeoHeader = getSeoDescription($translation['tr_3']);
