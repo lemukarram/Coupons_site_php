@@ -49,7 +49,7 @@
 
             <!-- Store link below card -->
             <div class="vch-store-link">
-                <a href="<?php echo $urlPath->redirect($item['coupon_id']); ?>" class="vch-view-all c-open" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo $urlPath->redirect($item['coupon_id']); ?>">
+                <a href="<?php echo $urlPath->redirect($item['coupon_id']); ?>" rel="nofollow sponsored" class="vch-view-all c-open" data-id="<?php echo echoOutput($item['coupon_id']); ?>" data-redirect="<?php echo $urlPath->redirect($item['coupon_id']); ?>">
                     <?php echo echoOutput($translation['tr_21']); ?> <?php echo echoOutput($item['store_title'] ?? ''); ?> <?php echo echoOutput($translation['tr_16'] ?? 'vouchers'); ?>
                 </a>
             </div>

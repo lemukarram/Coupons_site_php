@@ -16,7 +16,7 @@
         <?php if(!empty($couponDetails['coupon_code'])):  ?>
             <img class="image" src="<?php echo $urlPath->image($couponDetails['store_image']); ?>">
             <h2 class="title"><?php echo echoOutput($couponDetails['coupon_title']); ?></h2>
-            <p><?php echo echoOutput($translation['tr_23']); ?> <a href="<?php echo $urlPath->redirect($couponDetails['coupon_id']); ?>" target="_blank"><?php echo echoOutput($couponDetails['store_title']); ?></a></p>
+            <p><?php echo echoOutput($translation['tr_23']); ?> <a href="<?php echo $urlPath->redirect($couponDetails['coupon_id']); ?>" target="_blank" rel="nofollow sponsored"><?php echo echoOutput($couponDetails['store_title']); ?></a></p>
 
             <div class="coupon">
             <div><p class="uk-text-secondary uk-text-bold"><?php echo echoOutput($couponDetails['coupon_code']); ?></p></div>
@@ -24,7 +24,7 @@
             </div>
 
             <div class="uk-margin-medium-top">
-            <a href="<?php echo $urlPath->redirect($couponDetails['coupon_id']); ?>" target="_blank" class="uk-button uk-button-default uk-border-round-6 primary-color uk-text-bold"><?php echo echoOutput($translation['tr_98']); ?></a>
+            <a href="<?php echo $urlPath->redirect($couponDetails['coupon_id']); ?>" target="_blank" rel="nofollow sponsored" class="uk-button uk-button-default uk-border-round-6 primary-color uk-text-bold"><?php echo echoOutput($translation['tr_98']); ?></a>
             </div>
 
             <?php if(isset($isLike) && false): ?>
@@ -63,7 +63,7 @@
             <img class="image" src="<?php echo $urlPath->image($couponDetails['store_image']); ?>">
             <h2 class="title"><?php echo echoOutput($couponDetails['coupon_title']); ?></h2>
             <p class="uk-margin-remove-top"><?php echo echoOutput($translation['tr_89']); ?></p>
-            <a href="<?php echo $urlPath->redirect($couponDetails['coupon_id']); ?>" target="_blank" class="uk-button uk-button-primary uk-border-pill uk-text-bold"><?php echo echoOutput($translation['tr_98']); ?></a>
+            <a href="<?php echo $urlPath->redirect($couponDetails['coupon_id']); ?>" target="_blank" rel="nofollow sponsored" class="uk-button uk-button-primary uk-border-pill uk-text-bold"><?php echo echoOutput($translation['tr_98']); ?></a>
         <?php endif; ?>
 
     </div>

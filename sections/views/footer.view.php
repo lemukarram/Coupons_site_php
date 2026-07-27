@@ -71,6 +71,9 @@
                 <div class="uk-width-1-1 uk-text-center">
                     <small><?php echo echoOutput($translation['tr_47']); ?></small>
                 </div>
+                <div class="uk-width-1-1 uk-text-center uk-margin-small-top">
+                    <small style="opacity:0.65;">Some links on this site are affiliate links. We may earn a commission when you make a purchase &mdash; at no extra cost to you.</small>
+                </div>
             </div>
         </div>
     </div>

@@ -38,6 +38,10 @@
     </div>
 </div>
 
+<div class="uk-container uk-margin-small-top">
+    <p class="uk-text-small uk-text-muted uk-margin-remove">Some links on this page are affiliate links. We may earn a commission when you click through and make a purchase, at no extra cost to you.</p>
+</div>
+
 <div class="uk-container page uk-margin-medium-top mobile-margin">
     <div class="uk-grid-large" uk-grid>
 
