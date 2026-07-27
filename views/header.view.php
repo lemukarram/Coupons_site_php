@@ -47,7 +47,7 @@ $_ogImage = isset($ogImage) && !empty($ogImage)
 <script src="<?php echo $urlPath->assets_js('jquery.js'); ?>"></script>
 <script src="<?php echo $urlPath->assets_js('uikit.js'); ?>"></script>
 <script src="<?php echo $urlPath->assets_js('uikit-icons.js'); ?>"></script>
-<script async src="https://www.google.com/recaptcha/api.js"></script>
+<?php if(!empty($siteKey)): ?><script async src="https://www.google.com/recaptcha/api.js"></script><?php endif; ?>
 
 <script type="text/javascript">
 /* Global js vars */
